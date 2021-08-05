@@ -8,6 +8,8 @@ contract desilo {
     uint256 public groupCreationSCAmount;
     uint256 public scStakeAmount;
     uint256 public scSeedAmount;
+    uint256 public scStakePeriod;
+
     dSocialCredits _scContract; 
     address _owner;
     uint256 _scID = 0;
@@ -32,11 +34,12 @@ contract desilo {
     mapping(uint256 => uint256) _gscMinAcceptance; 
 
 
-    constructor(uint256 _scStakeAmount, int128 _scYield, uint256 _groupCreationSCAmount, uint256 _scSeedAmount) {
+    constructor(uint256 _scStakeAmount, int128 _scYield, uint256 _groupCreationSCAmount, uint256 _scSeedAmount, uint256 _scStakePeriod) {
         gscYield[0] = _scYield;
         scStakeAmount = _scStakeAmount;
         groupCreationSCAmount = _groupCreationSCAmount;
         scSeedAmount = _scSeedAmount;
+        scStakePeriod = _scStakePeriod;
         _owner = msg.sender;
     }
 
@@ -65,6 +68,7 @@ contract desilo {
     function stake(uint256 _commitId) external {
         _scContract.safeTransferFrom(msg.sender, address(this), _scID, scStakeAmount, "");
         _stakedAmount[_commitId][msg.sender] += scStakeAmount;
+        _stakeExpiry[_commitId][msg.sender] = block.timestamp + scStakePeriod;
     }
 
     function unstake(uint256 _commitId) external {
