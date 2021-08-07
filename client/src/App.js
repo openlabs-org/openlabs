@@ -25,6 +25,7 @@ const App = () => {
   const [account, setAccount] = useState(null);
   const [desiloContract, setDesiloContract] = useState(null);
   const [socialCreditsContract, setSocialCreditsContract] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -72,6 +73,7 @@ const App = () => {
     const provider = await threeIdConnect.getDidProvider();
     ceramic.did.setProvider(provider);
     await ceramic.did.authenticate();
+    setIsConnected(true)
   };
 
   if (!web3) {
@@ -79,7 +81,7 @@ const App = () => {
   }
   return (
     <div className="App">
-      <Topbar onConnect={threeIdAuthenticate}/>
+      <Topbar onConnect={threeIdAuthenticate} isConnected={isConnected}/>
     </div>
   );
 };

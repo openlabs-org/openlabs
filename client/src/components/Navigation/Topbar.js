@@ -2,12 +2,15 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+import { AccountCircle } from '@material-ui/icons';
 import Groups from '../../views/Groups'
 import Feed from '../../views/Feed'
+import Profile from '../../views/Profile'
 import TopbarLink from './TopbarLink'
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Topbar({onConnect}) {
+export default function Topbar({onConnect, isConnected}) {
   const classes = useStyles()
 
   return (
@@ -38,7 +41,16 @@ export default function Topbar({onConnect}) {
             <TopbarLink to="/" exact>Feed</TopbarLink>
             <TopbarLink to="/groups">Groups</TopbarLink>
             <div className={classes.spacer}></div>
-            <Button color="inherit" onClick={onConnect}>Connect</Button>
+            {isConnected ? (
+              <div>
+                <Button color="primary" onClick={onConnect} variant="contained">Submit</Button>
+                <TopbarLink to="/me" icon>
+                  <AccountCircle />
+                </TopbarLink>
+              </div>
+              ) : (
+                <Button color="inherit" onClick={onConnect} variant="contained">Connect</Button>
+            )}
           </Toolbar>
         </AppBar>
         <Switch>
@@ -47,6 +59,9 @@ export default function Topbar({onConnect}) {
           </Route>
           <Route path="/groups">
             <Groups />
+          </Route>
+          <Route path="/me">
+            <Profile />
           </Route>
         </Switch>
       </div>
