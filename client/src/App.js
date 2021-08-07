@@ -9,6 +9,7 @@ import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
 import { DID } from "dids";
 import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
 import "./App.css";
+import Topbar from './components/Navigation/Topbar'
 
 const CERAMIC_API_URL = "https://ceramic-clay.3boxlabs.com";
 const ceramic = new CeramicClient(CERAMIC_API_URL);
@@ -78,9 +79,7 @@ const App = () => {
   }
   return (
     <div className="App">
-      <h1>DeSilo</h1>
-      <p>Welcome to the future of research!</p>
-      <button onClick={threeIdAuthenticate}>Connect</button>
+      <Topbar onConnect={threeIdAuthenticate}/>
     </div>
   );
 };
