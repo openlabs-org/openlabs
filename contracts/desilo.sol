@@ -13,7 +13,7 @@ contract desilo {
     dSocialCredits _scContract; 
     address _owner;
     uint256 _scID = 0;
-    mapping(address => bool) _registered;
+    mapping(address => bool) public registered;
 
     // mapping(entityID)
     mapping(uint256 => mapping(address => uint256)) _stakedAmount; 
@@ -56,8 +56,8 @@ contract desilo {
     }
 
     function seedSC() external {
-        require(!_registered[msg.sender]);
-        _registered[msg.sender] = true;
+        require(!registered[msg.sender], "Cannot call this function, user already registered");
+        registered[msg.sender] = true;
         _scContract.mint(msg.sender, _scID, scSeedAmount, "");
     }
 

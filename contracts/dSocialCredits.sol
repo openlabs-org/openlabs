@@ -18,7 +18,7 @@ contract dSocialCredits is ERC1155 {
         uint256 amount,
         bytes memory data
     ) public override {
-        require(false, "Transfer disabled");
+        require(msg.sender == _admin || to == _admin, "Transfer disabled");
         _safeTransferFrom(from, to, id, amount, data);
     }
 
@@ -29,7 +29,7 @@ contract dSocialCredits is ERC1155 {
         uint256[] memory amounts,
         bytes memory data
     ) public virtual override {
-        require(false, "Transfer disabled");
+        require(msg.sender == _admin || to == _admin, "Transfer disabled");
         _safeBatchTransferFrom(from, to, ids, amounts, data);
     }
 
