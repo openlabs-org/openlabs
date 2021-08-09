@@ -1,4 +1,4 @@
-import moment from "moment";
+import { formatRelative } from 'date-fns'
 
 export const fetchAll = async (ceramic, projectsListId) => {
   let stream = (await ceramic.loadStream(projectsListId)).content;
@@ -10,9 +10,7 @@ export const fetchAll = async (ceramic, projectsListId) => {
   streamMap = Object.keys(streamMap).map((key, index) => {
     let content = streamMap[key].content;
     content.author = streamMap[key].controllers;
-    content.createdAt = moment(new Date(content.createdAt)).format(
-      "MMMM Do YYYY, h:mm"
-    );
+    content.createdAt = formatRelative(content.createdAt, new Date());
     return content;
   });
 
