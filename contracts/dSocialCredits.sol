@@ -1,18 +1,18 @@
-pragma solidity ^0.8.3; 
+pragma solidity ^0.8.3;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
-
 contract dSocialCredits is ERC1155 {
-
     address _admin;
     address[] _authorizedTransfer;
-    uint _authTransferCount;
+    uint256 _authTransferCount;
 
     modifier validTransfer(address from, address to) {
         bool hasValidParty = false;
-        for (uint i = 0; i < _authTransferCount; i++) {
-            if (to == _authorizedTransfer[i] || from == _authorizedTransfer[i]) {
+        for (uint256 i = 0; i < _authTransferCount; i++) {
+            if (
+                to == _authorizedTransfer[i] || from == _authorizedTransfer[i]
+            ) {
                 hasValidParty = true;
                 break;
             }
@@ -21,7 +21,11 @@ contract dSocialCredits is ERC1155 {
         _;
     }
 
-    constructor(address _adm, address[] memory _auth, uint _count) ERC1155("") {
+    constructor(
+        address _adm,
+        address[] memory _auth,
+        uint256 _count
+    ) ERC1155("") {
         _admin = _adm;
         _authorizedTransfer = _auth;
         _authTransferCount = _count;
@@ -66,7 +70,6 @@ contract dSocialCredits is ERC1155 {
         _mint(account, id, amount, data);
     }
 
-
     function mintBatch(
         address to,
         uint256[] memory ids,
@@ -76,5 +79,4 @@ contract dSocialCredits is ERC1155 {
         require(msg.sender == _admin, "Only designated admin can mint.");
         _mintBatch(to, ids, amounts, data);
     }
-
 }

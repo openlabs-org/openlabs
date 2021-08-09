@@ -11,6 +11,8 @@ import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
 import "./App.css";
 import Topbar from "./components/Navigation/Topbar";
 
+import Test from "./Test";
+
 const CERAMIC_API_URL = "https://ceramic-clay.3boxlabs.com";
 const ceramic = new CeramicClient(CERAMIC_API_URL);
 const resolver = {
@@ -46,7 +48,7 @@ const App = () => {
         const socialCreditsContract = new web3.eth.Contract(
           dSocialCreditsContract.abi,
           dSocialCreditsContract.networks[networkId] &&
-            dSocialCreditsContract.networks[networkId].address
+          dSocialCreditsContract.networks[networkId].address
         );
 
         // Set web3, accounts, and contract to the state
@@ -66,6 +68,7 @@ const App = () => {
     })();
   }, []);
 
+
   const threeIdAuthenticate = async () => {
     const threeIdConnect = new ThreeIdConnect();
     const authProvider = new EthereumAuthProvider(window.ethereum, account);
@@ -75,6 +78,7 @@ const App = () => {
     await ceramic.did.authenticate();
     setIsConnected(true);
   };
+
 
   if (!web3) {
     return <div>Loading Web3, accounts, and contract...</div>;
@@ -86,8 +90,48 @@ const App = () => {
         isConnected={isConnected}
         ceramic={ceramic}
       />
+      <Test desiloContract={desiloContract} socialCreditsContract={socialCreditsContract} account={account} />
     </div>
   );
 };
 
 export default App;
+
+
+// //FUNCTIONS TO CALL SMART CONTRACTS. WILL NEED TO SOMEHOW MAKE DESILOCONTRACT A REACHABLE OBJECT.
+
+// /* Parameters: initialSupply: int, uri: string */
+// async function createGroup(initialSupply, uri) {
+//   console.log("createGroup")
+//   return await desiloContract.methods.createGroup(initialSupply, uri).send({
+//     from: account,
+//   });
+// }
+
+// /* Parameters: commitId: string */
+// async function getUserSocialCredit(address) {
+//   await socialCreditsContract.methods.balanceOf(address, 0).call({
+//     from: account
+//   }).then(response => {
+//     console.log(response);
+//     return response;
+//   }).catch(error => {
+//     console.warn(error);
+//   })
+// }
+
+// /* Parameters: commitId: int */
+// async function stake(commitId) {
+//   console.log("stake")
+//   return await desiloContract.methods.stake(commitId).send({
+//     from: account
+//   })
+// }
+
+// /* Parameters: commitId: int */
+// async function unstake(commitId) {
+//   console.log("unstake")
+//   return await desiloContract.methods.unstake(commitId).send({
+//     from: account
+//   });
+// }

@@ -10,20 +10,31 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.0;\n\n/*\n * @dev Provides information about the current execution context, including the\n * sender of the transaction and its data. While these are generally available\n * via msg.sender and msg.data, they should not be accessed in such a direct\n * manner, since when dealing with meta-transactions the account sending and\n * paying for execution may not be the actual sender (as far as an application\n * is concerned).\n *\n * This contract is only required for intermediate, library-like contracts.\n */\nabstract contract Context {\n    function _msgSender() internal view virtual returns (address) {\n        return msg.sender;\n    }\n\n    function _msgData() internal view virtual returns (bytes calldata) {\n        return msg.data;\n    }\n}\n",
-  "sourcePath": "@openzeppelin\\contracts\\utils\\Context.sol",
+  "sourcePath": "@openzeppelin/contracts/utils/Context.sol",
   "ast": {
     "absolutePath": "@openzeppelin/contracts/utils/Context.sol",
     "exportedSymbols": {
       "Context": [
-        5120
+<<<<<<< Updated upstream
+        5166
       ]
     },
-    "id": 5121,
+    "id": 5167,
+=======
+        5116
+      ]
+    },
+    "id": 5117,
+>>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 5101,
+<<<<<<< Updated upstream
+        "id": 5147,
+=======
+        "id": 5097,
+>>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -31,7 +42,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:10"
+        "src": "33:23:11"
       },
       {
         "abstract": true,
@@ -39,80 +50,124 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 5120,
+<<<<<<< Updated upstream
+        "id": 5166,
         "linearizedBaseContracts": [
-          5120
+          5166
+=======
+        "id": 5116,
+        "linearizedBaseContracts": [
+          5116
+>>>>>>> Stashed changes
         ],
         "name": "Context",
-        "nameLocation": "572:7:10",
+        "nameLocation": "572:7:11",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 5109,
+<<<<<<< Updated upstream
+              "id": 5155,
+=======
+              "id": 5105,
+>>>>>>> Stashed changes
               "nodeType": "Block",
-              "src": "648:34:10",
+              "src": "648:34:11",
               "statements": [
                 {
                   "expression": {
                     "expression": {
-                      "id": 5106,
+<<<<<<< Updated upstream
+                      "id": 5152,
+=======
+                      "id": 5102,
+>>>>>>> Stashed changes
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 4294967281,
-                      "src": "665:3:10",
+                      "src": "665:3:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 5107,
+<<<<<<< Updated upstream
+                    "id": 5153,
+=======
+                    "id": 5103,
+>>>>>>> Stashed changes
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "memberName": "sender",
                     "nodeType": "MemberAccess",
-                    "src": "665:10:10",
+                    "src": "665:10:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 5105,
-                  "id": 5108,
+<<<<<<< Updated upstream
+                  "functionReturnParameters": 5151,
+                  "id": 5154,
+=======
+                  "functionReturnParameters": 5101,
+                  "id": 5104,
+>>>>>>> Stashed changes
                   "nodeType": "Return",
-                  "src": "658:17:10"
+                  "src": "658:17:11"
                 }
               ]
             },
-            "id": 5110,
+<<<<<<< Updated upstream
+            "id": 5156,
+=======
+            "id": 5106,
+>>>>>>> Stashed changes
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_msgSender",
-            "nameLocation": "595:10:10",
+            "nameLocation": "595:10:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5102,
+<<<<<<< Updated upstream
+              "id": 5148,
+=======
+              "id": 5098,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "605:2:10"
+              "src": "605:2:11"
             },
             "returnParameters": {
-              "id": 5105,
+<<<<<<< Updated upstream
+              "id": 5151,
+=======
+              "id": 5101,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 5104,
+<<<<<<< Updated upstream
+                  "id": 5150,
+=======
+                  "id": 5100,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 5110,
+<<<<<<< Updated upstream
+                  "scope": 5156,
+                  "src": "639:7:11",
+=======
+                  "scope": 5106,
                   "src": "639:7:10",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -120,10 +175,14 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 5103,
+<<<<<<< Updated upstream
+                    "id": 5149,
+=======
+                    "id": 5099,
+>>>>>>> Stashed changes
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "639:7:10",
+                    "src": "639:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -133,80 +192,123 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "638:9:10"
+              "src": "638:9:11"
             },
-            "scope": 5120,
+<<<<<<< Updated upstream
+            "scope": 5166,
+            "src": "586:96:11",
+=======
+            "scope": 5116,
             "src": "586:96:10",
+>>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": true,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 5118,
+<<<<<<< Updated upstream
+              "id": 5164,
+=======
+              "id": 5114,
+>>>>>>> Stashed changes
               "nodeType": "Block",
-              "src": "755:32:10",
+              "src": "755:32:11",
               "statements": [
                 {
                   "expression": {
                     "expression": {
-                      "id": 5115,
+<<<<<<< Updated upstream
+                      "id": 5161,
+=======
+                      "id": 5111,
+>>>>>>> Stashed changes
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 4294967281,
-                      "src": "772:3:10",
+                      "src": "772:3:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 5116,
+<<<<<<< Updated upstream
+                    "id": 5162,
+=======
+                    "id": 5112,
+>>>>>>> Stashed changes
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "memberName": "data",
                     "nodeType": "MemberAccess",
-                    "src": "772:8:10",
+                    "src": "772:8:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_calldata_ptr",
                       "typeString": "bytes calldata"
                     }
                   },
-                  "functionReturnParameters": 5114,
-                  "id": 5117,
+<<<<<<< Updated upstream
+                  "functionReturnParameters": 5160,
+                  "id": 5163,
+=======
+                  "functionReturnParameters": 5110,
+                  "id": 5113,
+>>>>>>> Stashed changes
                   "nodeType": "Return",
-                  "src": "765:15:10"
+                  "src": "765:15:11"
                 }
               ]
             },
-            "id": 5119,
+<<<<<<< Updated upstream
+            "id": 5165,
+=======
+            "id": 5115,
+>>>>>>> Stashed changes
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_msgData",
-            "nameLocation": "697:8:10",
+            "nameLocation": "697:8:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5111,
+<<<<<<< Updated upstream
+              "id": 5157,
+=======
+              "id": 5107,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "705:2:10"
+              "src": "705:2:11"
             },
             "returnParameters": {
-              "id": 5114,
+<<<<<<< Updated upstream
+              "id": 5160,
+=======
+              "id": 5110,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 5113,
+<<<<<<< Updated upstream
+                  "id": 5159,
+=======
+                  "id": 5109,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 5119,
+<<<<<<< Updated upstream
+                  "scope": 5165,
+                  "src": "739:14:11",
+=======
+                  "scope": 5115,
                   "src": "739:14:10",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -214,10 +316,14 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 5112,
+<<<<<<< Updated upstream
+                    "id": 5158,
+=======
+                    "id": 5108,
+>>>>>>> Stashed changes
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "739:5:10",
+                    "src": "739:5:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -226,34 +332,55 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "738:16:10"
+              "src": "738:16:11"
             },
-            "scope": 5120,
+<<<<<<< Updated upstream
+            "scope": 5166,
+            "src": "688:99:11",
+=======
+            "scope": 5116,
             "src": "688:99:10",
+>>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": true,
             "visibility": "internal"
           }
         ],
-        "scope": 5121,
+<<<<<<< Updated upstream
+        "scope": 5167,
+        "src": "554:235:11"
+=======
+        "scope": 5117,
         "src": "554:235:10"
+>>>>>>> Stashed changes
       }
     ],
-    "src": "33:757:10"
+    "src": "33:757:11"
   },
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/utils/Context.sol",
     "exportedSymbols": {
       "Context": [
-        5120
+<<<<<<< Updated upstream
+        5166
       ]
     },
-    "id": 5121,
+    "id": 5167,
+=======
+        5116
+      ]
+    },
+    "id": 5117,
+>>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 5101,
+<<<<<<< Updated upstream
+        "id": 5147,
+=======
+        "id": 5097,
+>>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -261,7 +388,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:10"
+        "src": "33:23:11"
       },
       {
         "abstract": true,
@@ -269,80 +396,124 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 5120,
+<<<<<<< Updated upstream
+        "id": 5166,
         "linearizedBaseContracts": [
-          5120
+          5166
+=======
+        "id": 5116,
+        "linearizedBaseContracts": [
+          5116
+>>>>>>> Stashed changes
         ],
         "name": "Context",
-        "nameLocation": "572:7:10",
+        "nameLocation": "572:7:11",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 5109,
+<<<<<<< Updated upstream
+              "id": 5155,
+=======
+              "id": 5105,
+>>>>>>> Stashed changes
               "nodeType": "Block",
-              "src": "648:34:10",
+              "src": "648:34:11",
               "statements": [
                 {
                   "expression": {
                     "expression": {
-                      "id": 5106,
+<<<<<<< Updated upstream
+                      "id": 5152,
+=======
+                      "id": 5102,
+>>>>>>> Stashed changes
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 4294967281,
-                      "src": "665:3:10",
+                      "src": "665:3:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 5107,
+<<<<<<< Updated upstream
+                    "id": 5153,
+=======
+                    "id": 5103,
+>>>>>>> Stashed changes
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "memberName": "sender",
                     "nodeType": "MemberAccess",
-                    "src": "665:10:10",
+                    "src": "665:10:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "functionReturnParameters": 5105,
-                  "id": 5108,
+<<<<<<< Updated upstream
+                  "functionReturnParameters": 5151,
+                  "id": 5154,
+=======
+                  "functionReturnParameters": 5101,
+                  "id": 5104,
+>>>>>>> Stashed changes
                   "nodeType": "Return",
-                  "src": "658:17:10"
+                  "src": "658:17:11"
                 }
               ]
             },
-            "id": 5110,
+<<<<<<< Updated upstream
+            "id": 5156,
+=======
+            "id": 5106,
+>>>>>>> Stashed changes
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_msgSender",
-            "nameLocation": "595:10:10",
+            "nameLocation": "595:10:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5102,
+<<<<<<< Updated upstream
+              "id": 5148,
+=======
+              "id": 5098,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "605:2:10"
+              "src": "605:2:11"
             },
             "returnParameters": {
-              "id": 5105,
+<<<<<<< Updated upstream
+              "id": 5151,
+=======
+              "id": 5101,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 5104,
+<<<<<<< Updated upstream
+                  "id": 5150,
+=======
+                  "id": 5100,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 5110,
+<<<<<<< Updated upstream
+                  "scope": 5156,
+                  "src": "639:7:11",
+=======
+                  "scope": 5106,
                   "src": "639:7:10",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -350,10 +521,14 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 5103,
+<<<<<<< Updated upstream
+                    "id": 5149,
+=======
+                    "id": 5099,
+>>>>>>> Stashed changes
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "639:7:10",
+                    "src": "639:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -363,80 +538,123 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "638:9:10"
+              "src": "638:9:11"
             },
-            "scope": 5120,
+<<<<<<< Updated upstream
+            "scope": 5166,
+            "src": "586:96:11",
+=======
+            "scope": 5116,
             "src": "586:96:10",
+>>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": true,
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 5118,
+<<<<<<< Updated upstream
+              "id": 5164,
+=======
+              "id": 5114,
+>>>>>>> Stashed changes
               "nodeType": "Block",
-              "src": "755:32:10",
+              "src": "755:32:11",
               "statements": [
                 {
                   "expression": {
                     "expression": {
-                      "id": 5115,
+<<<<<<< Updated upstream
+                      "id": 5161,
+=======
+                      "id": 5111,
+>>>>>>> Stashed changes
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 4294967281,
-                      "src": "772:3:10",
+                      "src": "772:3:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 5116,
+<<<<<<< Updated upstream
+                    "id": 5162,
+=======
+                    "id": 5112,
+>>>>>>> Stashed changes
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "memberName": "data",
                     "nodeType": "MemberAccess",
-                    "src": "772:8:10",
+                    "src": "772:8:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_calldata_ptr",
                       "typeString": "bytes calldata"
                     }
                   },
-                  "functionReturnParameters": 5114,
-                  "id": 5117,
+<<<<<<< Updated upstream
+                  "functionReturnParameters": 5160,
+                  "id": 5163,
+=======
+                  "functionReturnParameters": 5110,
+                  "id": 5113,
+>>>>>>> Stashed changes
                   "nodeType": "Return",
-                  "src": "765:15:10"
+                  "src": "765:15:11"
                 }
               ]
             },
-            "id": 5119,
+<<<<<<< Updated upstream
+            "id": 5165,
+=======
+            "id": 5115,
+>>>>>>> Stashed changes
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_msgData",
-            "nameLocation": "697:8:10",
+            "nameLocation": "697:8:11",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5111,
+<<<<<<< Updated upstream
+              "id": 5157,
+=======
+              "id": 5107,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "705:2:10"
+              "src": "705:2:11"
             },
             "returnParameters": {
-              "id": 5114,
+<<<<<<< Updated upstream
+              "id": 5160,
+=======
+              "id": 5110,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 5113,
+<<<<<<< Updated upstream
+                  "id": 5159,
+=======
+                  "id": 5109,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 5119,
+<<<<<<< Updated upstream
+                  "scope": 5165,
+                  "src": "739:14:11",
+=======
+                  "scope": 5115,
                   "src": "739:14:10",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -444,10 +662,14 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 5112,
+<<<<<<< Updated upstream
+                    "id": 5158,
+=======
+                    "id": 5108,
+>>>>>>> Stashed changes
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "739:5:10",
+                    "src": "739:5:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -456,28 +678,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "738:16:10"
+              "src": "738:16:11"
             },
-            "scope": 5120,
+<<<<<<< Updated upstream
+            "scope": 5166,
+            "src": "688:99:11",
+=======
+            "scope": 5116,
             "src": "688:99:10",
+>>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": true,
             "visibility": "internal"
           }
         ],
-        "scope": 5121,
+<<<<<<< Updated upstream
+        "scope": 5167,
+        "src": "554:235:11"
+=======
+        "scope": 5117,
         "src": "554:235:10"
+>>>>>>> Stashed changes
       }
     ],
-    "src": "33:757:10"
+    "src": "33:757:11"
   },
   "compiler": {
     "name": "solc",
     "version": "0.8.3+commit.8d00100c.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.3.4",
-  "updatedAt": "2021-08-09T00:05:31.140Z",
+  "schemaVersion": "3.4.1",
+<<<<<<< Updated upstream
+  "updatedAt": "2021-08-09T04:40:00.228Z",
+=======
+  "updatedAt": "2021-08-09T03:24:15.712Z",
+>>>>>>> Stashed changes
   "devdoc": {
     "kind": "dev",
     "methods": {},

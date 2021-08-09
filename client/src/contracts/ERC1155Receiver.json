@@ -113,24 +113,44 @@
     "absolutePath": "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol",
     "exportedSymbols": {
       "ERC1155Receiver": [
-        4803
+<<<<<<< Updated upstream
+        4849
       ],
       "ERC165": [
-        5144
+        5190
       ],
       "IERC1155Receiver": [
-        4754
+        4800
       ],
       "IERC165": [
-        5156
+        5202
       ]
     },
-    "id": 4804,
+    "id": 4850,
+=======
+        4799
+      ],
+      "ERC165": [
+        5140
+      ],
+      "IERC1155Receiver": [
+        4750
+      ],
+      "IERC165": [
+        5152
+      ]
+    },
+    "id": 4800,
+>>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4771,
+<<<<<<< Updated upstream
+        "id": 4817,
+=======
+        "id": 4767,
+>>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -138,29 +158,47 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:8"
+        "src": "33:23:9"
       },
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol",
         "file": "../IERC1155Receiver.sol",
-        "id": 4772,
+<<<<<<< Updated upstream
+        "id": 4818,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 4804,
-        "sourceUnit": 4755,
+        "scope": 4850,
+        "sourceUnit": 4801,
+        "src": "58:33:9",
+=======
+        "id": 4768,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4800,
+        "sourceUnit": 4751,
         "src": "58:33:8",
+>>>>>>> Stashed changes
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
         "absolutePath": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
         "file": "../../../utils/introspection/ERC165.sol",
-        "id": 4773,
+<<<<<<< Updated upstream
+        "id": 4819,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 4804,
-        "sourceUnit": 5145,
+        "scope": 4850,
+        "sourceUnit": 5191,
+        "src": "92:49:9",
+=======
+        "id": 4769,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4800,
+        "sourceUnit": 5141,
         "src": "92:49:8",
+>>>>>>> Stashed changes
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -169,62 +207,109 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 4775,
+<<<<<<< Updated upstream
+              "id": 4821,
               "name": "ERC165",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 5144,
+              "referencedDeclaration": 5190,
+              "src": "220:6:9"
+            },
+            "id": 4822,
+=======
+              "id": 4771,
+              "name": "ERC165",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 5140,
               "src": "220:6:8"
             },
-            "id": 4776,
+            "id": 4772,
+>>>>>>> Stashed changes
             "nodeType": "InheritanceSpecifier",
-            "src": "220:6:8"
+            "src": "220:6:9"
           },
           {
             "baseName": {
-              "id": 4777,
+<<<<<<< Updated upstream
+              "id": 4823,
               "name": "IERC1155Receiver",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 4754,
+              "referencedDeclaration": 4800,
+              "src": "228:16:9"
+            },
+            "id": 4824,
+=======
+              "id": 4773,
+              "name": "IERC1155Receiver",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 4750,
               "src": "228:16:8"
             },
-            "id": 4778,
+            "id": 4774,
+>>>>>>> Stashed changes
             "nodeType": "InheritanceSpecifier",
-            "src": "228:16:8"
+            "src": "228:16:9"
           }
         ],
         "contractDependencies": [
-          4754,
-          5144,
-          5156
+<<<<<<< Updated upstream
+          4800,
+          5190,
+          5202
         ],
         "contractKind": "contract",
         "documentation": {
-          "id": 4774,
+          "id": 4820,
+=======
+          4750,
+          5140,
+          5152
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 4770,
+>>>>>>> Stashed changes
           "nodeType": "StructuredDocumentation",
-          "src": "143:39:8",
+          "src": "143:39:9",
           "text": " @dev _Available since v3.1._"
         },
         "fullyImplemented": false,
-        "id": 4803,
+<<<<<<< Updated upstream
+        "id": 4849,
         "linearizedBaseContracts": [
-          4803,
-          4754,
-          5144,
-          5156
+          4849,
+          4800,
+          5190,
+          5202
+=======
+        "id": 4799,
+        "linearizedBaseContracts": [
+          4799,
+          4750,
+          5140,
+          5152
+>>>>>>> Stashed changes
         ],
         "name": "ERC1155Receiver",
-        "nameLocation": "201:15:8",
+        "nameLocation": "201:15:9",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "baseFunctions": [
-              5143,
-              5155
+<<<<<<< Updated upstream
+              5189,
+              5201
             ],
             "body": {
-              "id": 4801,
+              "id": 4847,
+=======
+              5139,
+              5151
+            ],
+            "body": {
+              "id": 4797,
+>>>>>>> Stashed changes
               "nodeType": "Block",
-              "src": "420:113:8",
+              "src": "420:113:9",
               "statements": [
                 {
                   "expression": {
@@ -232,7 +317,11 @@
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     },
-                    "id": 4799,
+<<<<<<< Updated upstream
+                    "id": 4845,
+=======
+                    "id": 4795,
+>>>>>>> Stashed changes
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -242,18 +331,31 @@
                         "typeIdentifier": "t_bytes4",
                         "typeString": "bytes4"
                       },
-                      "id": 4794,
+<<<<<<< Updated upstream
+                      "id": 4840,
+=======
+                      "id": 4790,
+>>>>>>> Stashed changes
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "leftExpression": {
-                        "id": 4789,
+<<<<<<< Updated upstream
+                        "id": 4835,
                         "name": "interfaceId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4781,
+                        "referencedDeclaration": 4827,
+                        "src": "437:11:9",
+=======
+                        "id": 4785,
+                        "name": "interfaceId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4777,
                         "src": "437:11:8",
+>>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes4",
                           "typeString": "bytes4"
@@ -265,14 +367,25 @@
                         "expression": {
                           "arguments": [
                             {
-                              "id": 4791,
+<<<<<<< Updated upstream
+                              "id": 4837,
                               "name": "IERC1155Receiver",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4754,
+                              "referencedDeclaration": 4800,
+                              "src": "457:16:9",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4800_$",
+=======
+                              "id": 4787,
+                              "name": "IERC1155Receiver",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4750,
                               "src": "457:16:8",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4754_$",
+                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4750_$",
+>>>>>>> Stashed changes
                                 "typeString": "type(contract IERC1155Receiver)"
                               }
                             }
@@ -280,22 +393,34 @@
                           "expression": {
                             "argumentTypes": [
                               {
-                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4754_$",
+<<<<<<< Updated upstream
+                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4800_$",
                                 "typeString": "type(contract IERC1155Receiver)"
                               }
                             ],
-                            "id": 4790,
+                            "id": 4836,
+=======
+                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4750_$",
+                                "typeString": "type(contract IERC1155Receiver)"
+                              }
+                            ],
+                            "id": 4786,
+>>>>>>> Stashed changes
                             "name": "type",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967269,
-                            "src": "452:4:8",
+                            "src": "452:4:9",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_metatype_pure$__$returns$__$",
                               "typeString": "function () pure"
                             }
                           },
-                          "id": 4792,
+<<<<<<< Updated upstream
+                          "id": 4838,
+=======
+                          "id": 4788,
+>>>>>>> Stashed changes
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -303,27 +428,35 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "452:22:8",
+                          "src": "452:22:9",
                           "tryCall": false,
                           "typeDescriptions": {
-                            "typeIdentifier": "t_magic_meta_type_t_contract$_IERC1155Receiver_$4754",
+<<<<<<< Updated upstream
+                            "typeIdentifier": "t_magic_meta_type_t_contract$_IERC1155Receiver_$4800",
                             "typeString": "type(contract IERC1155Receiver)"
                           }
                         },
-                        "id": 4793,
+                        "id": 4839,
+=======
+                            "typeIdentifier": "t_magic_meta_type_t_contract$_IERC1155Receiver_$4750",
+                            "typeString": "type(contract IERC1155Receiver)"
+                          }
+                        },
+                        "id": 4789,
+>>>>>>> Stashed changes
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "lValueRequested": false,
                         "memberName": "interfaceId",
                         "nodeType": "MemberAccess",
-                        "src": "452:34:8",
+                        "src": "452:34:9",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes4",
                           "typeString": "bytes4"
                         }
                       },
-                      "src": "437:49:8",
+                      "src": "437:49:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
@@ -334,12 +467,21 @@
                     "rightExpression": {
                       "arguments": [
                         {
-                          "id": 4797,
+<<<<<<< Updated upstream
+                          "id": 4843,
                           "name": "interfaceId",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4781,
+                          "referencedDeclaration": 4827,
+                          "src": "514:11:9",
+=======
+                          "id": 4793,
+                          "name": "interfaceId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4777,
                           "src": "514:11:8",
+>>>>>>> Stashed changes
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes4",
                             "typeString": "bytes4"
@@ -354,32 +496,53 @@
                           }
                         ],
                         "expression": {
-                          "id": 4795,
+<<<<<<< Updated upstream
+                          "id": 4841,
+=======
+                          "id": 4791,
+>>>>>>> Stashed changes
                           "name": "super",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 4294967271,
-                          "src": "490:5:8",
+                          "src": "490:5:9",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_super$_ERC1155Receiver_$4803_$",
+<<<<<<< Updated upstream
+                            "typeIdentifier": "t_type$_t_super$_ERC1155Receiver_$4849_$",
                             "typeString": "type(contract super ERC1155Receiver)"
                           }
                         },
-                        "id": 4796,
+                        "id": 4842,
+=======
+                            "typeIdentifier": "t_type$_t_super$_ERC1155Receiver_$4799_$",
+                            "typeString": "type(contract super ERC1155Receiver)"
+                          }
+                        },
+                        "id": 4792,
+>>>>>>> Stashed changes
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "memberName": "supportsInterface",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 5143,
+<<<<<<< Updated upstream
+                        "referencedDeclaration": 5189,
+                        "src": "490:23:9",
+=======
+                        "referencedDeclaration": 5139,
                         "src": "490:23:8",
+>>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$_t_bytes4_$returns$_t_bool_$",
                           "typeString": "function (bytes4) view returns (bool)"
                         }
                       },
-                      "id": 4798,
+<<<<<<< Updated upstream
+                      "id": 4844,
+=======
+                      "id": 4794,
+>>>>>>> Stashed changes
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -387,74 +550,119 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "490:36:8",
+                      "src": "490:36:9",
                       "tryCall": false,
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
                       }
                     },
-                    "src": "437:89:8",
+                    "src": "437:89:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 4788,
-                  "id": 4800,
+<<<<<<< Updated upstream
+                  "functionReturnParameters": 4834,
+                  "id": 4846,
+=======
+                  "functionReturnParameters": 4784,
+                  "id": 4796,
+>>>>>>> Stashed changes
                   "nodeType": "Return",
-                  "src": "430:96:8"
+                  "src": "430:96:9"
                 }
               ]
             },
             "documentation": {
-              "id": 4779,
+<<<<<<< Updated upstream
+              "id": 4825,
+=======
+              "id": 4775,
+>>>>>>> Stashed changes
               "nodeType": "StructuredDocumentation",
-              "src": "251:56:8",
+              "src": "251:56:9",
               "text": " @dev See {IERC165-supportsInterface}."
             },
             "functionSelector": "01ffc9a7",
-            "id": 4802,
+<<<<<<< Updated upstream
+            "id": 4848,
+=======
+            "id": 4798,
+>>>>>>> Stashed changes
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "supportsInterface",
-            "nameLocation": "321:17:8",
+            "nameLocation": "321:17:9",
             "nodeType": "FunctionDefinition",
             "overrides": {
-              "id": 4785,
+<<<<<<< Updated upstream
+              "id": 4831,
               "nodeType": "OverrideSpecifier",
               "overrides": [
                 {
-                  "id": 4783,
+                  "id": 4829,
                   "name": "ERC165",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 5144,
+                  "referencedDeclaration": 5190,
+                  "src": "388:6:9"
+                },
+                {
+                  "id": 4830,
+                  "name": "IERC165",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 5202,
+                  "src": "396:7:9"
+=======
+              "id": 4781,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [
+                {
+                  "id": 4779,
+                  "name": "ERC165",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 5140,
                   "src": "388:6:8"
                 },
                 {
-                  "id": 4784,
+                  "id": 4780,
                   "name": "IERC165",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 5156,
+                  "referencedDeclaration": 5152,
                   "src": "396:7:8"
+>>>>>>> Stashed changes
                 }
               ],
-              "src": "379:25:8"
+              "src": "379:25:9"
             },
             "parameters": {
-              "id": 4782,
+<<<<<<< Updated upstream
+              "id": 4828,
+=======
+              "id": 4778,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4781,
+<<<<<<< Updated upstream
+                  "id": 4827,
+=======
+                  "id": 4777,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "interfaceId",
-                  "nameLocation": "346:11:8",
+                  "nameLocation": "346:11:9",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4802,
+<<<<<<< Updated upstream
+                  "scope": 4848,
+                  "src": "339:18:9",
+=======
+                  "scope": 4798,
                   "src": "339:18:8",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -462,10 +670,14 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 4780,
+<<<<<<< Updated upstream
+                    "id": 4826,
+=======
+                    "id": 4776,
+>>>>>>> Stashed changes
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
-                    "src": "339:6:8",
+                    "src": "339:6:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes4",
                       "typeString": "bytes4"
@@ -474,21 +686,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "338:20:8"
+              "src": "338:20:9"
             },
             "returnParameters": {
-              "id": 4788,
+<<<<<<< Updated upstream
+              "id": 4834,
+=======
+              "id": 4784,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4787,
+<<<<<<< Updated upstream
+                  "id": 4833,
+=======
+                  "id": 4783,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4802,
+<<<<<<< Updated upstream
+                  "scope": 4848,
+                  "src": "414:4:9",
+=======
+                  "scope": 4798,
                   "src": "414:4:8",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -496,10 +721,14 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 4786,
+<<<<<<< Updated upstream
+                    "id": 4832,
+=======
+                    "id": 4782,
+>>>>>>> Stashed changes
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "414:4:8",
+                    "src": "414:4:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -508,43 +737,73 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "413:6:8"
+              "src": "413:6:9"
             },
-            "scope": 4803,
+<<<<<<< Updated upstream
+            "scope": 4849,
+            "src": "312:221:9",
+=======
+            "scope": 4799,
             "src": "312:221:8",
+>>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": true,
             "visibility": "public"
           }
         ],
-        "scope": 4804,
+<<<<<<< Updated upstream
+        "scope": 4850,
+        "src": "183:352:9"
+=======
+        "scope": 4800,
         "src": "183:352:8"
+>>>>>>> Stashed changes
       }
     ],
-    "src": "33:503:8"
+    "src": "33:503:9"
   },
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol",
     "exportedSymbols": {
       "ERC1155Receiver": [
-        4803
+<<<<<<< Updated upstream
+        4849
       ],
       "ERC165": [
-        5144
+        5190
       ],
       "IERC1155Receiver": [
-        4754
+        4800
       ],
       "IERC165": [
-        5156
+        5202
       ]
     },
-    "id": 4804,
+    "id": 4850,
+=======
+        4799
+      ],
+      "ERC165": [
+        5140
+      ],
+      "IERC1155Receiver": [
+        4750
+      ],
+      "IERC165": [
+        5152
+      ]
+    },
+    "id": 4800,
+>>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4771,
+<<<<<<< Updated upstream
+        "id": 4817,
+=======
+        "id": 4767,
+>>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -552,29 +811,47 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:8"
+        "src": "33:23:9"
       },
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol",
         "file": "../IERC1155Receiver.sol",
-        "id": 4772,
+<<<<<<< Updated upstream
+        "id": 4818,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 4804,
-        "sourceUnit": 4755,
+        "scope": 4850,
+        "sourceUnit": 4801,
+        "src": "58:33:9",
+=======
+        "id": 4768,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4800,
+        "sourceUnit": 4751,
         "src": "58:33:8",
+>>>>>>> Stashed changes
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
         "absolutePath": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
         "file": "../../../utils/introspection/ERC165.sol",
-        "id": 4773,
+<<<<<<< Updated upstream
+        "id": 4819,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 4804,
-        "sourceUnit": 5145,
+        "scope": 4850,
+        "sourceUnit": 5191,
+        "src": "92:49:9",
+=======
+        "id": 4769,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4800,
+        "sourceUnit": 5141,
         "src": "92:49:8",
+>>>>>>> Stashed changes
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -583,62 +860,109 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 4775,
+<<<<<<< Updated upstream
+              "id": 4821,
               "name": "ERC165",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 5144,
+              "referencedDeclaration": 5190,
+              "src": "220:6:9"
+            },
+            "id": 4822,
+=======
+              "id": 4771,
+              "name": "ERC165",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 5140,
               "src": "220:6:8"
             },
-            "id": 4776,
+            "id": 4772,
+>>>>>>> Stashed changes
             "nodeType": "InheritanceSpecifier",
-            "src": "220:6:8"
+            "src": "220:6:9"
           },
           {
             "baseName": {
-              "id": 4777,
+<<<<<<< Updated upstream
+              "id": 4823,
               "name": "IERC1155Receiver",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 4754,
+              "referencedDeclaration": 4800,
+              "src": "228:16:9"
+            },
+            "id": 4824,
+=======
+              "id": 4773,
+              "name": "IERC1155Receiver",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 4750,
               "src": "228:16:8"
             },
-            "id": 4778,
+            "id": 4774,
+>>>>>>> Stashed changes
             "nodeType": "InheritanceSpecifier",
-            "src": "228:16:8"
+            "src": "228:16:9"
           }
         ],
         "contractDependencies": [
-          4754,
-          5144,
-          5156
+<<<<<<< Updated upstream
+          4800,
+          5190,
+          5202
         ],
         "contractKind": "contract",
         "documentation": {
-          "id": 4774,
+          "id": 4820,
+=======
+          4750,
+          5140,
+          5152
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 4770,
+>>>>>>> Stashed changes
           "nodeType": "StructuredDocumentation",
-          "src": "143:39:8",
+          "src": "143:39:9",
           "text": " @dev _Available since v3.1._"
         },
         "fullyImplemented": false,
-        "id": 4803,
+<<<<<<< Updated upstream
+        "id": 4849,
         "linearizedBaseContracts": [
-          4803,
-          4754,
-          5144,
-          5156
+          4849,
+          4800,
+          5190,
+          5202
+=======
+        "id": 4799,
+        "linearizedBaseContracts": [
+          4799,
+          4750,
+          5140,
+          5152
+>>>>>>> Stashed changes
         ],
         "name": "ERC1155Receiver",
-        "nameLocation": "201:15:8",
+        "nameLocation": "201:15:9",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "baseFunctions": [
-              5143,
-              5155
+<<<<<<< Updated upstream
+              5189,
+              5201
             ],
             "body": {
-              "id": 4801,
+              "id": 4847,
+=======
+              5139,
+              5151
+            ],
+            "body": {
+              "id": 4797,
+>>>>>>> Stashed changes
               "nodeType": "Block",
-              "src": "420:113:8",
+              "src": "420:113:9",
               "statements": [
                 {
                   "expression": {
@@ -646,7 +970,11 @@
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     },
-                    "id": 4799,
+<<<<<<< Updated upstream
+                    "id": 4845,
+=======
+                    "id": 4795,
+>>>>>>> Stashed changes
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -656,18 +984,31 @@
                         "typeIdentifier": "t_bytes4",
                         "typeString": "bytes4"
                       },
-                      "id": 4794,
+<<<<<<< Updated upstream
+                      "id": 4840,
+=======
+                      "id": 4790,
+>>>>>>> Stashed changes
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "leftExpression": {
-                        "id": 4789,
+<<<<<<< Updated upstream
+                        "id": 4835,
                         "name": "interfaceId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4781,
+                        "referencedDeclaration": 4827,
+                        "src": "437:11:9",
+=======
+                        "id": 4785,
+                        "name": "interfaceId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4777,
                         "src": "437:11:8",
+>>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes4",
                           "typeString": "bytes4"
@@ -679,14 +1020,25 @@
                         "expression": {
                           "arguments": [
                             {
-                              "id": 4791,
+<<<<<<< Updated upstream
+                              "id": 4837,
                               "name": "IERC1155Receiver",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4754,
+                              "referencedDeclaration": 4800,
+                              "src": "457:16:9",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4800_$",
+=======
+                              "id": 4787,
+                              "name": "IERC1155Receiver",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4750,
                               "src": "457:16:8",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4754_$",
+                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4750_$",
+>>>>>>> Stashed changes
                                 "typeString": "type(contract IERC1155Receiver)"
                               }
                             }
@@ -694,22 +1046,34 @@
                           "expression": {
                             "argumentTypes": [
                               {
-                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4754_$",
+<<<<<<< Updated upstream
+                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4800_$",
                                 "typeString": "type(contract IERC1155Receiver)"
                               }
                             ],
-                            "id": 4790,
+                            "id": 4836,
+=======
+                                "typeIdentifier": "t_type$_t_contract$_IERC1155Receiver_$4750_$",
+                                "typeString": "type(contract IERC1155Receiver)"
+                              }
+                            ],
+                            "id": 4786,
+>>>>>>> Stashed changes
                             "name": "type",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 4294967269,
-                            "src": "452:4:8",
+                            "src": "452:4:9",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_metatype_pure$__$returns$__$",
                               "typeString": "function () pure"
                             }
                           },
-                          "id": 4792,
+<<<<<<< Updated upstream
+                          "id": 4838,
+=======
+                          "id": 4788,
+>>>>>>> Stashed changes
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -717,27 +1081,35 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "452:22:8",
+                          "src": "452:22:9",
                           "tryCall": false,
                           "typeDescriptions": {
-                            "typeIdentifier": "t_magic_meta_type_t_contract$_IERC1155Receiver_$4754",
+<<<<<<< Updated upstream
+                            "typeIdentifier": "t_magic_meta_type_t_contract$_IERC1155Receiver_$4800",
                             "typeString": "type(contract IERC1155Receiver)"
                           }
                         },
-                        "id": 4793,
+                        "id": 4839,
+=======
+                            "typeIdentifier": "t_magic_meta_type_t_contract$_IERC1155Receiver_$4750",
+                            "typeString": "type(contract IERC1155Receiver)"
+                          }
+                        },
+                        "id": 4789,
+>>>>>>> Stashed changes
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "lValueRequested": false,
                         "memberName": "interfaceId",
                         "nodeType": "MemberAccess",
-                        "src": "452:34:8",
+                        "src": "452:34:9",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes4",
                           "typeString": "bytes4"
                         }
                       },
-                      "src": "437:49:8",
+                      "src": "437:49:9",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
@@ -748,12 +1120,21 @@
                     "rightExpression": {
                       "arguments": [
                         {
-                          "id": 4797,
+<<<<<<< Updated upstream
+                          "id": 4843,
                           "name": "interfaceId",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4781,
+                          "referencedDeclaration": 4827,
+                          "src": "514:11:9",
+=======
+                          "id": 4793,
+                          "name": "interfaceId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4777,
                           "src": "514:11:8",
+>>>>>>> Stashed changes
                           "typeDescriptions": {
                             "typeIdentifier": "t_bytes4",
                             "typeString": "bytes4"
@@ -768,32 +1149,53 @@
                           }
                         ],
                         "expression": {
-                          "id": 4795,
+<<<<<<< Updated upstream
+                          "id": 4841,
+=======
+                          "id": 4791,
+>>>>>>> Stashed changes
                           "name": "super",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
                           "referencedDeclaration": 4294967271,
-                          "src": "490:5:8",
+                          "src": "490:5:9",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_super$_ERC1155Receiver_$4803_$",
+<<<<<<< Updated upstream
+                            "typeIdentifier": "t_type$_t_super$_ERC1155Receiver_$4849_$",
                             "typeString": "type(contract super ERC1155Receiver)"
                           }
                         },
-                        "id": 4796,
+                        "id": 4842,
+=======
+                            "typeIdentifier": "t_type$_t_super$_ERC1155Receiver_$4799_$",
+                            "typeString": "type(contract super ERC1155Receiver)"
+                          }
+                        },
+                        "id": 4792,
+>>>>>>> Stashed changes
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "memberName": "supportsInterface",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 5143,
+<<<<<<< Updated upstream
+                        "referencedDeclaration": 5189,
+                        "src": "490:23:9",
+=======
+                        "referencedDeclaration": 5139,
                         "src": "490:23:8",
+>>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_view$_t_bytes4_$returns$_t_bool_$",
                           "typeString": "function (bytes4) view returns (bool)"
                         }
                       },
-                      "id": 4798,
+<<<<<<< Updated upstream
+                      "id": 4844,
+=======
+                      "id": 4794,
+>>>>>>> Stashed changes
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -801,74 +1203,119 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "490:36:8",
+                      "src": "490:36:9",
                       "tryCall": false,
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
                         "typeString": "bool"
                       }
                     },
-                    "src": "437:89:8",
+                    "src": "437:89:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 4788,
-                  "id": 4800,
+<<<<<<< Updated upstream
+                  "functionReturnParameters": 4834,
+                  "id": 4846,
+=======
+                  "functionReturnParameters": 4784,
+                  "id": 4796,
+>>>>>>> Stashed changes
                   "nodeType": "Return",
-                  "src": "430:96:8"
+                  "src": "430:96:9"
                 }
               ]
             },
             "documentation": {
-              "id": 4779,
+<<<<<<< Updated upstream
+              "id": 4825,
+=======
+              "id": 4775,
+>>>>>>> Stashed changes
               "nodeType": "StructuredDocumentation",
-              "src": "251:56:8",
+              "src": "251:56:9",
               "text": " @dev See {IERC165-supportsInterface}."
             },
             "functionSelector": "01ffc9a7",
-            "id": 4802,
+<<<<<<< Updated upstream
+            "id": 4848,
+=======
+            "id": 4798,
+>>>>>>> Stashed changes
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "supportsInterface",
-            "nameLocation": "321:17:8",
+            "nameLocation": "321:17:9",
             "nodeType": "FunctionDefinition",
             "overrides": {
-              "id": 4785,
+<<<<<<< Updated upstream
+              "id": 4831,
               "nodeType": "OverrideSpecifier",
               "overrides": [
                 {
-                  "id": 4783,
+                  "id": 4829,
                   "name": "ERC165",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 5144,
+                  "referencedDeclaration": 5190,
+                  "src": "388:6:9"
+                },
+                {
+                  "id": 4830,
+                  "name": "IERC165",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 5202,
+                  "src": "396:7:9"
+=======
+              "id": 4781,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [
+                {
+                  "id": 4779,
+                  "name": "ERC165",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 5140,
                   "src": "388:6:8"
                 },
                 {
-                  "id": 4784,
+                  "id": 4780,
                   "name": "IERC165",
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 5156,
+                  "referencedDeclaration": 5152,
                   "src": "396:7:8"
+>>>>>>> Stashed changes
                 }
               ],
-              "src": "379:25:8"
+              "src": "379:25:9"
             },
             "parameters": {
-              "id": 4782,
+<<<<<<< Updated upstream
+              "id": 4828,
+=======
+              "id": 4778,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4781,
+<<<<<<< Updated upstream
+                  "id": 4827,
+=======
+                  "id": 4777,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "interfaceId",
-                  "nameLocation": "346:11:8",
+                  "nameLocation": "346:11:9",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4802,
+<<<<<<< Updated upstream
+                  "scope": 4848,
+                  "src": "339:18:9",
+=======
+                  "scope": 4798,
                   "src": "339:18:8",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -876,10 +1323,14 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-                    "id": 4780,
+<<<<<<< Updated upstream
+                    "id": 4826,
+=======
+                    "id": 4776,
+>>>>>>> Stashed changes
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
-                    "src": "339:6:8",
+                    "src": "339:6:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes4",
                       "typeString": "bytes4"
@@ -888,21 +1339,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "338:20:8"
+              "src": "338:20:9"
             },
             "returnParameters": {
-              "id": 4788,
+<<<<<<< Updated upstream
+              "id": 4834,
+=======
+              "id": 4784,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4787,
+<<<<<<< Updated upstream
+                  "id": 4833,
+=======
+                  "id": 4783,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4802,
+<<<<<<< Updated upstream
+                  "scope": 4848,
+                  "src": "414:4:9",
+=======
+                  "scope": 4798,
                   "src": "414:4:8",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -910,10 +1374,14 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 4786,
+<<<<<<< Updated upstream
+                    "id": 4832,
+=======
+                    "id": 4782,
+>>>>>>> Stashed changes
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "414:4:8",
+                    "src": "414:4:9",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -922,28 +1390,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "413:6:8"
+              "src": "413:6:9"
             },
-            "scope": 4803,
+<<<<<<< Updated upstream
+            "scope": 4849,
+            "src": "312:221:9",
+=======
+            "scope": 4799,
             "src": "312:221:8",
+>>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": true,
             "visibility": "public"
           }
         ],
-        "scope": 4804,
+<<<<<<< Updated upstream
+        "scope": 4850,
+        "src": "183:352:9"
+=======
+        "scope": 4800,
         "src": "183:352:8"
+>>>>>>> Stashed changes
       }
     ],
-    "src": "33:503:8"
+    "src": "33:503:9"
   },
   "compiler": {
     "name": "solc",
     "version": "0.8.3+commit.8d00100c.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.3.4",
-  "updatedAt": "2021-08-09T00:05:31.130Z",
+  "schemaVersion": "3.4.1",
+<<<<<<< Updated upstream
+  "updatedAt": "2021-08-09T04:40:00.223Z",
+=======
+  "updatedAt": "2021-08-09T03:24:15.707Z",
+>>>>>>> Stashed changes
   "devdoc": {
     "details": "_Available since v3.1._",
     "kind": "dev",

@@ -323,26 +323,43 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.0;\n\nimport \"../IERC1155.sol\";\n\n/**\n * @dev Interface of the optional ERC1155MetadataExtension interface, as defined\n * in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP].\n *\n * _Available since v3.1._\n */\ninterface IERC1155MetadataURI is IERC1155 {\n    /**\n     * @dev Returns the URI for token type `id`.\n     *\n     * If the `\\{id\\}` substring is present in the URI, it must be replaced by\n     * clients with the actual token type ID.\n     */\n    function uri(uint256 id) external view returns (string memory);\n}\n",
-  "sourcePath": "@openzeppelin\\contracts\\token\\ERC1155\\extensions\\IERC1155MetadataURI.sol",
+  "sourcePath": "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
   "ast": {
     "absolutePath": "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
     "exportedSymbols": {
       "IERC1155": [
-        4713
+<<<<<<< Updated upstream
+        4759
       ],
       "IERC1155MetadataURI": [
-        4769
+        4815
       ],
       "IERC165": [
-        5156
+        5202
       ]
     },
-    "id": 4770,
+    "id": 4816,
+=======
+        4709
+      ],
+      "IERC1155MetadataURI": [
+        4765
+      ],
+      "IERC165": [
+        5152
+      ]
+    },
+    "id": 4766,
+>>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4756,
+<<<<<<< Updated upstream
+        "id": 4802,
+=======
+        "id": 4752,
+>>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -350,17 +367,26 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:7"
+        "src": "33:23:8"
       },
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
         "file": "../IERC1155.sol",
-        "id": 4757,
+<<<<<<< Updated upstream
+        "id": 4803,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 4770,
-        "sourceUnit": 4714,
+        "scope": 4816,
+        "sourceUnit": 4760,
+        "src": "58:25:8",
+=======
+        "id": 4753,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4766,
+        "sourceUnit": 4710,
         "src": "58:25:7",
+>>>>>>> Stashed changes
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -369,67 +395,115 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 4759,
+<<<<<<< Updated upstream
+              "id": 4805,
               "name": "IERC1155",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 4713,
+              "referencedDeclaration": 4759,
+              "src": "313:8:8"
+            },
+            "id": 4806,
+=======
+              "id": 4755,
+              "name": "IERC1155",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 4709,
               "src": "313:8:7"
             },
-            "id": 4760,
+            "id": 4756,
+>>>>>>> Stashed changes
             "nodeType": "InheritanceSpecifier",
-            "src": "313:8:7"
+            "src": "313:8:8"
           }
         ],
         "contractDependencies": [
-          4713,
-          5156
+<<<<<<< Updated upstream
+          4759,
+          5202
         ],
         "contractKind": "interface",
         "documentation": {
-          "id": 4758,
+          "id": 4804,
+=======
+          4709,
+          5152
+        ],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 4754,
+>>>>>>> Stashed changes
           "nodeType": "StructuredDocumentation",
-          "src": "85:194:7",
+          "src": "85:194:8",
           "text": " @dev Interface of the optional ERC1155MetadataExtension interface, as defined\n in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP].\n _Available since v3.1._"
         },
         "fullyImplemented": false,
-        "id": 4769,
+<<<<<<< Updated upstream
+        "id": 4815,
         "linearizedBaseContracts": [
-          4769,
-          4713,
-          5156
+          4815,
+          4759,
+          5202
+=======
+        "id": 4765,
+        "linearizedBaseContracts": [
+          4765,
+          4709,
+          5152
+>>>>>>> Stashed changes
         ],
         "name": "IERC1155MetadataURI",
-        "nameLocation": "290:19:7",
+        "nameLocation": "290:19:8",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 4761,
+<<<<<<< Updated upstream
+              "id": 4807,
+=======
+              "id": 4757,
+>>>>>>> Stashed changes
               "nodeType": "StructuredDocumentation",
-              "src": "328:192:7",
+              "src": "328:192:8",
               "text": " @dev Returns the URI for token type `id`.\n If the `\\{id\\}` substring is present in the URI, it must be replaced by\n clients with the actual token type ID."
             },
             "functionSelector": "0e89341c",
-            "id": 4768,
+<<<<<<< Updated upstream
+            "id": 4814,
+=======
+            "id": 4764,
+>>>>>>> Stashed changes
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "uri",
-            "nameLocation": "534:3:7",
+            "nameLocation": "534:3:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4764,
+<<<<<<< Updated upstream
+              "id": 4810,
+=======
+              "id": 4760,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4763,
+<<<<<<< Updated upstream
+                  "id": 4809,
+=======
+                  "id": 4759,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "id",
-                  "nameLocation": "546:2:7",
+                  "nameLocation": "546:2:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4768,
+<<<<<<< Updated upstream
+                  "scope": 4814,
+                  "src": "538:10:8",
+=======
+                  "scope": 4764,
                   "src": "538:10:7",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -437,10 +511,14 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4762,
+<<<<<<< Updated upstream
+                    "id": 4808,
+=======
+                    "id": 4758,
+>>>>>>> Stashed changes
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "538:7:7",
+                    "src": "538:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -449,21 +527,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "537:12:7"
+              "src": "537:12:8"
             },
             "returnParameters": {
-              "id": 4767,
+<<<<<<< Updated upstream
+              "id": 4813,
+=======
+              "id": 4763,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4766,
+<<<<<<< Updated upstream
+                  "id": 4812,
+=======
+                  "id": 4762,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4768,
+<<<<<<< Updated upstream
+                  "scope": 4814,
+                  "src": "573:13:8",
+=======
+                  "scope": 4764,
                   "src": "573:13:7",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -471,10 +562,14 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 4765,
+<<<<<<< Updated upstream
+                    "id": 4811,
+=======
+                    "id": 4761,
+>>>>>>> Stashed changes
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "573:6:7",
+                    "src": "573:6:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -483,40 +578,67 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "572:15:7"
+              "src": "572:15:8"
             },
-            "scope": 4769,
+<<<<<<< Updated upstream
+            "scope": 4815,
+            "src": "525:63:8",
+=======
+            "scope": 4765,
             "src": "525:63:7",
+>>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 4770,
+<<<<<<< Updated upstream
+        "scope": 4816,
+        "src": "280:310:8"
+=======
+        "scope": 4766,
         "src": "280:310:7"
+>>>>>>> Stashed changes
       }
     ],
-    "src": "33:558:7"
+    "src": "33:558:8"
   },
   "legacyAST": {
     "absolutePath": "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
     "exportedSymbols": {
       "IERC1155": [
-        4713
+<<<<<<< Updated upstream
+        4759
       ],
       "IERC1155MetadataURI": [
-        4769
+        4815
       ],
       "IERC165": [
-        5156
+        5202
       ]
     },
-    "id": 4770,
+    "id": 4816,
+=======
+        4709
+      ],
+      "IERC1155MetadataURI": [
+        4765
+      ],
+      "IERC165": [
+        5152
+      ]
+    },
+    "id": 4766,
+>>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4756,
+<<<<<<< Updated upstream
+        "id": 4802,
+=======
+        "id": 4752,
+>>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -524,17 +646,26 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:7"
+        "src": "33:23:8"
       },
       {
         "absolutePath": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
         "file": "../IERC1155.sol",
-        "id": 4757,
+<<<<<<< Updated upstream
+        "id": 4803,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
-        "scope": 4770,
-        "sourceUnit": 4714,
+        "scope": 4816,
+        "sourceUnit": 4760,
+        "src": "58:25:8",
+=======
+        "id": 4753,
+        "nameLocation": "-1:-1:-1",
+        "nodeType": "ImportDirective",
+        "scope": 4766,
+        "sourceUnit": 4710,
         "src": "58:25:7",
+>>>>>>> Stashed changes
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -543,67 +674,115 @@
         "baseContracts": [
           {
             "baseName": {
-              "id": 4759,
+<<<<<<< Updated upstream
+              "id": 4805,
               "name": "IERC1155",
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 4713,
+              "referencedDeclaration": 4759,
+              "src": "313:8:8"
+            },
+            "id": 4806,
+=======
+              "id": 4755,
+              "name": "IERC1155",
+              "nodeType": "IdentifierPath",
+              "referencedDeclaration": 4709,
               "src": "313:8:7"
             },
-            "id": 4760,
+            "id": 4756,
+>>>>>>> Stashed changes
             "nodeType": "InheritanceSpecifier",
-            "src": "313:8:7"
+            "src": "313:8:8"
           }
         ],
         "contractDependencies": [
-          4713,
-          5156
+<<<<<<< Updated upstream
+          4759,
+          5202
         ],
         "contractKind": "interface",
         "documentation": {
-          "id": 4758,
+          "id": 4804,
+=======
+          4709,
+          5152
+        ],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 4754,
+>>>>>>> Stashed changes
           "nodeType": "StructuredDocumentation",
-          "src": "85:194:7",
+          "src": "85:194:8",
           "text": " @dev Interface of the optional ERC1155MetadataExtension interface, as defined\n in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP].\n _Available since v3.1._"
         },
         "fullyImplemented": false,
-        "id": 4769,
+<<<<<<< Updated upstream
+        "id": 4815,
         "linearizedBaseContracts": [
-          4769,
-          4713,
-          5156
+          4815,
+          4759,
+          5202
+=======
+        "id": 4765,
+        "linearizedBaseContracts": [
+          4765,
+          4709,
+          5152
+>>>>>>> Stashed changes
         ],
         "name": "IERC1155MetadataURI",
-        "nameLocation": "290:19:7",
+        "nameLocation": "290:19:8",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 4761,
+<<<<<<< Updated upstream
+              "id": 4807,
+=======
+              "id": 4757,
+>>>>>>> Stashed changes
               "nodeType": "StructuredDocumentation",
-              "src": "328:192:7",
+              "src": "328:192:8",
               "text": " @dev Returns the URI for token type `id`.\n If the `\\{id\\}` substring is present in the URI, it must be replaced by\n clients with the actual token type ID."
             },
             "functionSelector": "0e89341c",
-            "id": 4768,
+<<<<<<< Updated upstream
+            "id": 4814,
+=======
+            "id": 4764,
+>>>>>>> Stashed changes
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "uri",
-            "nameLocation": "534:3:7",
+            "nameLocation": "534:3:8",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4764,
+<<<<<<< Updated upstream
+              "id": 4810,
+=======
+              "id": 4760,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4763,
+<<<<<<< Updated upstream
+                  "id": 4809,
+=======
+                  "id": 4759,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "id",
-                  "nameLocation": "546:2:7",
+                  "nameLocation": "546:2:8",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4768,
+<<<<<<< Updated upstream
+                  "scope": 4814,
+                  "src": "538:10:8",
+=======
+                  "scope": 4764,
                   "src": "538:10:7",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -611,10 +790,14 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 4762,
+<<<<<<< Updated upstream
+                    "id": 4808,
+=======
+                    "id": 4758,
+>>>>>>> Stashed changes
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "538:7:7",
+                    "src": "538:7:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -623,21 +806,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "537:12:7"
+              "src": "537:12:8"
             },
             "returnParameters": {
-              "id": 4767,
+<<<<<<< Updated upstream
+              "id": 4813,
+=======
+              "id": 4763,
+>>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4766,
+<<<<<<< Updated upstream
+                  "id": 4812,
+=======
+                  "id": 4762,
+>>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4768,
+<<<<<<< Updated upstream
+                  "scope": 4814,
+                  "src": "573:13:8",
+=======
+                  "scope": 4764,
                   "src": "573:13:7",
+>>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -645,10 +841,14 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 4765,
+<<<<<<< Updated upstream
+                    "id": 4811,
+=======
+                    "id": 4761,
+>>>>>>> Stashed changes
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "573:6:7",
+                    "src": "573:6:8",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -657,28 +857,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "572:15:7"
+              "src": "572:15:8"
             },
-            "scope": 4769,
+<<<<<<< Updated upstream
+            "scope": 4815,
+            "src": "525:63:8",
+=======
+            "scope": 4765,
             "src": "525:63:7",
+>>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 4770,
+<<<<<<< Updated upstream
+        "scope": 4816,
+        "src": "280:310:8"
+=======
+        "scope": 4766,
         "src": "280:310:7"
+>>>>>>> Stashed changes
       }
     ],
-    "src": "33:558:7"
+    "src": "33:558:8"
   },
   "compiler": {
     "name": "solc",
     "version": "0.8.3+commit.8d00100c.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.3.4",
-  "updatedAt": "2021-08-09T00:05:31.126Z",
+  "schemaVersion": "3.4.1",
+<<<<<<< Updated upstream
+  "updatedAt": "2021-08-09T04:40:00.196Z",
+=======
+  "updatedAt": "2021-08-09T03:24:15.707Z",
+>>>>>>> Stashed changes
   "devdoc": {
     "details": "Interface of the optional ERC1155MetadataExtension interface, as defined in the https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[EIP]. _Available since v3.1._",
     "kind": "dev",

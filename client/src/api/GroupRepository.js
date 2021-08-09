@@ -1,3 +1,4 @@
+
 export const fetchAll = () => {
   return Promise.resolve(groups);
 };
