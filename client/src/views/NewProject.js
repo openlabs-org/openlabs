@@ -51,6 +51,25 @@ export default function NewProject({ ceramic }) {
     console.log("ProjectSchema", projectSchema.commitId.toString());
   };
 
+  const updateGroupSchema = async () => {
+    const schema = {
+      $schema: "http://json-schema.org/draft-07/schema#",
+      title: "Group",
+      type: "object",
+      properties: {
+        id: { type: "number" },
+        token: { type: "string" },
+        name: { type: "string" },
+      },
+      required: ["id", "token", "name"],
+    };
+    const metadata = {
+      controllers: [ceramic.did.id],
+    };
+    const groupSchema = await TileDocument.create(ceramic, schema, metadata);
+    console.log("ProjectSchema", groupSchema.commitId.toString());
+  };
+
   const updateProjectCuratedSchema = async () => {
     const schema = {
       $schema: "http://json-schema.org/draft-07/schema#",

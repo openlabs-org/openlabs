@@ -6,9 +6,25 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 contract dSocialCredits is ERC1155 {
 
     address _admin;
+    address[] _authorizedTransfer;
+    uint _authTransferCount;
 
-    constructor(address _adm) ERC1155("") {
+    modifier validTransfer(address from, address to) {
+        bool hasValidParty = false;
+        for (uint i = 0; i < _authTransferCount; i++) {
+            if (to == _authorizedTransfer[i] || from == _authorizedTransfer[i]) {
+                hasValidParty = true;
+                break;
+            }
+        }
+        require(hasValidParty, "Illegal social credit transfer.");
+        _;
+    }
+
+    constructor(address _adm, address[] memory _auth, uint _count) ERC1155("") {
         _admin = _adm;
+        _authorizedTransfer = _auth;
+        _authTransferCount = _count;
     }
 
     function safeTransferFrom(
@@ -17,8 +33,7 @@ contract dSocialCredits is ERC1155 {
         uint256 id,
         uint256 amount,
         bytes memory data
-    ) public override {
-        require(msg.sender == _admin || to == _admin, "Transfer disabled");
+    ) public override validTransfer(from, to) {
         _safeTransferFrom(from, to, id, amount, data);
     }
 
@@ -28,8 +43,7 @@ contract dSocialCredits is ERC1155 {
         uint256[] memory ids,
         uint256[] memory amounts,
         bytes memory data
-    ) public virtual override {
-        require(msg.sender == _admin || to == _admin, "Transfer disabled");
+    ) public virtual override validTransfer(from, to) {
         _safeBatchTransferFrom(from, to, ids, amounts, data);
     }
 

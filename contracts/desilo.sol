@@ -112,7 +112,7 @@ contract desilo is ERC1155Receiver {
         pure
         returns(bytes4)
         {
-            return this.onERC1155BatchReceived.selector;
+            return this.onERC1155Received.selector;
         }
 
     function onERC1155BatchReceived(
