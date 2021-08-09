@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { Container, Typography, Grid, TextField } from "@material-ui/core";
+import { Container, Typography, Grid, TextField, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { fetchAll } from "../api/ProjectRepository";
@@ -17,17 +17,20 @@ const useStyles = makeStyles({
 export default ({ ceramic }) => {
   const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = (e) => setSearch(e.target.value);
 
   useEffect(() => {
     const load = async () => {
+      setIsLoading(true)
       let results = await fetchAll(
         ceramic,
         globals.ceramicSchemas.ProjectsList1
       );
-      if (search) results = results.filter((item) => item.title.match(search));
+      if (search) results = results.filter((item) => item.title.toLowerCase().match(search));
       setProjects(results);
+      setIsLoading(false)
     };
     if (ceramic) load();
   }, [search, ceramic]);
@@ -43,7 +46,11 @@ export default ({ ceramic }) => {
         <Grid item xs={2}>
           <TextField label="Search" variant="filled" onChange={handleSearch} />
         </Grid>
-        {projects.map((project) => (
+        {isLoading ? 
+          <Grid item xs={12}>
+            <CircularProgress size={300} />
+          </Grid>
+        : projects.map((project) => (
           <Grid item xs={12} key={"project_" + project.id}>
             <ProjectCard project={project} />
           </Grid>

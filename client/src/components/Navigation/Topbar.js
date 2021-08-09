@@ -1,6 +1,6 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { AppBar, Toolbar, Typography, Button, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
 import Groups from "../../views/Groups";
@@ -12,6 +12,7 @@ import TopbarLink from "./TopbarLink";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginBottom: '20px'
   },
   title: {
     flexGrow: 0,
@@ -21,15 +22,36 @@ const useStyles = makeStyles((theme) => ({
   spacer: {
     flexGrow: 1,
   },
+  spinner: {
+    marginRight: '8px'
+  }
 }));
 
 export default function Topbar({ onConnect, isConnected, ceramic }) {
   const classes = useStyles();
 
+  const [isConnecting, setIsConnecting] = useState(false);
+  
+  const handleConnect = () => {
+    setIsConnecting(true);
+    onConnect();
+  };
+
+  const ConnectBtn = isConnecting ? (
+    <Button color="inherit" onClick={handleConnect} variant="contained" disabled>
+      <CircularProgress size={24} className={classes.spinner} />
+      Connecting
+    </Button>
+  ) : (
+    <Button color="inherit" onClick={handleConnect} variant="contained">
+      Connect
+    </Button>
+  )
+
   return (
     <Router>
       <div className={classes.root}>
-        <AppBar position="static" color="transparent">
+        <AppBar position="static" color="transparent" className={classes.root}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               Desilo
@@ -41,18 +63,14 @@ export default function Topbar({ onConnect, isConnected, ceramic }) {
             <div className={classes.spacer}></div>
             {isConnected ? (
               <div>
-                <Button color="primary" variant="contained">
+                <Button component={Link} to="/new" color="primary" variant="contained">
                   New Project
                 </Button>
                 <TopbarLink to="/me" icon>
                   <AccountCircle />
                 </TopbarLink>
               </div>
-            ) : (
-              <Button color="inherit" onClick={onConnect} variant="contained">
-                Connect
-              </Button>
-            )}
+            ) : ConnectBtn}
           </Toolbar>
         </AppBar>
         <Switch>

@@ -1,5 +1,6 @@
-import { Button, FormControl, TextField } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
+import { Button, FormControl, TextField, Container, Grid, Typography } from "@material-ui/core";
+import { Publish as PublishIcon } from '@material-ui/icons';
 import { TileDocument } from "@ceramicnetwork/stream-tile";
 
 const globals = require("../global.json");
@@ -217,25 +218,44 @@ export default function NewProject({ ceramic }) {
   };
 
   return (
-    <div>
-      <h1>New Project</h1>
-      <FormControl>
-        <TextField
-          placeholder="Title"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-        ></TextField>
-        <TextField
-          placeholder="Summary"
-          onChange={(e) => setSummary(e.target.value)}
-          multiline
-          maxRows={5}
-          value={summary}
-        ></TextField>
-        <Button variant="outlined" onClick={uploadProject}>
-          Upload
-        </Button>
-      </FormControl>
-    </div>
+    <Container maxWidth="lg">
+      <Grid container spacing={3} alignItems="center">
+        <Grid item xs={12}>
+          <Typography variant="h3">New Project</Typography>
+        </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Title"
+              placeholder="Your amazing project title..."
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              fullWidth
+              variant="outlined"
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Summary"
+              placeholder="Your amazing project summary..."
+              onChange={(e) => setSummary(e.target.value)}
+              multiline
+              rows={5}
+              value={summary}
+              fullWidth
+              variant="outlined"
+            ></TextField>
+          </Grid>
+          <Grid item xs={12}>
+            <Button 
+              variant="contained"
+              color="primary" 
+              onClick={uploadProject}
+              startIcon={<PublishIcon/>}
+            >
+              Upload
+            </Button>
+          </Grid>
+      </Grid>
+    </Container>
   );
 }
