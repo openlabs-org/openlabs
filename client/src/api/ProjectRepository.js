@@ -30,7 +30,7 @@ export const fetchAll = async (ceramic, projectsListId) => {
 };
 
 export const fetch = async (ceramic, projectsListId, id) => {
-  let stream = await fetchAll(ceramic);
+  let stream = await fetchAll(ceramic, projectsListId);
   return Promise.resolve(stream.find((project) => project.id === id));
 };
 
