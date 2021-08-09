@@ -10,9 +10,11 @@ import { DID } from "dids";
 import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
 import "./App.css";
 import Topbar from "./components/Navigation/Topbar";
+import UserContext from "./context/UserContext";
 
 
 const CERAMIC_API_URL = "https://ceramic-clay.3boxlabs.com";
+const CERAMIC_PROJECT_LIST_ID = "kjzl6cwe1jw14aez5in18vh2o1x8s7eh7tom9mwc3g34u6v0t6g5fhlk73zs18s";
 const ceramic = new CeramicClient(CERAMIC_API_URL);
 const resolver = {
   ...KeyDidResolver.getResolver(),
@@ -83,13 +85,15 @@ const App = () => {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   return (
-    <div className="App">
-      <Topbar
-        onConnect={threeIdAuthenticate}
-        isConnected={isConnected}
-        ceramic={ceramic}
-      />
-    </div>
+    <UserContext.Provider value={{account, projectListId: CERAMIC_PROJECT_LIST_ID}}>
+      <div className="App">
+        <Topbar
+          onConnect={threeIdAuthenticate}
+          isConnected={isConnected}
+          ceramic={ceramic}
+        />
+      </div>
+    </UserContext.Provider>
   );
 };
 

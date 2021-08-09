@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { Container, Typography, Grid, TextField, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { fetchAll } from "../api/ProjectRepository";
 import ProjectCard from "../components/Project/ProjectCard";
+import UserContext from "../context/UserContext";
 
 const useStyles = makeStyles({
   root: {
@@ -13,6 +14,7 @@ const useStyles = makeStyles({
 });
 
 export default ({ ceramic }) => {
+  const { projectListId } = useContext(UserContext);
   const styles = useStyles();
 
   const [projects, setProjects] = useState([]);
@@ -23,11 +25,11 @@ export default ({ ceramic }) => {
 
   useEffect(() => {
     const load = async () => {
-      setIsLoading(true)
-      let results = await fetchAll(ceramic);
+      setIsLoading(true);
+      let results = await fetchAll(ceramic, projectListId);
       if (search) results = results.filter((item) => item.title.toLowerCase().match(search));
       setProjects(results);
-      setIsLoading(false)
+      setIsLoading(false);
     };
     if (ceramic) load();
   }, [search, ceramic]);

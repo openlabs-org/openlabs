@@ -1,9 +1,7 @@
 import { formatRelative } from "date-fns";
 import globals from "../global.json";
 
-const projectsListId = globals.ceramicSchemas.ProjectsList1
-
-export const fetchAll = async (ceramic) => {
+export const fetchAll = async (ceramic, projectsListId) => {
   let stream = (await ceramic.loadStream(projectsListId)).content;
   let projectCuratedStreamIdList = stream.projects;
   const queries = projectCuratedStreamIdList.map((elem) => ({
@@ -31,7 +29,7 @@ export const fetchAll = async (ceramic) => {
   return streamMap;
 };
 
-export const fetch = async (ceramic, id) => {
+export const fetch = async (ceramic, projectsListId, id) => {
   let stream = await fetchAll(ceramic);
   return Promise.resolve(stream.find((project) => project.id === id));
 };
