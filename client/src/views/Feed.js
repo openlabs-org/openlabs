@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default () => {
+export default ({ceramic}) => {
   const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -20,12 +20,12 @@ export default () => {
 
   useEffect(() => { 
     const load = async () => {
-      let results = await fetchAll();
+      let results = await fetchAll(ceramic);
       if (search) results = results.filter(item => item.title.match(search));
       setProjects(results)
     };
-    load();
-  }, [search]);
+    if (ceramic) load();
+  }, [search, ceramic]);
 
   const styles = useStyles();
   

@@ -2,8 +2,9 @@ pragma solidity ^0.8.3;
 
 import "./dSocialCredits.sol";
 import "./library/ABDKMath64x64.sol";
+import "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol"; 
 
-contract desilo {
+contract desilo is ERC1155Receiver {
 
     uint256 public groupCreationSCAmount;
     uint256 public scStakeAmount;
@@ -34,7 +35,7 @@ contract desilo {
     mapping(uint256 => uint256) _gscMinAcceptance; 
 
 
-    constructor(uint256 _scStakeAmount, int128 _scYield, uint256 _groupCreationSCAmount, uint256 _scSeedAmount, uint256 _scStakePeriod) {
+    constructor(uint256 _scStakeAmount, int128 _scYield, uint256 _groupCreationSCAmount, uint256 _scSeedAmount, uint256 _scStakePeriod) IERC1155Receiver() {
         gscYield[0] = _scYield;
         scStakeAmount = _scStakeAmount;
         groupCreationSCAmount = _groupCreationSCAmount;
@@ -98,5 +99,35 @@ contract desilo {
         }
         _scContract.mintBatch(msg.sender, ids, amounts, "");
     }
+
+    function onERC1155Received(
+        address operator,
+        address from,
+        uint256 id,
+        uint256 value,
+        bytes calldata data
+        )
+        external
+        override
+        pure
+        returns(bytes4)
+        {
+            this.onERC1155BatchReceived.selector;
+        }
+
+    function onERC1155BatchReceived(
+        address operator,
+        address from,
+        uint256[] calldata ids,
+        uint256[] calldata values,
+        bytes calldata data
+        )
+        external
+        override
+        pure
+        returns(bytes4)
+        {
+            this.onERC1155BatchReceived.selector;
+        }
 
 }

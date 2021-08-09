@@ -1,16 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
 import Groups from "../../views/Groups";
 import Feed from "../../views/Feed";
 import Profile from "../../views/Profile";
+import NewProject from "../../views/NewProject";
 import TopbarLink from "./TopbarLink";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Topbar({ onConnect, isConnected }) {
+export default function Topbar({ onConnect, isConnected, ceramic }) {
   const classes = useStyles();
 
   return (
@@ -61,13 +57,16 @@ export default function Topbar({ onConnect, isConnected }) {
         </AppBar>
         <Switch>
           <Route exact path="/">
-            <Feed />
+            <Feed ceramic={ceramic}  />
           </Route>
           <Route path="/groups">
             <Groups />
           </Route>
           <Route path="/me">
             <Profile />
+          </Route>
+          <Route path="/new">
+            <NewProject ceramic={ceramic} />
           </Route>
         </Switch>
       </div>

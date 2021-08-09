@@ -9,7 +9,7 @@ import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
 import { DID } from "dids";
 import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
 import "./App.css";
-import Topbar from './components/Navigation/Topbar'
+import Topbar from "./components/Navigation/Topbar";
 
 const CERAMIC_API_URL = "https://ceramic-clay.3boxlabs.com";
 const ceramic = new CeramicClient(CERAMIC_API_URL);
@@ -73,7 +73,7 @@ const App = () => {
     const provider = await threeIdConnect.getDidProvider();
     ceramic.did.setProvider(provider);
     await ceramic.did.authenticate();
-    setIsConnected(true)
+    setIsConnected(true);
   };
 
   if (!web3) {
@@ -81,7 +81,11 @@ const App = () => {
   }
   return (
     <div className="App">
-      <Topbar onConnect={threeIdAuthenticate} isConnected={isConnected}/>
+      <Topbar
+        onConnect={threeIdAuthenticate}
+        isConnected={isConnected}
+        ceramic={ceramic}
+      />
     </div>
   );
 };
