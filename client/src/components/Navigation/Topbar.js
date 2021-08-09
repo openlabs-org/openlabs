@@ -7,6 +7,7 @@ import Groups from "../../views/Groups";
 import Feed from "../../views/Feed";
 import Profile from "../../views/Profile";
 import NewProject from "../../views/NewProject";
+import Project from "../../views/Project";
 import TopbarLink from "./TopbarLink";
 
 const useStyles = makeStyles((theme) => ({
@@ -85,6 +86,9 @@ export default function Topbar({ onConnect, isConnected, ceramic }) {
           </Route>
           <Route path="/new">
             <NewProject ceramic={ceramic} />
+          </Route>
+          <Route path="/project/:id">
+            <Project ceramic={ceramic} />
           </Route>
         </Switch>
       </div>

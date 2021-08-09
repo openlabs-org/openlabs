@@ -6,8 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { fetchAll } from "../api/ProjectRepository";
 import ProjectCard from "../components/Project/ProjectCard";
 
-const globals = require("../global.json");
-
 const useStyles = makeStyles({
   root: {
     marginTop: "20px",
@@ -15,6 +13,8 @@ const useStyles = makeStyles({
 });
 
 export default ({ ceramic }) => {
+  const styles = useStyles();
+
   const [projects, setProjects] = useState([]);
   const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -24,18 +24,13 @@ export default ({ ceramic }) => {
   useEffect(() => {
     const load = async () => {
       setIsLoading(true)
-      let results = await fetchAll(
-        ceramic,
-        globals.ceramicSchemas.ProjectsList1
-      );
+      let results = await fetchAll(ceramic);
       if (search) results = results.filter((item) => item.title.toLowerCase().match(search));
       setProjects(results);
       setIsLoading(false)
     };
     if (ceramic) load();
   }, [search, ceramic]);
-
-  const styles = useStyles();
 
   return (
     <Container maxWidth="lg" className={styles.root}>
@@ -51,7 +46,7 @@ export default ({ ceramic }) => {
             <CircularProgress size={300} />
           </Grid>
         : projects.map((project) => (
-          <Grid item xs={12} key={"project_" + project.id}>
+          <Grid item xs={12} key={"project_" + project.id} >
             <ProjectCard project={project} />
           </Grid>
         ))}

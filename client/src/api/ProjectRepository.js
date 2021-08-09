@@ -1,6 +1,9 @@
-import { formatRelative } from 'date-fns'
+import { formatRelative } from "date-fns";
+import globals from "../global.json";
 
-export const fetchAll = async (ceramic, projectsListId) => {
+const projectsListId = globals.ceramicSchemas.ProjectsList1
+
+export const fetchAll = async (ceramic) => {
   let stream = (await ceramic.loadStream(projectsListId)).content;
   let projectCuratedStreamIdList = stream.projects;
   const queries = projectCuratedStreamIdList.map((elem) => ({
@@ -28,8 +31,8 @@ export const fetchAll = async (ceramic, projectsListId) => {
   return streamMap;
 };
 
-export const fetch = async (ceramic, projectsListId, id) => {
-  let stream = await fetchAll(ceramic, projectsListId);
+export const fetch = async (ceramic, id) => {
+  let stream = await fetchAll(ceramic);
   return Promise.resolve(stream.find((project) => project.id === id));
 };
 
