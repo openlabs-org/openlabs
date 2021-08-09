@@ -136,17 +136,17 @@ export default function NewProject({ ceramic }) {
     // const projectsListCommitId =
     //   "k3y52l7qbv1fryc37ed4oei1wi886zf1wvndr4gyymptuunjkvf1v5ynramfrppts";
 
-    const testA = await TileDocument.create(
-      ceramic,
-      { projects: [] },
-      {
-        controllers: [ceramic.did.id],
-        family: "ProjectsList",
-        schema: globals.ceramicSchemas.projectsListSchema,
-      }
-    );
+    // const testA = await TileDocument.create(
+    //   ceramic,
+    //   { projects: [] },
+    //   {
+    //     controllers: [ceramic.did.id],
+    //     family: "ProjectsList",
+    //     schema: globals.ceramicSchemas.projectsListSchema,
+    //   }
+    // );
 
-    console.log(testA.id.toString());
+    // console.log(testA.id.toString());
 
     // const projectsListAlpha =
     //   "kjzl6cwe1jw147vpdbx1nnqgdauzaza30bif2e15xflx7achoygcdsg6rqw0ci0";
@@ -171,7 +171,7 @@ export default function NewProject({ ceramic }) {
       {
         streamId: newProject.id.toString(),
         createdAt: Date.now(),
-        groups: ["Group A"],
+        groups: [{ id: 1, name: "Group A" }],
       },
       {
         controllers: [curatorID],
@@ -184,7 +184,7 @@ export default function NewProject({ ceramic }) {
 
     const projectListStream = await TileDocument.load(
       ceramic,
-      testA.id.toString()
+      globals.ceramicSchemas.ProjectsList1
     );
     await projectListStream.update({
       projects: projectListStream.content.projects.concat([
@@ -192,7 +192,8 @@ export default function NewProject({ ceramic }) {
       ]),
     });
     console.log(
-      (await TileDocument.load(ceramic, testA.id.toString())).content
+      (await TileDocument.load(ceramic, globals.ceramicSchemas.ProjectsList1))
+        .content
     );
   };
 

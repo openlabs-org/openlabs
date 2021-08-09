@@ -11,6 +11,7 @@
     "@material-ui/icons": "^4.11.2",
     "dids": "^2.4.0",
     "key-did-resolver": "^1.2.1",
+    "moment": "^2.29.1",
     "react": "16.11.0",
     "react-dom": "16.11.0",
     "react-router-dom": "^5.2.0",

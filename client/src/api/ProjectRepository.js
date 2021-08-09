@@ -1,10 +1,32 @@
+import moment from "moment";
+
 export const fetchAll = async (ceramic, projectsListId) => {
-  let stream = await ceramic.loadStream(projectsListId);
+  let stream = (await ceramic.loadStream(projectsListId)).content;
   let projectCuratedStreamIdList = stream.projects;
   const queries = projectCuratedStreamIdList.map((elem) => ({
     streamId: elem,
   }));
-  const streamMap = await ceramic.multiQuery(queries);
+  let streamMap = await ceramic.multiQuery(queries);
+  streamMap = Object.keys(streamMap).map((key, index) => {
+    let content = streamMap[key].content;
+    content.author = streamMap[key].controllers;
+    content.createdAt = moment(new Date(content.createdAt)).format(
+      "MMMM Do YYYY, h:mm"
+    );
+    return content;
+  });
+
+  let contentStreams = await ceramic.multiQuery(streamMap);
+  contentStreams = Object.keys(contentStreams).map(
+    (key, index) => contentStreams[key].content
+  );
+
+  streamMap = streamMap.map((key, index) => {
+    return Object.assign({}, key, contentStreams[index]);
+  });
+
+  console.log(streamMap);
+
   return streamMap;
 };
 
