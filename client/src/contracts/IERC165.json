@@ -35,26 +35,15 @@
     "absolutePath": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
     "exportedSymbols": {
       "IERC165": [
-<<<<<<< Updated upstream
         5202
       ]
     },
     "id": 5203,
-=======
-        5152
-      ]
-    },
-    "id": 5153,
->>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-<<<<<<< Updated upstream
         "id": 5192,
-=======
-        "id": 5142,
->>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -70,25 +59,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-<<<<<<< Updated upstream
           "id": 5193,
-=======
-          "id": 5143,
->>>>>>> Stashed changes
           "nodeType": "StructuredDocumentation",
           "src": "58:279:13",
           "text": " @dev Interface of the ERC165 standard, as defined in the\n https://eips.ethereum.org/EIPS/eip-165[EIP].\n Implementers can declare support of contract interfaces, which can then be\n queried by others ({ERC165Checker}).\n For an implementation, see {ERC165}."
         },
         "fullyImplemented": false,
-<<<<<<< Updated upstream
         "id": 5202,
         "linearizedBaseContracts": [
           5202
-=======
-        "id": 5152,
-        "linearizedBaseContracts": [
-          5152
->>>>>>> Stashed changes
         ],
         "name": "IERC165",
         "nameLocation": "348:7:13",
@@ -96,21 +75,13 @@
         "nodes": [
           {
             "documentation": {
-<<<<<<< Updated upstream
               "id": 5194,
-=======
-              "id": 5144,
->>>>>>> Stashed changes
               "nodeType": "StructuredDocumentation",
               "src": "362:340:13",
               "text": " @dev Returns true if this contract implements the interface defined by\n `interfaceId`. See the corresponding\n https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]\n to learn more about how these ids are created.\n This function call must use less than 30 000 gas."
             },
             "functionSelector": "01ffc9a7",
-<<<<<<< Updated upstream
             "id": 5201,
-=======
-            "id": 5151,
->>>>>>> Stashed changes
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -118,31 +89,18 @@
             "nameLocation": "716:17:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-<<<<<<< Updated upstream
               "id": 5197,
-=======
-              "id": 5147,
->>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< Updated upstream
                   "id": 5196,
-=======
-                  "id": 5146,
->>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "interfaceId",
                   "nameLocation": "741:11:13",
                   "nodeType": "VariableDeclaration",
-<<<<<<< Updated upstream
                   "scope": 5201,
                   "src": "734:18:13",
-=======
-                  "scope": 5151,
-                  "src": "734:18:12",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -150,11 +108,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-<<<<<<< Updated upstream
                     "id": 5195,
-=======
-                    "id": 5145,
->>>>>>> Stashed changes
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "734:6:13",
@@ -169,31 +123,18 @@
               "src": "733:20:13"
             },
             "returnParameters": {
-<<<<<<< Updated upstream
               "id": 5200,
-=======
-              "id": 5150,
->>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< Updated upstream
                   "id": 5199,
-=======
-                  "id": 5149,
->>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-<<<<<<< Updated upstream
                   "scope": 5201,
                   "src": "777:4:13",
-=======
-                  "scope": 5151,
-                  "src": "777:4:12",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -201,11 +142,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-<<<<<<< Updated upstream
                     "id": 5198,
-=======
-                    "id": 5148,
->>>>>>> Stashed changes
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "777:4:13",
@@ -219,25 +156,15 @@
               ],
               "src": "776:6:13"
             },
-<<<<<<< Updated upstream
             "scope": 5202,
             "src": "707:76:13",
-=======
-            "scope": 5152,
-            "src": "707:76:12",
->>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-<<<<<<< Updated upstream
         "scope": 5203,
         "src": "338:447:13"
-=======
-        "scope": 5153,
-        "src": "338:447:12"
->>>>>>> Stashed changes
       }
     ],
     "src": "33:753:13"
@@ -246,26 +173,15 @@
     "absolutePath": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
     "exportedSymbols": {
       "IERC165": [
-<<<<<<< Updated upstream
         5202
       ]
     },
     "id": 5203,
-=======
-        5152
-      ]
-    },
-    "id": 5153,
->>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-<<<<<<< Updated upstream
         "id": 5192,
-=======
-        "id": 5142,
->>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -281,25 +197,15 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-<<<<<<< Updated upstream
           "id": 5193,
-=======
-          "id": 5143,
->>>>>>> Stashed changes
           "nodeType": "StructuredDocumentation",
           "src": "58:279:13",
           "text": " @dev Interface of the ERC165 standard, as defined in the\n https://eips.ethereum.org/EIPS/eip-165[EIP].\n Implementers can declare support of contract interfaces, which can then be\n queried by others ({ERC165Checker}).\n For an implementation, see {ERC165}."
         },
         "fullyImplemented": false,
-<<<<<<< Updated upstream
         "id": 5202,
         "linearizedBaseContracts": [
           5202
-=======
-        "id": 5152,
-        "linearizedBaseContracts": [
-          5152
->>>>>>> Stashed changes
         ],
         "name": "IERC165",
         "nameLocation": "348:7:13",
@@ -307,21 +213,13 @@
         "nodes": [
           {
             "documentation": {
-<<<<<<< Updated upstream
               "id": 5194,
-=======
-              "id": 5144,
->>>>>>> Stashed changes
               "nodeType": "StructuredDocumentation",
               "src": "362:340:13",
               "text": " @dev Returns true if this contract implements the interface defined by\n `interfaceId`. See the corresponding\n https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]\n to learn more about how these ids are created.\n This function call must use less than 30 000 gas."
             },
             "functionSelector": "01ffc9a7",
-<<<<<<< Updated upstream
             "id": 5201,
-=======
-            "id": 5151,
->>>>>>> Stashed changes
             "implemented": false,
             "kind": "function",
             "modifiers": [],
@@ -329,31 +227,18 @@
             "nameLocation": "716:17:13",
             "nodeType": "FunctionDefinition",
             "parameters": {
-<<<<<<< Updated upstream
               "id": 5197,
-=======
-              "id": 5147,
->>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< Updated upstream
                   "id": 5196,
-=======
-                  "id": 5146,
->>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "interfaceId",
                   "nameLocation": "741:11:13",
                   "nodeType": "VariableDeclaration",
-<<<<<<< Updated upstream
                   "scope": 5201,
                   "src": "734:18:13",
-=======
-                  "scope": 5151,
-                  "src": "734:18:12",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -361,11 +246,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-<<<<<<< Updated upstream
                     "id": 5195,
-=======
-                    "id": 5145,
->>>>>>> Stashed changes
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "734:6:13",
@@ -380,31 +261,18 @@
               "src": "733:20:13"
             },
             "returnParameters": {
-<<<<<<< Updated upstream
               "id": 5200,
-=======
-              "id": 5150,
->>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< Updated upstream
                   "id": 5199,
-=======
-                  "id": 5149,
->>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-<<<<<<< Updated upstream
                   "scope": 5201,
                   "src": "777:4:13",
-=======
-                  "scope": 5151,
-                  "src": "777:4:12",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -412,11 +280,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-<<<<<<< Updated upstream
                     "id": 5198,
-=======
-                    "id": 5148,
->>>>>>> Stashed changes
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "777:4:13",
@@ -430,25 +294,15 @@
               ],
               "src": "776:6:13"
             },
-<<<<<<< Updated upstream
             "scope": 5202,
             "src": "707:76:13",
-=======
-            "scope": 5152,
-            "src": "707:76:12",
->>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-<<<<<<< Updated upstream
         "scope": 5203,
         "src": "338:447:13"
-=======
-        "scope": 5153,
-        "src": "338:447:12"
->>>>>>> Stashed changes
       }
     ],
     "src": "33:753:13"
@@ -459,11 +313,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-<<<<<<< Updated upstream
-  "updatedAt": "2021-08-09T04:40:00.230Z",
-=======
-  "updatedAt": "2021-08-09T03:24:15.735Z",
->>>>>>> Stashed changes
+  "updatedAt": "2021-08-09T06:07:02.995Z",
   "devdoc": {
     "details": "Interface of the ERC165 standard, as defined in the https://eips.ethereum.org/EIPS/eip-165[EIP]. Implementers can declare support of contract interfaces, which can then be queried by others ({ERC165Checker}). For an implementation, see {ERC165}.",
     "kind": "dev",

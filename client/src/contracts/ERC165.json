@@ -35,7 +35,6 @@
     "absolutePath": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
     "exportedSymbols": {
       "ERC165": [
-<<<<<<< Updated upstream
         5190
       ],
       "IERC165": [
@@ -43,24 +42,11 @@
       ]
     },
     "id": 5191,
-=======
-        5140
-      ],
-      "IERC165": [
-        5152
-      ]
-    },
-    "id": 5141,
->>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-<<<<<<< Updated upstream
         "id": 5168,
-=======
-        "id": 5118,
->>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -73,21 +59,12 @@
       {
         "absolutePath": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
         "file": "./IERC165.sol",
-<<<<<<< Updated upstream
         "id": 5169,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 5191,
         "sourceUnit": 5203,
         "src": "58:23:12",
-=======
-        "id": 5119,
-        "nameLocation": "-1:-1:-1",
-        "nodeType": "ImportDirective",
-        "scope": 5141,
-        "sourceUnit": 5153,
-        "src": "58:23:11",
->>>>>>> Stashed changes
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -96,7 +73,6 @@
         "baseContracts": [
           {
             "baseName": {
-<<<<<<< Updated upstream
               "id": 5171,
               "name": "IERC165",
               "nodeType": "IdentifierPath",
@@ -104,49 +80,25 @@
               "src": "688:7:12"
             },
             "id": 5172,
-=======
-              "id": 5121,
-              "name": "IERC165",
-              "nodeType": "IdentifierPath",
-              "referencedDeclaration": 5152,
-              "src": "688:7:11"
-            },
-            "id": 5122,
->>>>>>> Stashed changes
             "nodeType": "InheritanceSpecifier",
             "src": "688:7:12"
           }
         ],
         "contractDependencies": [
-<<<<<<< Updated upstream
           5202
         ],
         "contractKind": "contract",
         "documentation": {
           "id": 5170,
-=======
-          5152
-        ],
-        "contractKind": "contract",
-        "documentation": {
-          "id": 5120,
->>>>>>> Stashed changes
           "nodeType": "StructuredDocumentation",
           "src": "83:576:12",
           "text": " @dev Implementation of the {IERC165} interface.\n Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check\n for the additional interface id that will be supported. For example:\n ```solidity\n function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {\n     return interfaceId == type(MyInterface).interfaceId || super.supportsInterface(interfaceId);\n }\n ```\n Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation."
         },
         "fullyImplemented": true,
-<<<<<<< Updated upstream
         "id": 5190,
         "linearizedBaseContracts": [
           5190,
           5202
-=======
-        "id": 5140,
-        "linearizedBaseContracts": [
-          5140,
-          5152
->>>>>>> Stashed changes
         ],
         "name": "ERC165",
         "nameLocation": "678:6:12",
@@ -154,17 +106,10 @@
         "nodes": [
           {
             "baseFunctions": [
-<<<<<<< Updated upstream
               5201
             ],
             "body": {
               "id": 5188,
-=======
-              5151
-            ],
-            "body": {
-              "id": 5138,
->>>>>>> Stashed changes
               "nodeType": "Block",
               "src": "854:64:12",
               "statements": [
@@ -174,31 +119,18 @@
                       "typeIdentifier": "t_bytes4",
                       "typeString": "bytes4"
                     },
-<<<<<<< Updated upstream
                     "id": 5186,
-=======
-                    "id": 5136,
->>>>>>> Stashed changes
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
-<<<<<<< Updated upstream
                       "id": 5181,
                       "name": "interfaceId",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 5175,
                       "src": "871:11:12",
-=======
-                      "id": 5131,
-                      "name": "interfaceId",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 5125,
-                      "src": "871:11:11",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes4",
                         "typeString": "bytes4"
@@ -210,7 +142,6 @@
                       "expression": {
                         "arguments": [
                           {
-<<<<<<< Updated upstream
                             "id": 5183,
                             "name": "IERC165",
                             "nodeType": "Identifier",
@@ -219,16 +150,6 @@
                             "src": "891:7:12",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_contract$_IERC165_$5202_$",
-=======
-                            "id": 5133,
-                            "name": "IERC165",
-                            "nodeType": "Identifier",
-                            "overloadedDeclarations": [],
-                            "referencedDeclaration": 5152,
-                            "src": "891:7:11",
-                            "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_IERC165_$5152_$",
->>>>>>> Stashed changes
                               "typeString": "type(contract IERC165)"
                             }
                           }
@@ -236,19 +157,11 @@
                         "expression": {
                           "argumentTypes": [
                             {
-<<<<<<< Updated upstream
                               "typeIdentifier": "t_type$_t_contract$_IERC165_$5202_$",
                               "typeString": "type(contract IERC165)"
                             }
                           ],
                           "id": 5182,
-=======
-                              "typeIdentifier": "t_type$_t_contract$_IERC165_$5152_$",
-                              "typeString": "type(contract IERC165)"
-                            }
-                          ],
-                          "id": 5132,
->>>>>>> Stashed changes
                           "name": "type",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -259,11 +172,7 @@
                             "typeString": "function () pure"
                           }
                         },
-<<<<<<< Updated upstream
                         "id": 5184,
-=======
-                        "id": 5134,
->>>>>>> Stashed changes
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -274,19 +183,11 @@
                         "src": "886:13:12",
                         "tryCall": false,
                         "typeDescriptions": {
-<<<<<<< Updated upstream
                           "typeIdentifier": "t_magic_meta_type_t_contract$_IERC165_$5202",
                           "typeString": "type(contract IERC165)"
                         }
                       },
                       "id": 5185,
-=======
-                          "typeIdentifier": "t_magic_meta_type_t_contract$_IERC165_$5152",
-                          "typeString": "type(contract IERC165)"
-                        }
-                      },
-                      "id": 5135,
->>>>>>> Stashed changes
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -305,34 +206,21 @@
                       "typeString": "bool"
                     }
                   },
-<<<<<<< Updated upstream
                   "functionReturnParameters": 5180,
                   "id": 5187,
-=======
-                  "functionReturnParameters": 5130,
-                  "id": 5137,
->>>>>>> Stashed changes
                   "nodeType": "Return",
                   "src": "864:47:12"
                 }
               ]
             },
             "documentation": {
-<<<<<<< Updated upstream
               "id": 5173,
-=======
-              "id": 5123,
->>>>>>> Stashed changes
               "nodeType": "StructuredDocumentation",
               "src": "702:56:12",
               "text": " @dev See {IERC165-supportsInterface}."
             },
             "functionSelector": "01ffc9a7",
-<<<<<<< Updated upstream
             "id": 5189,
-=======
-            "id": 5139,
->>>>>>> Stashed changes
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -340,41 +228,24 @@
             "nameLocation": "772:17:12",
             "nodeType": "FunctionDefinition",
             "overrides": {
-<<<<<<< Updated upstream
               "id": 5177,
-=======
-              "id": 5127,
->>>>>>> Stashed changes
               "nodeType": "OverrideSpecifier",
               "overrides": [],
               "src": "830:8:12"
             },
             "parameters": {
-<<<<<<< Updated upstream
               "id": 5176,
-=======
-              "id": 5126,
->>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< Updated upstream
                   "id": 5175,
-=======
-                  "id": 5125,
->>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "interfaceId",
                   "nameLocation": "797:11:12",
                   "nodeType": "VariableDeclaration",
-<<<<<<< Updated upstream
                   "scope": 5189,
                   "src": "790:18:12",
-=======
-                  "scope": 5139,
-                  "src": "790:18:11",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -382,11 +253,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-<<<<<<< Updated upstream
                     "id": 5174,
-=======
-                    "id": 5124,
->>>>>>> Stashed changes
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "790:6:12",
@@ -401,31 +268,18 @@
               "src": "789:20:12"
             },
             "returnParameters": {
-<<<<<<< Updated upstream
               "id": 5180,
-=======
-              "id": 5130,
->>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< Updated upstream
                   "id": 5179,
-=======
-                  "id": 5129,
->>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-<<<<<<< Updated upstream
                   "scope": 5189,
                   "src": "848:4:12",
-=======
-                  "scope": 5139,
-                  "src": "848:4:11",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -433,11 +287,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-<<<<<<< Updated upstream
                     "id": 5178,
-=======
-                    "id": 5128,
->>>>>>> Stashed changes
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "848:4:12",
@@ -451,25 +301,15 @@
               ],
               "src": "847:6:12"
             },
-<<<<<<< Updated upstream
             "scope": 5190,
             "src": "763:155:12",
-=======
-            "scope": 5140,
-            "src": "763:155:11",
->>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": true,
             "visibility": "public"
           }
         ],
-<<<<<<< Updated upstream
         "scope": 5191,
         "src": "660:260:12"
-=======
-        "scope": 5141,
-        "src": "660:260:11"
->>>>>>> Stashed changes
       }
     ],
     "src": "33:888:12"
@@ -478,7 +318,6 @@
     "absolutePath": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
     "exportedSymbols": {
       "ERC165": [
-<<<<<<< Updated upstream
         5190
       ],
       "IERC165": [
@@ -486,24 +325,11 @@
       ]
     },
     "id": 5191,
-=======
-        5140
-      ],
-      "IERC165": [
-        5152
-      ]
-    },
-    "id": 5141,
->>>>>>> Stashed changes
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-<<<<<<< Updated upstream
         "id": 5168,
-=======
-        "id": 5118,
->>>>>>> Stashed changes
         "literals": [
           "solidity",
           "^",
@@ -516,21 +342,12 @@
       {
         "absolutePath": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
         "file": "./IERC165.sol",
-<<<<<<< Updated upstream
         "id": 5169,
         "nameLocation": "-1:-1:-1",
         "nodeType": "ImportDirective",
         "scope": 5191,
         "sourceUnit": 5203,
         "src": "58:23:12",
-=======
-        "id": 5119,
-        "nameLocation": "-1:-1:-1",
-        "nodeType": "ImportDirective",
-        "scope": 5141,
-        "sourceUnit": 5153,
-        "src": "58:23:11",
->>>>>>> Stashed changes
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -539,7 +356,6 @@
         "baseContracts": [
           {
             "baseName": {
-<<<<<<< Updated upstream
               "id": 5171,
               "name": "IERC165",
               "nodeType": "IdentifierPath",
@@ -547,49 +363,25 @@
               "src": "688:7:12"
             },
             "id": 5172,
-=======
-              "id": 5121,
-              "name": "IERC165",
-              "nodeType": "IdentifierPath",
-              "referencedDeclaration": 5152,
-              "src": "688:7:11"
-            },
-            "id": 5122,
->>>>>>> Stashed changes
             "nodeType": "InheritanceSpecifier",
             "src": "688:7:12"
           }
         ],
         "contractDependencies": [
-<<<<<<< Updated upstream
           5202
         ],
         "contractKind": "contract",
         "documentation": {
           "id": 5170,
-=======
-          5152
-        ],
-        "contractKind": "contract",
-        "documentation": {
-          "id": 5120,
->>>>>>> Stashed changes
           "nodeType": "StructuredDocumentation",
           "src": "83:576:12",
           "text": " @dev Implementation of the {IERC165} interface.\n Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check\n for the additional interface id that will be supported. For example:\n ```solidity\n function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {\n     return interfaceId == type(MyInterface).interfaceId || super.supportsInterface(interfaceId);\n }\n ```\n Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation."
         },
         "fullyImplemented": true,
-<<<<<<< Updated upstream
         "id": 5190,
         "linearizedBaseContracts": [
           5190,
           5202
-=======
-        "id": 5140,
-        "linearizedBaseContracts": [
-          5140,
-          5152
->>>>>>> Stashed changes
         ],
         "name": "ERC165",
         "nameLocation": "678:6:12",
@@ -597,17 +389,10 @@
         "nodes": [
           {
             "baseFunctions": [
-<<<<<<< Updated upstream
               5201
             ],
             "body": {
               "id": 5188,
-=======
-              5151
-            ],
-            "body": {
-              "id": 5138,
->>>>>>> Stashed changes
               "nodeType": "Block",
               "src": "854:64:12",
               "statements": [
@@ -617,31 +402,18 @@
                       "typeIdentifier": "t_bytes4",
                       "typeString": "bytes4"
                     },
-<<<<<<< Updated upstream
                     "id": 5186,
-=======
-                    "id": 5136,
->>>>>>> Stashed changes
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
-<<<<<<< Updated upstream
                       "id": 5181,
                       "name": "interfaceId",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 5175,
                       "src": "871:11:12",
-=======
-                      "id": 5131,
-                      "name": "interfaceId",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 5125,
-                      "src": "871:11:11",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_bytes4",
                         "typeString": "bytes4"
@@ -653,7 +425,6 @@
                       "expression": {
                         "arguments": [
                           {
-<<<<<<< Updated upstream
                             "id": 5183,
                             "name": "IERC165",
                             "nodeType": "Identifier",
@@ -662,16 +433,6 @@
                             "src": "891:7:12",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_contract$_IERC165_$5202_$",
-=======
-                            "id": 5133,
-                            "name": "IERC165",
-                            "nodeType": "Identifier",
-                            "overloadedDeclarations": [],
-                            "referencedDeclaration": 5152,
-                            "src": "891:7:11",
-                            "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_contract$_IERC165_$5152_$",
->>>>>>> Stashed changes
                               "typeString": "type(contract IERC165)"
                             }
                           }
@@ -679,19 +440,11 @@
                         "expression": {
                           "argumentTypes": [
                             {
-<<<<<<< Updated upstream
                               "typeIdentifier": "t_type$_t_contract$_IERC165_$5202_$",
                               "typeString": "type(contract IERC165)"
                             }
                           ],
                           "id": 5182,
-=======
-                              "typeIdentifier": "t_type$_t_contract$_IERC165_$5152_$",
-                              "typeString": "type(contract IERC165)"
-                            }
-                          ],
-                          "id": 5132,
->>>>>>> Stashed changes
                           "name": "type",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
@@ -702,11 +455,7 @@
                             "typeString": "function () pure"
                           }
                         },
-<<<<<<< Updated upstream
                         "id": 5184,
-=======
-                        "id": 5134,
->>>>>>> Stashed changes
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -717,19 +466,11 @@
                         "src": "886:13:12",
                         "tryCall": false,
                         "typeDescriptions": {
-<<<<<<< Updated upstream
                           "typeIdentifier": "t_magic_meta_type_t_contract$_IERC165_$5202",
                           "typeString": "type(contract IERC165)"
                         }
                       },
                       "id": 5185,
-=======
-                          "typeIdentifier": "t_magic_meta_type_t_contract$_IERC165_$5152",
-                          "typeString": "type(contract IERC165)"
-                        }
-                      },
-                      "id": 5135,
->>>>>>> Stashed changes
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -748,34 +489,21 @@
                       "typeString": "bool"
                     }
                   },
-<<<<<<< Updated upstream
                   "functionReturnParameters": 5180,
                   "id": 5187,
-=======
-                  "functionReturnParameters": 5130,
-                  "id": 5137,
->>>>>>> Stashed changes
                   "nodeType": "Return",
                   "src": "864:47:12"
                 }
               ]
             },
             "documentation": {
-<<<<<<< Updated upstream
               "id": 5173,
-=======
-              "id": 5123,
->>>>>>> Stashed changes
               "nodeType": "StructuredDocumentation",
               "src": "702:56:12",
               "text": " @dev See {IERC165-supportsInterface}."
             },
             "functionSelector": "01ffc9a7",
-<<<<<<< Updated upstream
             "id": 5189,
-=======
-            "id": 5139,
->>>>>>> Stashed changes
             "implemented": true,
             "kind": "function",
             "modifiers": [],
@@ -783,41 +511,24 @@
             "nameLocation": "772:17:12",
             "nodeType": "FunctionDefinition",
             "overrides": {
-<<<<<<< Updated upstream
               "id": 5177,
-=======
-              "id": 5127,
->>>>>>> Stashed changes
               "nodeType": "OverrideSpecifier",
               "overrides": [],
               "src": "830:8:12"
             },
             "parameters": {
-<<<<<<< Updated upstream
               "id": 5176,
-=======
-              "id": 5126,
->>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< Updated upstream
                   "id": 5175,
-=======
-                  "id": 5125,
->>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "interfaceId",
                   "nameLocation": "797:11:12",
                   "nodeType": "VariableDeclaration",
-<<<<<<< Updated upstream
                   "scope": 5189,
                   "src": "790:18:12",
-=======
-                  "scope": 5139,
-                  "src": "790:18:11",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -825,11 +536,7 @@
                     "typeString": "bytes4"
                   },
                   "typeName": {
-<<<<<<< Updated upstream
                     "id": 5174,
-=======
-                    "id": 5124,
->>>>>>> Stashed changes
                     "name": "bytes4",
                     "nodeType": "ElementaryTypeName",
                     "src": "790:6:12",
@@ -844,31 +551,18 @@
               "src": "789:20:12"
             },
             "returnParameters": {
-<<<<<<< Updated upstream
               "id": 5180,
-=======
-              "id": 5130,
->>>>>>> Stashed changes
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-<<<<<<< Updated upstream
                   "id": 5179,
-=======
-                  "id": 5129,
->>>>>>> Stashed changes
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-<<<<<<< Updated upstream
                   "scope": 5189,
                   "src": "848:4:12",
-=======
-                  "scope": 5139,
-                  "src": "848:4:11",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -876,11 +570,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-<<<<<<< Updated upstream
                     "id": 5178,
-=======
-                    "id": 5128,
->>>>>>> Stashed changes
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "848:4:12",
@@ -894,25 +584,15 @@
               ],
               "src": "847:6:12"
             },
-<<<<<<< Updated upstream
             "scope": 5190,
             "src": "763:155:12",
-=======
-            "scope": 5140,
-            "src": "763:155:11",
->>>>>>> Stashed changes
             "stateMutability": "view",
             "virtual": true,
             "visibility": "public"
           }
         ],
-<<<<<<< Updated upstream
         "scope": 5191,
         "src": "660:260:12"
-=======
-        "scope": 5141,
-        "src": "660:260:11"
->>>>>>> Stashed changes
       }
     ],
     "src": "33:888:12"
@@ -923,11 +603,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-<<<<<<< Updated upstream
-  "updatedAt": "2021-08-09T04:40:00.229Z",
-=======
-  "updatedAt": "2021-08-09T03:24:15.734Z",
->>>>>>> Stashed changes
+  "updatedAt": "2021-08-09T06:07:02.994Z",
   "devdoc": {
     "details": "Implementation of the {IERC165} interface. Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check for the additional interface id that will be supported. For example: ```solidity function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {     return interfaceId == type(MyInterface).interfaceId || super.supportsInterface(interfaceId); } ``` Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation.",
     "kind": "dev",

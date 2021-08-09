@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-=======
-// SPDX-License-Identifier: MIT
->>>>>>> Stashed changes
 pragma solidity ^0.8.3;
 
 import "./dSocialCredits.sol";
@@ -31,11 +27,7 @@ contract desilo is ERC1155Receiver {
     mapping(uint256 => uint256) _threadGSCCount;
 
     // mapping(groupID => fixed128x128)
-<<<<<<< Updated upstream
     uint256 public _groupCount = 1;
-=======
-    uint256 _groupCount = 1;
->>>>>>> Stashed changes
     mapping(uint256 => string) _groupURI;
     mapping(uint256 => int128) public gscYield;
     mapping(uint256 => uint256) _gscMinAcceptance;
@@ -147,11 +139,7 @@ contract desilo is ERC1155Receiver {
         uint256 value,
         bytes calldata data
     ) external pure override returns (bytes4) {
-<<<<<<< Updated upstream
         return this.onERC1155Received.selector;
-=======
-        return this.onERC1155BatchReceived.selector;
->>>>>>> Stashed changes
     }
 
     function onERC1155BatchReceived(
