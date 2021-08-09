@@ -11,7 +11,6 @@ import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
 import "./App.css";
 import Topbar from "./components/Navigation/Topbar";
 
-import Test from "./Test";
 
 const CERAMIC_API_URL = "https://ceramic-clay.3boxlabs.com";
 const ceramic = new CeramicClient(CERAMIC_API_URL);
@@ -90,7 +89,6 @@ const App = () => {
         isConnected={isConnected}
         ceramic={ceramic}
       />
-      <Test desiloContract={desiloContract} socialCreditsContract={socialCreditsContract} account={account} />
     </div>
   );
 };
