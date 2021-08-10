@@ -85,7 +85,7 @@ const App = () => {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   return (
-    <UserContext.Provider value={{account, projectListId: CERAMIC_PROJECT_LIST_ID}}>
+    <UserContext.Provider value={{account, projectListId: CERAMIC_PROJECT_LIST_ID, desiloContract, socialCreditsContract}}>
       <div className="App">
         <Topbar
           onConnect={threeIdAuthenticate}

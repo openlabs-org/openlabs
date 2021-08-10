@@ -32,6 +32,11 @@ contract desilo is ERC1155Receiver {
     mapping(uint256 => int128) public gscYield;
     mapping(uint256 => uint256) _gscMinAcceptance;
 
+    event GroupCreated(uint256 id, address creator); 
+    event Staked(address staker, uint256 commitId); 
+    event Unstaked(address staker, uint256 commitId); 
+
+
     constructor(
         uint256 _scStakeAmount,
         int128 _scYield,
@@ -51,6 +56,7 @@ contract desilo is ERC1155Receiver {
         _scContract.burn(msg.sender, _scID, groupCreationSCAmount);
         _groupURI[_groupCount] = _uri;
         _scContract.mint(msg.sender, _groupCount, _initialSupply, "");
+        emit GroupCreated(_groupCount, msg.sender);
         _groupCount++;
     }
 
@@ -86,6 +92,7 @@ contract desilo is ERC1155Receiver {
         );
         _stakedAmount[_commitId][msg.sender] += scStakeAmount;
         _stakeExpiry[_commitId][msg.sender] = block.timestamp + scStakePeriod;
+        emit Staked(msg.sender, _commitId); 
     }
 
     function unstake(uint256 _commitId) external {
@@ -130,6 +137,7 @@ contract desilo is ERC1155Receiver {
             }
         }
         _scContract.mintBatch(msg.sender, ids, amounts, "");
+        emit Unstaked(msg.sender, _commitId); 
     }
 
     function onERC1155Received(

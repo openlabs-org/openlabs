@@ -1,13 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { Button, FormControl, TextField, Container, Grid, Typography } from "@material-ui/core";
-import { Publish as PublishIcon } from '@material-ui/icons';
+import React, { useState, useEffect, useContext } from "react";
+import {
+  Button,
+  FormControl,
+  TextField,
+  Container,
+  Grid,
+  Typography,
+} from "@material-ui/core";
+import { Publish as PublishIcon } from "@material-ui/icons";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
+import UserContext from "../context/UserContext";
 
 const globals = require("../global.json");
 
 export default function NewProject({ ceramic }) {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
+  const [groupName, setGroupName] = useState("");
+  const [groupToken, setGroupToken] = useState("");
+  const { desiloContract, account } = useContext(UserContext);
 
   const updateEntitySchema = async () => {
     const schema = {
@@ -58,6 +69,24 @@ export default function NewProject({ ceramic }) {
       title: "Group",
       type: "object",
       properties: {
+        token: { type: "string" },
+        name: { type: "string" },
+      },
+      required: ["token", "name"],
+    };
+    const metadata = {
+      controllers: [ceramic.did.id],
+    };
+    const groupSchema = await TileDocument.create(ceramic, schema, metadata);
+    console.log("GroupSchema", groupSchema.commitId.toString());
+  };
+
+  const updateGroupCuratedSchema = async () => {
+    const schema = {
+      $schema: "http://json-schema.org/draft-07/schema#",
+      title: "GroupCurated",
+      type: "object",
+      properties: {
         id: { type: "number" },
         token: { type: "string" },
         name: { type: "string" },
@@ -68,7 +97,7 @@ export default function NewProject({ ceramic }) {
       controllers: [ceramic.did.id],
     };
     const groupSchema = await TileDocument.create(ceramic, schema, metadata);
-    console.log("ProjectSchema", groupSchema.commitId.toString());
+    console.log("GroupCuratedSchema", groupSchema.commitId.toString());
   };
 
   const updateProjectCuratedSchema = async () => {
@@ -104,10 +133,10 @@ export default function NewProject({ ceramic }) {
     );
   };
 
-  const updateProjectsListSchema = async () => {
+  const updateBroadcasterSchema = async () => {
     const schema = {
       $schema: "http://json-schema.org/draft-07/schema#",
-      title: "ProjectsList",
+      title: "Broadcaster",
       type: "object",
       properties: {
         projects: {
@@ -116,8 +145,14 @@ export default function NewProject({ ceramic }) {
             type: "string",
           },
         },
+        groups: {
+          type: "array",
+          items: {
+            type: "string",
+          },
+        },
       },
-      required: ["projects"],
+      required: ["projects", "groups"],
     };
     const metadata = {
       controllers: [ceramic.did.id],
@@ -128,7 +163,7 @@ export default function NewProject({ ceramic }) {
       metadata
     );
 
-    console.log("ProjectsListSchema", projectsListSchema.commitId.toString());
+    console.log("BroadcasterSchema", projectsListSchema.commitId.toString());
   };
 
   const uploadProject = async () => {
@@ -139,7 +174,9 @@ export default function NewProject({ ceramic }) {
     // await updateEntitySchema();
     // await updateProjectSchema();
     // await updateProjectCuratedSchema();
-    // await updateProjectsListSchema();
+    await updateGroupSchema();
+    await updateGroupCuratedSchema();
+    // await updateBroadcasterSchema();
 
     // const testA = await TileDocument.create(
     //   ceramic,
@@ -171,49 +208,84 @@ export default function NewProject({ ceramic }) {
     // const projectsListAlpha =
     //   "kjzl6cwe1jw147vpdbx1nnqgdauzaza30bif2e15xflx7achoygcdsg6rqw0ci0";
 
-    // Client-side
-    let authorID = ceramic.did.id;
-    let newProject = await TileDocument.create(
-      ceramic,
-      { title, summary, entities: [] },
-      {
-        controllers: [authorID],
-        family: "Project",
-        schema: globals.ceramicSchemas.ProjectSchema,
-      }
-    );
-    console.log("Project submitted at stream: ", newProject.id.toString());
+    // // Client-side
+    // let authorID = ceramic.did.id;
+    // let newProject = await TileDocument.create(
+    //   ceramic,
+    //   { title, summary, entities: [] },
+    //   {
+    //     controllers: [authorID],
+    //     family: "Project",
+    //     schema: globals.ceramicSchemas.ProjectSchema,
+    //   }
+    // );
+    // console.log("Project submitted at stream: ", newProject.id.toString());
 
-    // Curator-side
-    let curatorID = ceramic.did.id;
-    let curatedProject = await TileDocument.create(
+    // // Curator-side
+    // let curatorID = ceramic.did.id;
+    // let curatedProject = await TileDocument.create(
+    //   ceramic,
+    //   {
+    //     streamId: newProject.id.toString(),
+    //     createdAt: Date.now(),
+    //     groups: [1],
+    //   },
+    //   {
+    //     controllers: [curatorID],
+    //     family: "Project",
+    //     schema: globals.ceramicSchemas.ProjectCuratedSchema,
+    //   }
+    // );
+
+    // console.log("Project curated at stream: ", curatedProject.id.toString());
+
+    // const projectListStream = await TileDocument.load(
+    //   ceramic,
+    //   globals.ceramicSchemas.ProjectsList1
+    // );
+    // await projectListStream.update({
+    //   projects: projectListStream.content.projects.concat([
+    //     curatedProject.id.toString(),
+    //   ]),
+    // });
+    // console.log(
+    //   (await TileDocument.load(ceramic, globals.ceramicSchemas.ProjectsList1))
+    //     .content
+    // );
+  };
+
+  const createGroup = async () => {
+    // Client-side
+    let groupSetup = await TileDocument.create(
       ceramic,
       {
-        streamId: newProject.id.toString(),
-        createdAt: Date.now(),
-        groups: [{ id: 1, name: "Group A" }],
+        name: groupName,
+        token: groupToken,
       },
       {
-        controllers: [curatorID],
-        family: "Project",
-        schema: globals.ceramicSchemas.ProjectCuratedSchema,
+        schema: globals.ceramicSchemas.GroupSchema,
+        controllers: [ceramic.did.id],
       }
     );
 
-    console.log("Project curated at stream: ", curatedProject.id.toString());
+    let createGroupCall = await desiloContract.methods
+      .createGroup(100, groupSetup.id.toString())
+      .send({
+        from: account,
+      });
 
-    const projectListStream = await TileDocument.load(
+    // Broadcaster-side
+    let groupCurated = await TileDocument.create(
       ceramic,
-      globals.ceramicSchemas.ProjectsList1
-    );
-    await projectListStream.update({
-      projects: projectListStream.content.projects.concat([
-        curatedProject.id.toString(),
-      ]),
-    });
-    console.log(
-      (await TileDocument.load(ceramic, globals.ceramicSchemas.ProjectsList1))
-        .content
+      {
+        id: createGroupCall.events.GroupCreated.returnValues.id,
+        name: groupName,
+        token: groupToken,
+      },
+      {
+        schema: globals.ceramicSchemas.GroupCuratedSchema,
+        controllers: [ceramic.did.id],
+      }
     );
   };
 
@@ -223,38 +295,51 @@ export default function NewProject({ ceramic }) {
         <Grid item xs={12}>
           <Typography variant="h3">New Project</Typography>
         </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Title"
-              placeholder="Your amazing project title..."
-              onChange={(e) => setTitle(e.target.value)}
-              value={title}
-              fullWidth
-              variant="outlined"
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Summary"
-              placeholder="Your amazing project summary..."
-              onChange={(e) => setSummary(e.target.value)}
-              multiline
-              rows={5}
-              value={summary}
-              fullWidth
-              variant="outlined"
-            ></TextField>
-          </Grid>
-          <Grid item xs={12}>
-            <Button 
-              variant="contained"
-              color="primary" 
-              onClick={uploadProject}
-              startIcon={<PublishIcon/>}
-            >
-              Upload
-            </Button>
-          </Grid>
+        <Grid item xs={12}>
+          <TextField
+            label="Title"
+            placeholder="Your amazing project title..."
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            fullWidth
+            variant="outlined"
+          ></TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            label="Summary"
+            placeholder="Your amazing project summary..."
+            onChange={(e) => setSummary(e.target.value)}
+            multiline
+            rows={5}
+            value={summary}
+            fullWidth
+            variant="outlined"
+          ></TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={uploadProject}
+            startIcon={<PublishIcon />}
+          >
+            Upload
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            placeholder="Group name"
+            onChange={(e) => setGroupName(e.target.value)}
+            value={groupName}
+          ></TextField>
+          <TextField
+            placeholder="Group token"
+            onChange={(e) => setGroupToken(e.target.value)}
+            value={groupToken}
+          ></TextField>
+          <Button onClick={createGroup}>Create Group</Button>
+        </Grid>
       </Grid>
     </Container>
   );
