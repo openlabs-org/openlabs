@@ -85,7 +85,7 @@ const App = () => {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   return (
-    <UserContext.Provider value={{account, projectListId: CERAMIC_PROJECT_LIST_ID, desiloContract, socialCreditsContract}}>
+    <UserContext.Provider value={{ account, projectListId: CERAMIC_PROJECT_LIST_ID, desiloContract, socialCreditsContract }}>
       <div className="App">
         <Topbar
           onConnect={threeIdAuthenticate}
@@ -136,4 +136,31 @@ export default App;
 //   return await desiloContract.methods.unstake(commitId).send({
 //     from: account
 //   });
+// }
+
+// // Get all groups a user is associated with
+// async function getUserGroups() {
+//   let res = [];
+//   let groups = await fetchAll();
+
+//   for (let group of groups) {
+//     let balance = await socialCreditsContract.methods.balanceOf(account, group.id).call({
+//       from: account
+//     }).then(response => {
+//       console.log(response);
+//       return response;
+//     }).catch(error => {
+//       console.warn(error);
+//     });
+
+//     if (balance > 0) {
+//       let userGroup = {
+//         id: group.id,
+//         token: group.name,
+//         balance: balance
+//       }
+//       res.push(userGroup);
+//     }
+//   }
+//   return res;
 // }
