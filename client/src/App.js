@@ -97,7 +97,7 @@ const App = () => {
         socialCreditsContract,
         ceramic,
         idx,
-        web3
+        web3,
       }}
     >
       <div className="App">
@@ -145,4 +145,31 @@ export default App;
 //   return await desiloContract.methods.unstake(commitId).send({
 //     from: account
 //   });
+// }
+
+// // Get all groups a user is associated with
+// async function getUserGroups() {
+//   let res = [];
+//   let groups = await fetchAll();
+
+//   for (let group of groups) {
+//     let balance = await socialCreditsContract.methods.balanceOf(account, group.id).call({
+//       from: account
+//     }).then(response => {
+//       console.log(response);
+//       return response;
+//     }).catch(error => {
+//       console.warn(error);
+//     });
+
+//     if (balance > 0) {
+//       let userGroup = {
+//         id: group.id,
+//         token: group.name,
+//         balance: balance
+//       }
+//       res.push(userGroup);
+//     }
+//   }
+//   return res;
 // }
