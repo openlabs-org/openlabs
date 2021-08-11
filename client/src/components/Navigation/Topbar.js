@@ -15,7 +15,6 @@ import Profile from "../../views/Profile";
 import NewProject from "../../views/NewProject";
 import Project from "../../views/Project";
 import TopbarLink from "./TopbarLink";
-import UserContext from "../../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {

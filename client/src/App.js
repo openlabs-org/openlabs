@@ -46,7 +46,6 @@ const App = () => {
         setDesiloContract(desiloContract);
         setSocialCreditsContract(socialCreditsContract);
         setIDX(idx);
-        console.log(idx)
 
         // Authenticate
       } catch (error) {
