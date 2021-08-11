@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { Container, Typography, Grid, TextField, CircularProgress } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Grid,
+  TextField,
+  CircularProgress,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { fetchAll } from "../api/ProjectRepository";
@@ -13,8 +19,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default ({ ceramic }) => {
-  const { projectListId } = useContext(UserContext);
+export default () => {
+  const { desiloContract, projectListId, ceramic, idx } =
+    useContext(UserContext);
   const styles = useStyles();
 
   const [projects, setProjects] = useState([]);
@@ -26,13 +33,16 @@ export default ({ ceramic }) => {
   useEffect(() => {
     const load = async () => {
       setIsLoading(true);
-      let results = await fetchAll(ceramic, projectListId);
-      if (search) results = results.filter((item) => item.title.toLowerCase().match(search));
+      let results = await fetchAll(desiloContract, ceramic, idx, projectListId);
+      if (search)
+        results = results.filter((item) =>
+          item.title.toLowerCase().match(search)
+        );
       setProjects(results);
       setIsLoading(false);
     };
-    if (ceramic) load();
-  }, [search, ceramic]);
+    if (ceramic && desiloContract && idx) load();
+  }, [search, ceramic, desiloContract, idx]);
 
   return (
     <Container maxWidth="lg" className={styles.root}>
@@ -43,15 +53,17 @@ export default ({ ceramic }) => {
         <Grid item xs={2}>
           <TextField label="Search" variant="filled" onChange={handleSearch} />
         </Grid>
-        {isLoading ? 
+        {isLoading ? (
           <Grid item xs={12}>
             <CircularProgress size={300} />
           </Grid>
-        : projects.map((project) => (
-          <Grid item xs={12} key={"project_" + project.id} >
-            <ProjectCard project={project} />
-          </Grid>
-        ))}
+        ) : (
+          projects.map((project) => (
+            <Grid item xs={12} key={"project_" + project.id}>
+              <ProjectCard project={project} />
+            </Grid>
+          ))
+        )}
       </Grid>
     </Container>
   );

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button, CircularProgress } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  CircularProgress,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
 import Groups from "../../views/Groups";
@@ -9,11 +15,12 @@ import Profile from "../../views/Profile";
 import NewProject from "../../views/NewProject";
 import Project from "../../views/Project";
 import TopbarLink from "./TopbarLink";
+import UserContext from "../../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: '20px'
+    marginBottom: "20px",
   },
   title: {
     flexGrow: 0,
@@ -24,22 +31,27 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   spinner: {
-    marginRight: '8px'
-  }
+    marginRight: "8px",
+  },
 }));
 
-export default function Topbar({ onConnect, isConnected, ceramic }) {
+export default function Topbar({ onConnect, isConnected }) {
   const classes = useStyles();
 
   const [isConnecting, setIsConnecting] = useState(false);
-  
+
   const handleConnect = () => {
     setIsConnecting(true);
     onConnect();
   };
 
   const ConnectBtn = isConnecting ? (
-    <Button color="inherit" onClick={handleConnect} variant="contained" disabled>
+    <Button
+      color="inherit"
+      onClick={handleConnect}
+      variant="contained"
+      disabled
+    >
       <CircularProgress size={24} className={classes.spinner} />
       Connecting
     </Button>
@@ -47,7 +59,7 @@ export default function Topbar({ onConnect, isConnected, ceramic }) {
     <Button color="inherit" onClick={handleConnect} variant="contained">
       Connect
     </Button>
-  )
+  );
 
   return (
     <Router>
@@ -64,19 +76,26 @@ export default function Topbar({ onConnect, isConnected, ceramic }) {
             <div className={classes.spacer}></div>
             {isConnected ? (
               <div>
-                <Button component={Link} to="/new" color="primary" variant="contained">
+                <Button
+                  component={Link}
+                  to="/new"
+                  color="primary"
+                  variant="contained"
+                >
                   New Project
                 </Button>
                 <TopbarLink to="/me" icon>
                   <AccountCircle />
                 </TopbarLink>
               </div>
-            ) : ConnectBtn}
+            ) : (
+              ConnectBtn
+            )}
           </Toolbar>
         </AppBar>
         <Switch>
           <Route exact path="/">
-            <Feed ceramic={ceramic}  />
+            <Feed />
           </Route>
           <Route path="/groups">
             <Groups />
@@ -85,10 +104,10 @@ export default function Topbar({ onConnect, isConnected, ceramic }) {
             <Profile />
           </Route>
           <Route path="/new">
-            <NewProject ceramic={ceramic} />
+            <NewProject />
           </Route>
           <Route path="/project/:id">
-            <Project ceramic={ceramic} />
+            <Project />
           </Route>
         </Switch>
       </div>

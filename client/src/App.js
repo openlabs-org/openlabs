@@ -7,14 +7,16 @@ import CeramicClient from "@ceramicnetwork/http-client";
 import KeyDidResolver from "key-did-resolver";
 import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
 import { DID } from "dids";
+import { IDX } from "@ceramicstudio/idx";
+
 import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
 import "./App.css";
 import Topbar from "./components/Navigation/Topbar";
 import UserContext from "./context/UserContext";
 
-
 const CERAMIC_API_URL = "https://ceramic-clay.3boxlabs.com";
-const CERAMIC_PROJECT_LIST_ID = "kjzl6cwe1jw14aez5in18vh2o1x8s7eh7tom9mwc3g34u6v0t6g5fhlk73zs18s";
+const CERAMIC_PROJECT_LIST_ID =
+  "kjzl6cwe1jw14aez5in18vh2o1x8s7eh7tom9mwc3g34u6v0t6g5fhlk73zs18s";
 const ceramic = new CeramicClient(CERAMIC_API_URL);
 const resolver = {
   ...KeyDidResolver.getResolver(),
@@ -25,6 +27,7 @@ ceramic.did = did;
 
 const App = () => {
   const [web3, setWeb3] = useState(null);
+  const [idx, setIDX] = useState(null);
   const [account, setAccount] = useState(null);
   const [desiloContract, setDesiloContract] = useState(null);
   const [socialCreditsContract, setSocialCreditsContract] = useState(null);
@@ -43,13 +46,15 @@ const App = () => {
 
         const desiloContract = new web3.eth.Contract(
           desilo.abi,
-          desilo.networks[networkId] && desilo.networks[networkId].address
+          desilo.networks[networkId] && desilo.networks[networkId].address,
+          { from: account, gasLimit: 1000000 }
         );
 
         const socialCreditsContract = new web3.eth.Contract(
           dSocialCreditsContract.abi,
           dSocialCreditsContract.networks[networkId] &&
-          dSocialCreditsContract.networks[networkId].address
+            dSocialCreditsContract.networks[networkId].address,
+          { from: account, gasLimit: 1000000 }
         );
 
         // Set web3, accounts, and contract to the state
@@ -69,7 +74,6 @@ const App = () => {
     })();
   }, []);
 
-
   const threeIdAuthenticate = async () => {
     const threeIdConnect = new ThreeIdConnect();
     const authProvider = new EthereumAuthProvider(window.ethereum, account);
@@ -77,28 +81,33 @@ const App = () => {
     const provider = await threeIdConnect.getDidProvider();
     ceramic.did.setProvider(provider);
     await ceramic.did.authenticate();
+    const idx = new IDX({ ceramic });
+    setIDX(idx);
     setIsConnected(true);
   };
-
 
   if (!web3) {
     return <div>Loading Web3, accounts, and contract...</div>;
   }
   return (
-    <UserContext.Provider value={{account, projectListId: CERAMIC_PROJECT_LIST_ID, desiloContract, socialCreditsContract}}>
+    <UserContext.Provider
+      value={{
+        account,
+        desiloContract,
+        socialCreditsContract,
+        ceramic,
+        idx,
+        web3
+      }}
+    >
       <div className="App">
-        <Topbar
-          onConnect={threeIdAuthenticate}
-          isConnected={isConnected}
-          ceramic={ceramic}
-        />
+        <Topbar onConnect={threeIdAuthenticate} isConnected={isConnected} />
       </div>
     </UserContext.Provider>
   );
 };
 
 export default App;
-
 
 // //FUNCTIONS TO CALL SMART CONTRACTS. WILL NEED TO SOMEHOW MAKE DESILOCONTRACT A REACHABLE OBJECT.
 

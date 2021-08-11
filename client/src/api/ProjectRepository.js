@@ -1,36 +1,52 @@
-import { formatRelative } from "date-fns";
+import { formatDistance } from "date-fns";
 import globals from "../global.json";
 
-export const fetchAll = async (ceramic, projectsListId) => {
-  let stream = (await ceramic.loadStream(projectsListId)).content;
-  let projectCuratedStreamIdList = stream.projects;
-  const queries = projectCuratedStreamIdList.map((elem) => ({
-    streamId: elem,
-  }));
-  let streamMap = await ceramic.multiQuery(queries);
-  streamMap = Object.keys(streamMap).map((key, index) => {
-    let content = streamMap[key].content;
-    content.author = streamMap[key].controllers;
-    content.createdAt = formatRelative(content.createdAt, new Date());
-    return content;
-  });
+export const fetchAll = async (
+  desiloContract,
+  ceramic,
+  idx
+) => {
+  let projects = await desiloContract.methods.getAllProjects().call();
+  let affiliations = await desiloContract.methods.getAllAffiliations().call();
+  let groups = await desiloContract.methods.getAllGroups().call();
 
-  let contentStreams = await ceramic.multiQuery(streamMap);
-  contentStreams = Object.keys(contentStreams).map(
-    (key, index) => contentStreams[key].content
-  );
+  console.log(projects);
+  let projectURIs = projects.map((elem) => ({ streamId: elem.uri }));
+  console.log(projectURIs);
+  let projectCeramic = await ceramic.multiQuery(projectURIs);
+  let projectDict = await Promise.all(Object.keys(projectCeramic).map(
+    async (key, index) => {
+      let content = projectCeramic[key].content;
+      content.author = await Promise.all(projectCeramic[key].controllers.map(
+        async (did) => (await idx.get("basicProfile", did)).name
+      ));
+      content.createdAt = formatDistance(
+        new Date(projects[index].createdAt * 1000),
+        new Date(),
+        { addSuffix: true }
+      );
+      content.id = key;
+      content.groups = [];
+      affiliations[index].forEach((isAffiliated, index) => {
+        if (isAffiliated) {
+          content.groups.push(groups[index]);
+        }
+      });
+      return content;
+    }
+  ));
 
-  streamMap = streamMap.map((key, index) => {
-    return Object.assign({}, key, contentStreams[index]);
-  });
-
-  console.log(streamMap);
-
-  return streamMap;
+  console.log(projectDict);
+  return projectDict;
 };
 
-export const fetch = async (ceramic, projectsListId, id) => {
-  let stream = await fetchAll(ceramic, projectsListId);
+export const fetch = async (
+  desiloContract,
+  ceramic,
+  idx,
+  id
+) => {
+  let stream = await fetchAll(desiloContract, ceramic, idx);
   return Promise.resolve(stream.find((project) => project.id === id));
 };
 

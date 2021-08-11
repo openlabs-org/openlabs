@@ -13,12 +13,12 @@ import UserContext from "../context/UserContext";
 
 const globals = require("../global.json");
 
-export default function NewProject({ ceramic }) {
+export default function NewProject() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [groupName, setGroupName] = useState("");
   const [groupToken, setGroupToken] = useState("");
-  const { desiloContract, account } = useContext(UserContext);
+  const { desiloContract, account, ceramic, web3 } = useContext(UserContext);
 
   const updateEntitySchema = async () => {
     const schema = {
@@ -81,91 +81,6 @@ export default function NewProject({ ceramic }) {
     console.log("GroupSchema", groupSchema.commitId.toString());
   };
 
-  const updateGroupCuratedSchema = async () => {
-    const schema = {
-      $schema: "http://json-schema.org/draft-07/schema#",
-      title: "GroupCurated",
-      type: "object",
-      properties: {
-        id: { type: "number" },
-        token: { type: "string" },
-        name: { type: "string" },
-      },
-      required: ["id", "token", "name"],
-    };
-    const metadata = {
-      controllers: [ceramic.did.id],
-    };
-    const groupSchema = await TileDocument.create(ceramic, schema, metadata);
-    console.log("GroupCuratedSchema", groupSchema.commitId.toString());
-  };
-
-  const updateProjectCuratedSchema = async () => {
-    const schema = {
-      $schema: "http://json-schema.org/draft-07/schema#",
-      title: "ProjectCurated",
-      type: "object",
-      properties: {
-        streamId: { type: "string" },
-        createdAt: { type: "integer" },
-        groups: {
-          type: "array",
-          items: {
-            type: "string",
-          },
-        },
-      },
-      required: ["streamId", "createdAt", "groups"],
-    };
-
-    const metadata = {
-      controllers: [ceramic.did.id],
-    };
-
-    const projecCuratedtSchema = await TileDocument.create(
-      ceramic,
-      schema,
-      metadata
-    );
-    console.log(
-      "ProjectCuratedSchema",
-      projecCuratedtSchema.commitId.toString()
-    );
-  };
-
-  const updateBroadcasterSchema = async () => {
-    const schema = {
-      $schema: "http://json-schema.org/draft-07/schema#",
-      title: "Broadcaster",
-      type: "object",
-      properties: {
-        projects: {
-          type: "array",
-          items: {
-            type: "string",
-          },
-        },
-        groups: {
-          type: "array",
-          items: {
-            type: "string",
-          },
-        },
-      },
-      required: ["projects", "groups"],
-    };
-    const metadata = {
-      controllers: [ceramic.did.id],
-    };
-    const projectsListSchema = await TileDocument.create(
-      ceramic,
-      schema,
-      metadata
-    );
-
-    console.log("BroadcasterSchema", projectsListSchema.commitId.toString());
-  };
-
   const uploadProject = async () => {
     if (title === "") {
       alert("Please provide title for your project!");
@@ -173,42 +88,8 @@ export default function NewProject({ ceramic }) {
     }
     // await updateEntitySchema();
     // await updateProjectSchema();
-    // await updateProjectCuratedSchema();
-    await updateGroupSchema();
-    await updateGroupCuratedSchema();
-    // await updateBroadcasterSchema();
+    // await updateGroupSchema();
 
-    // const testA = await TileDocument.create(
-    //   ceramic,
-    //   { title, summary, groups: ["Group A", "Group B"] },
-    //   {
-    //     controllers: [ceramic.did.id],
-    //     family: "Project",
-    //     schema: commitId,
-    //   }
-    // );
-
-    // console.log(testA.state);
-
-    // const projectsListCommitId =
-    //   "k3y52l7qbv1fryc37ed4oei1wi886zf1wvndr4gyymptuunjkvf1v5ynramfrppts";
-
-    // const testA = await TileDocument.create(
-    //   ceramic,
-    //   { projects: [] },
-    //   {
-    //     controllers: [ceramic.did.id],
-    //     family: "ProjectsList",
-    //     schema: globals.ceramicSchemas.projectsListSchema,
-    //   }
-    // );
-
-    // console.log(testA.id.toString());
-
-    // const projectsListAlpha =
-    //   "kjzl6cwe1jw147vpdbx1nnqgdauzaza30bif2e15xflx7achoygcdsg6rqw0ci0";
-
-    // // Client-side
     // let authorID = ceramic.did.id;
     // let newProject = await TileDocument.create(
     //   ceramic,
@@ -221,41 +102,12 @@ export default function NewProject({ ceramic }) {
     // );
     // console.log("Project submitted at stream: ", newProject.id.toString());
 
-    // // Curator-side
-    // let curatorID = ceramic.did.id;
-    // let curatedProject = await TileDocument.create(
-    //   ceramic,
-    //   {
-    //     streamId: newProject.id.toString(),
-    //     createdAt: Date.now(),
-    //     groups: [1],
-    //   },
-    //   {
-    //     controllers: [curatorID],
-    //     family: "Project",
-    //     schema: globals.ceramicSchemas.ProjectCuratedSchema,
-    //   }
-    // );
-
-    // console.log("Project curated at stream: ", curatedProject.id.toString());
-
-    // const projectListStream = await TileDocument.load(
-    //   ceramic,
-    //   globals.ceramicSchemas.ProjectsList1
-    // );
-    // await projectListStream.update({
-    //   projects: projectListStream.content.projects.concat([
-    //     curatedProject.id.toString(),
-    //   ]),
-    // });
-    // console.log(
-    //   (await TileDocument.load(ceramic, globals.ceramicSchemas.ProjectsList1))
-    //     .content
-    // );
+    // await desiloContract.methods
+    //   .registerProject(newProject.id.toString())
+    //   .send();
   };
 
   const createGroup = async () => {
-    // Client-side
     let groupSetup = await TileDocument.create(
       ceramic,
       {
@@ -269,24 +121,10 @@ export default function NewProject({ ceramic }) {
     );
 
     let createGroupCall = await desiloContract.methods
-      .createGroup(100, groupSetup.id.toString())
+      .createGroup(100, groupSetup.id.toString(), 8, 30)
       .send({
         from: account,
       });
-
-    // Broadcaster-side
-    let groupCurated = await TileDocument.create(
-      ceramic,
-      {
-        id: createGroupCall.events.GroupCreated.returnValues.id,
-        name: groupName,
-        token: groupToken,
-      },
-      {
-        schema: globals.ceramicSchemas.GroupCuratedSchema,
-        controllers: [ceramic.did.id],
-      }
-    );
   };
 
   return (
@@ -332,13 +170,21 @@ export default function NewProject({ ceramic }) {
             placeholder="Group name"
             onChange={(e) => setGroupName(e.target.value)}
             value={groupName}
+            variant="outlined"
           ></TextField>
+        </Grid>
+        <Grid item xs={12}>
           <TextField
             placeholder="Group token"
             onChange={(e) => setGroupToken(e.target.value)}
             value={groupToken}
+            variant="outlined"
           ></TextField>
-          <Button onClick={createGroup}>Create Group</Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button onClick={createGroup} variant="outlined">
+            Create Group
+          </Button>
         </Grid>
       </Grid>
     </Container>
