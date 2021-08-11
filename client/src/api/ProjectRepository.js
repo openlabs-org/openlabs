@@ -47,7 +47,7 @@ export const fetch = async ({
 },
   id
 ) => {
-  let stream = await fetchAll({desiloContract, ceramic}, idx);
+  let stream = await fetchAll({desiloContract, ceramic, idx});
   return Promise.resolve(stream.find((project) => project.id === id));
 };
 

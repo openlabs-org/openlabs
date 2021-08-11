@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import { fetch } from "../api/ProjectRepository";
+import UserContext from "../context/UserContext";
 
-export default function Project({ ceramic }) {
+export default function Project() {
   const { id } = useParams();
   const [project, setProject] = useState(null)
+  const { ceramic, desiloContract, idx } = useContext(UserContext);
 
   useEffect(() => {
     const load = async () => {
-      const project = await fetch({ceramic}, id);
+      const project = await fetch({ceramic, desiloContract, idx}, id);
       setProject(project);
     }
-    load()
-  }, [id, ceramic]);
+    if (desiloContract && ceramic && idx) load()
+  }, [id, ceramic, desiloContract, idx]);
   
   return (
     <Container maxWidth="lg">
