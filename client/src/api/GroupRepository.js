@@ -6,6 +6,7 @@ export const fetchAll = async (desiloContract, ceramic) => {
     let content = groupCeramic[key].content;
     content.id = index;
     content.description = "Token: " + content.token;
+  
     return content;
   });
   console.log(groupDict);

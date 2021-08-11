@@ -90,21 +90,21 @@ export default function NewProject() {
     // await updateProjectSchema();
     // await updateGroupSchema();
 
-    // let authorID = ceramic.did.id;
-    // let newProject = await TileDocument.create(
-    //   ceramic,
-    //   { title, summary, entities: [] },
-    //   {
-    //     controllers: [authorID],
-    //     family: "Project",
-    //     schema: globals.ceramicSchemas.ProjectSchema,
-    //   }
-    // );
-    // console.log("Project submitted at stream: ", newProject.id.toString());
+    let authorID = ceramic.did.id;
+    let newProject = await TileDocument.create(
+      ceramic,
+      { title, summary, entities: [] },
+      {
+        controllers: [authorID],
+        family: "Project",
+        schema: globals.ceramicSchemas.ProjectSchema,
+      }
+    );
+    console.log("Project submitted at stream: ", newProject.id.toString());
 
-    // await desiloContract.methods
-    //   .registerProject(newProject.id.toString())
-    //   .send();
+    await desiloContract.methods
+      .registerProject(newProject.id.toString())
+      .send();
   };
 
   const createGroup = async () => {
