@@ -22,7 +22,7 @@ export default () => {
 
   useEffect(() => {
     const load = async () => {
-      let results = await fetchAll(desiloContract, ceramic);
+      let results = await fetchAll({desiloContract, ceramic});
       if (search) results = results.filter((item) => item.name.match(search));
       setGroups(results);
     };

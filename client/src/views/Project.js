@@ -9,7 +9,7 @@ export default function Project({ ceramic }) {
 
   useEffect(() => {
     const load = async () => {
-      const project = await fetch(ceramic, id);
+      const project = await fetch({ceramic}, id);
       setProject(project);
     }
     load()

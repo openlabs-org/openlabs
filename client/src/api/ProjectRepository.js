@@ -1,11 +1,11 @@
 import { formatDistance } from "date-fns";
 import globals from "../global.json";
 
-export const fetchAll = async (
+export const fetchAll = async ({
   desiloContract,
   ceramic,
   idx
-) => {
+}) => {
   let projects = await desiloContract.methods.getAllProjects().call();
   let affiliations = await desiloContract.methods.getAllAffiliations().call();
   let groups = await desiloContract.methods.getAllGroups().call();
@@ -40,13 +40,14 @@ export const fetchAll = async (
   return projectDict;
 };
 
-export const fetch = async (
+export const fetch = async ({
   desiloContract,
   ceramic,
-  idx,
+  idx
+},
   id
 ) => {
-  let stream = await fetchAll(desiloContract, ceramic, idx);
+  let stream = await fetchAll({desiloContract, ceramic}, idx);
   return Promise.resolve(stream.find((project) => project.id === id));
 };
 

@@ -3,27 +3,10 @@ import desilo from "./contracts/desilo.json";
 import dSocialCreditsContract from "./contracts/dSocialCredits.json";
 import getWeb3 from "./getWeb3";
 
-import CeramicClient from "@ceramicnetwork/http-client";
-import KeyDidResolver from "key-did-resolver";
-import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
-import { DID } from "dids";
-import { IDX } from "@ceramicstudio/idx";
-
-import { ThreeIdConnect, EthereumAuthProvider } from "@3id/connect";
 import "./App.css";
 import Topbar from "./components/Navigation/Topbar";
 import UserContext from "./context/UserContext";
-
-const CERAMIC_API_URL = "https://ceramic-clay.3boxlabs.com";
-const CERAMIC_PROJECT_LIST_ID =
-  "kjzl6cwe1jw14aez5in18vh2o1x8s7eh7tom9mwc3g34u6v0t6g5fhlk73zs18s";
-const ceramic = new CeramicClient(CERAMIC_API_URL);
-const resolver = {
-  ...KeyDidResolver.getResolver(),
-  ...ThreeIdResolver.getResolver(ceramic),
-};
-const did = new DID({ resolver });
-ceramic.did = did;
+import { ceramic, idx, threeIdAuthenticate } from './api/CeramicService';
 
 const App = () => {
   const [web3, setWeb3] = useState(null);
@@ -62,6 +45,8 @@ const App = () => {
         setAccount(account);
         setDesiloContract(desiloContract);
         setSocialCreditsContract(socialCreditsContract);
+        setIDX(idx);
+        console.log(idx)
 
         // Authenticate
       } catch (error) {
@@ -74,14 +59,8 @@ const App = () => {
     })();
   }, []);
 
-  const threeIdAuthenticate = async () => {
-    const threeIdConnect = new ThreeIdConnect();
-    const authProvider = new EthereumAuthProvider(window.ethereum, account);
-    await threeIdConnect.connect(authProvider);
-    const provider = await threeIdConnect.getDidProvider();
-    ceramic.did.setProvider(provider);
-    await ceramic.did.authenticate();
-    const idx = new IDX({ ceramic });
+  const onConnect = async () => {
+    const idx = await threeIdAuthenticate(window.ethereum, account);
     setIDX(idx);
     setIsConnected(true);
   };
@@ -101,7 +80,7 @@ const App = () => {
       }}
     >
       <div className="App">
-        <Topbar onConnect={threeIdAuthenticate} isConnected={isConnected} />
+        <Topbar onConnect={onConnect} isConnected={isConnected} />
       </div>
     </UserContext.Provider>
   );
