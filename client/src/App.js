@@ -6,7 +6,7 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 import Topbar from "./components/Navigation/Topbar";
 import UserContext from "./context/UserContext";
-import { ceramic, idx, threeIdAuthenticate } from './api/CeramicService';
+import { ceramic, threeIdAuthenticate } from './api/CeramicService';
 
 const App = () => {
   const [web3, setWeb3] = useState(null);
@@ -45,7 +45,6 @@ const App = () => {
         setAccount(account);
         setDesiloContract(desiloContract);
         setSocialCreditsContract(socialCreditsContract);
-        setIDX(idx);
 
         // Authenticate
       } catch (error) {
