@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -9,11 +9,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
-import Groups from "../../views/Groups";
-import Feed from "../../views/Feed";
-import Profile from "../../views/Profile";
-import NewProject from "../../views/NewProject";
-import Project from "../../views/Project";
+
 import TopbarLink from "./TopbarLink";
 
 const useStyles = makeStyles((theme) => ({
@@ -61,55 +57,36 @@ export default function Topbar({ onConnect, isConnected }) {
   );
 
   return (
-    <Router>
-      <div className={classes.root}>
-        <AppBar position="static" color="transparent" className={classes.root}>
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              OpenLabs
-            </Typography>
-            <TopbarLink to="/" exact>
-              Feed
-            </TopbarLink>
-            <TopbarLink to="/groups">Groups</TopbarLink>
-            <div className={classes.spacer}></div>
-            {isConnected ? (
-              <div>
-                <Button
-                  component={Link}
-                  to="/new"
-                  color="primary"
-                  variant="contained"
-                >
-                  New Project
-                </Button>
-                <TopbarLink to="/me" icon>
-                  <AccountCircle />
-                </TopbarLink>
-              </div>
-            ) : (
-              ConnectBtn
-            )}
-          </Toolbar>
-        </AppBar>
-        <Switch>
-          <Route exact path="/">
-            <Feed />
-          </Route>
-          <Route path="/groups">
-            <Groups />
-          </Route>
-          <Route path="/me">
-            <Profile />
-          </Route>
-          <Route path="/new">
-            <NewProject />
-          </Route>
-          <Route path="/project/:id">
-            <Project />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <>
+      <AppBar position="static" color="transparent" className={classes.root}>
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            OpenLabs
+          </Typography>
+          <TopbarLink to="/" exact>
+            Feed
+          </TopbarLink>
+          <TopbarLink to="/groups">Groups</TopbarLink>
+          <div className={classes.spacer}></div>
+          {isConnected ? (
+            <div>
+              <Button
+                component={Link}
+                to="/new"
+                color="primary"
+                variant="contained"
+              >
+                New Project
+              </Button>
+              <TopbarLink to="/me" icon>
+                <AccountCircle />
+              </TopbarLink>
+            </div>
+          ) : (
+            ConnectBtn
+          )}
+        </Toolbar>
+      </AppBar>
+    </>
   );
 }

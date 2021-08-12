@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActions, CardContent, Button, Typography, CardActionArea } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -12,13 +13,24 @@ const useStyles = makeStyles({
   }
 });
 
-export default ({ project }) => {
+export default ({ project, skeleton = false }) => {
   const classes = useStyles();
   const history = useHistory();
 
-  const goToProject = () => history.push("/project/" + project.id);
+  const goToProject = () => project && history.push("/project/" + project.id);
 
   return (
+    skeleton ? 
+    <Card className={classes.root} variant="outlined">
+      <CardContent>
+        <Skeleton animation="wave"/>
+        <Skeleton animation="wave"/>
+        <Skeleton animation="wave"/>
+      </CardContent>
+      <CardActions>
+       <Skeleton animation="wave"/>
+      </CardActions>
+    </Card> :
     <Card className={classes.root} variant="outlined">
       <CardActionArea onClick={goToProject}>
         <CardContent>
@@ -36,7 +48,6 @@ export default ({ project }) => {
       <CardActions>
         { project.groups.map(group => <Button size="small" key={'group_' + group.id}>{group.name}</Button>)}
       </CardActions>
-      
     </Card>
   )
 }
