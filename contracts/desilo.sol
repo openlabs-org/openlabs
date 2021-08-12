@@ -30,11 +30,11 @@ contract desilo is ERC1155Receiver {
     uint256 public scID = 2**256 - 1;
     mapping(address => bool) public registered;
 
-    // mapping(entityID)
-    mapping(uint256 => mapping(address => uint256)) _stakedAmount;
-    mapping(uint256 => mapping(address => uint256)) _stakeExpiry;
-    mapping(uint256 => uint256) _entityToThread;
-    mapping(uint256 => string) _entityURI;
+    // mapping(entityID). keccak256(projectURI, entityURI)
+    mapping(bytes32 => mapping(address => uint256)) _stakedAmount;
+    mapping(bytes32 => mapping(address => uint256)) _stakeExpiry;
+    mapping(bytes32 => uint256) _entityToThread;
+    mapping(bytes32 => string) _entityURI;
 
     // mapping(groupID)
     mapping (uint256 => mapping(uint256 => bool)) _affiliatedGroups;
@@ -43,18 +43,19 @@ contract desilo is ERC1155Receiver {
 
     // mapping(projectID)
     mapping(uint256 => Project) _projects; 
-    uint256 _projectCount = 0; 
+    mapping(uint256 => uint256) _projectEntitiesCount;
+    uint256 _projectCount = 0;
 
     // mapping(groupID => fixed128x128)
-    uint256 public _groupCount = 0;
+    uint256 _groupCount = 0;
     mapping(uint256 => Group) public _groups; // Group's 
 
 
     event GroupCreated(uint256 id, address creator); 
     event ProjectCreated(uint256 id, address creator); 
     event ProjectAccepted(uint256 projectId, uint256 groupId); 
-    event Staked(address staker, uint256 commitId); 
-    event Unstaked(address staker, uint256 commitId); 
+    event Staked(address staker, bytes32 commitId, string uri); 
+    event Unstaked(address staker, bytes32 commitId, string uri); 
 
 
     constructor(
@@ -119,6 +120,21 @@ contract desilo is ERC1155Receiver {
         return projects; 
     }
 
+    function getProjectEntities(uint256 projectID) external view returns(string[] memory entityURIs) {
+        string[] memory entityURIs = new string[](_projectEntitiesCount[projectID]);
+        for (uint i = 0; i < _projectEntitiesCount[projectID]; i++) {
+            entityURIs[i] = _entityURI[keccak256(abi.encodePacked(_projects[projectID].uri, _projectEntitiesCount[projectID]))];
+        }
+    }
+
+    function addProjectEntity(uint256 projectID, string memory entityURI) external {
+        // Run Chainlink verification of ownership
+        bytes32 entityID = keccak256(abi.encodePacked(_projects[projectID].uri, _projectEntitiesCount[projectID]));
+        _entityToThread[entityID] = projectID;
+        _entityURI[entityID] = entityURI;
+        _projectEntitiesCount[projectID] += 1;
+    }
+
     function vouchProject(uint256 projectID, uint256 groupID, uint256 amount) external {
         _scContract.burn(msg.sender, groupID, amount);
         _affiliatedGroupsVouched[projectID][groupID] += amount; 
@@ -142,7 +158,7 @@ contract desilo is ERC1155Receiver {
         _scContract.mint(msg.sender, scID, scSeedAmount, "");
     }
 
-    function getStaked(uint256 _commitId, address _addr)
+    function getStaked(bytes32 _commitId, address _addr)
         public
         view
         returns (uint256)
@@ -150,7 +166,7 @@ contract desilo is ERC1155Receiver {
         return _stakedAmount[_commitId][_addr];
     }
 
-    function stake(uint256 _commitId) external {
+    function stake(bytes32 _commitId) external {
         _scContract.safeTransferFrom(
             msg.sender,
             address(this),
@@ -160,10 +176,10 @@ contract desilo is ERC1155Receiver {
         );
         _stakedAmount[_commitId][msg.sender] += scStakeAmount;
         _stakeExpiry[_commitId][msg.sender] = block.timestamp + scStakePeriod;
-        emit Staked(msg.sender, _commitId); 
+        emit Staked(msg.sender, _commitId, ""); 
     }
 
-    function unstake(uint256 _commitId) external {
+    function unstake(bytes32 _commitId) external {
         require(
             block.timestamp >= _stakeExpiry[_commitId][msg.sender],
             "desilo: You may not yet unstake."
@@ -205,7 +221,7 @@ contract desilo is ERC1155Receiver {
             }
         }
         _scContract.mintBatch(msg.sender, ids, amounts, "");
-        emit Unstaked(msg.sender, _commitId); 
+        emit Unstaked(msg.sender, _commitId, ""); 
     }
 
     function registerProject(string memory uri) external {

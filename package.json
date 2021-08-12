@@ -23,6 +23,7 @@
     "@openzeppelin/contracts": "^4.2.0"
   },
   "dependencies": {
+    "@chainlink/contracts": "^0.2.1",
     "@material-ui/icons": "^4.11.2",
     "@truffle/hdwallet-provider": "^1.4.3"
   }
