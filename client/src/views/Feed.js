@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 });
 
 export default () => {
-  const { desiloContract, projectListId, ceramic, idx } =
+  const { desiloContract, ceramic, idx } =
     useContext(UserContext);
   const styles = useStyles();
 
@@ -33,7 +33,7 @@ export default () => {
   useEffect(() => {
     const load = async () => {
       setIsLoading(true);
-      let results = await fetchAll(desiloContract, ceramic, idx, projectListId);
+      let results = await fetchAll({desiloContract, ceramic, idx});
       if (search)
         results = results.filter((item) =>
           item.title.toLowerCase().match(search)

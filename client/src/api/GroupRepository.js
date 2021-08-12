@@ -1,4 +1,4 @@
-export const fetchAll = async (desiloContract, ceramic) => {
+export const fetchAll = async ({desiloContract, ceramic}) => {
   let groups = await desiloContract.methods.getAllGroups().call();
   let groupURIs = groups.map((elem) => ({ streamId: elem.uri }));
   let groupCeramic = await ceramic.multiQuery(groupURIs);
@@ -13,7 +13,7 @@ export const fetchAll = async (desiloContract, ceramic) => {
   return groupDict;
 };
 
-export const fetch = async (desiloContract, ceramic, id) => {
+export const fetch = async ({desiloContract, ceramic}, id) => {
   let stream = await fetchAll(desiloContract, ceramic);
   return Promise.resolve(groups.find((project) => project.id === id));
 };
