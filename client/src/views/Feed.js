@@ -1,23 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import {
-  Container,
   Typography,
   Grid,
-  TextField,
-  CircularProgress,
+  TextField
 } from "@material-ui/core";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import { fetchAll } from "../api/ProjectRepository";
 import ProjectCard from "../components/Project/ProjectCard";
 import UserContext from "../context/UserContext";
 
-const useStyles = makeStyles({
-  root: {
-    marginTop: "20px",
-  },
-});
+const useStyles = makeStyles({});
 
 export default () => {
   const { desiloContract, ceramic, idx } =
@@ -45,26 +40,24 @@ export default () => {
   }, [search, ceramic, desiloContract, idx]);
 
   return (
-    <Container maxWidth="lg" className={styles.root}>
-      <Grid container spacing={3} alignItems="center">
-        <Grid item xs={10}>
-          <Typography variant="h3">Research Feed</Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <TextField label="Search" variant="filled" onChange={handleSearch} />
-        </Grid>
-        {isLoading ? (
-          <Grid item xs={12}>
-            <CircularProgress size={300} />
-          </Grid>
-        ) : (
-          projects.map((project) => (
-            <Grid item xs={12} key={"project_" + project.id}>
-              <ProjectCard project={project} />
-            </Grid>
-          ))
-        )}
+    <Grid container spacing={3} alignItems="center">
+      <Grid item xs={10}>
+        <Typography variant="h3">Research Feed</Typography>
       </Grid>
-    </Container>
+      <Grid item xs={2}>
+        <TextField label="Search" variant="filled" onChange={handleSearch} />
+      </Grid>
+      {isLoading ? Array.from(Array(3)).map((_, index) => (
+        <Grid item xs={12} key={"skeleton_project_" + index}>
+          <ProjectCard project={null} skeleton />
+        </Grid>
+      )) : (
+        projects.map((project) => (
+          <Grid item xs={12} key={"project_" + project.id}>
+            <ProjectCard project={project} />
+          </Grid>
+        ))
+      )}
+    </Grid>
   );
 };
