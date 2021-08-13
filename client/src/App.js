@@ -6,12 +6,13 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 import Topbar from "./components/Navigation/Topbar";
 import UserContext from "./context/UserContext";
-import { ceramic, threeIdAuthenticate } from './api/CeramicService';
+import { ceramic, threeIdAuthenticate } from "./api/CeramicService";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Typography } from "@material-ui/core";
 
 import Groups from "./views/Groups";
+import Group from "./views/Group";
 import Feed from "./views/Feed";
 import Profile from "./views/Profile";
 import NewProject from "./views/NewProject";
@@ -90,30 +91,32 @@ const App = () => {
         <Router>
           <Topbar onConnect={onConnect} isConnected={isConnected} />
           <Container maxWidth="lg">
-          {isConnected ? (
-            <Switch>
-              <Route exact path="/">
-                <Feed />
-              </Route>
-              <Route path="/groups">
-                <Groups />
-              </Route>
-              <Route path="/me">
-                <Profile />
-              </Route>
-              <Route path="/new">
-                <NewProject />
-              </Route>
-              <Route path="/project/:id">
-                <Project />
-              </Route>
-            </Switch>
+            {isConnected ? (
+              <Switch>
+                <Route exact path="/">
+                  <Feed />
+                </Route>
+                <Route path="/groups">
+                  <Groups />
+                </Route>
+                <Route path="/group/:id">
+                  <Group />
+                </Route>
+                <Route path="/me">
+                  <Profile />
+                </Route>
+                <Route path="/new">
+                  <NewProject />
+                </Route>
+                <Route path="/project/:id">
+                  <Project />
+                </Route>
+              </Switch>
             ) : (
               <Typography>
                 You must be connected to explore <strong>OpenLabs</strong>
               </Typography>
-            )
-          }
+            )}
           </Container>
         </Router>
       </div>

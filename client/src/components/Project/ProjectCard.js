@@ -1,8 +1,15 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActions, CardContent, Button, Typography, CardActionArea } from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
-import { useHistory } from 'react-router-dom';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+  CardActionArea,
+} from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -10,7 +17,7 @@ const useStyles = makeStyles({
   },
   subtitle: {
     fontSize: 14,
-  }
+  },
 });
 
 export default ({ project, skeleton = false }) => {
@@ -19,23 +26,28 @@ export default ({ project, skeleton = false }) => {
 
   const goToProject = () => project && history.push("/project/" + project.id);
 
-  return (
-    skeleton ? 
+  return skeleton ? (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Skeleton animation="wave"/>
-        <Skeleton animation="wave"/>
-        <Skeleton animation="wave"/>
+        <Skeleton animation="wave" />
+        <Skeleton animation="wave" />
+        <Skeleton animation="wave" />
       </CardContent>
       <CardActions>
-       <Skeleton animation="wave"/>
+        <Skeleton animation="wave" />
       </CardActions>
-    </Card> :
+    </Card>
+  ) : (
     <Card className={classes.root} variant="outlined">
       <CardActionArea onClick={goToProject}>
         <CardContent>
-          <Typography className={classes.subtitle} color="textSecondary" gutterBottom>
-            {project.author}, {project.createdAt}
+          <Typography
+            className={classes.subtitle}
+            color="textSecondary"
+            gutterBottom
+          >
+            {project.author.map((author) => author.name).join()},{" "}
+            {project.createdAt}
           </Typography>
           <Typography variant="h5" component="h2">
             {project.title}
@@ -46,8 +58,12 @@ export default ({ project, skeleton = false }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        { project.groups.map(group => <Button size="small" key={'group_' + group.id}>{group.name}</Button>)}
+        {project.groups.map((group) => (
+          <Button size="small" key={"group_" + group.id}>
+            {group.name}
+          </Button>
+        ))}
       </CardActions>
     </Card>
-  )
-}
+  );
+};

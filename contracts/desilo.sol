@@ -110,6 +110,16 @@ contract desilo is ERC1155Receiver {
         return projects; 
     }
 
+    function getAllVouched() external view returns(uint256[][] memory) {
+        uint256[][] memory projects = new uint256[][](_projectCount);
+        for (uint i = 0; i < _projectCount; i++) {
+            uint256[] memory affiliations = new uint256[](_groupCount);
+            for (uint j = 0; j < _groupCount; j++) affiliations[j] = _affiliatedGroupsVouched[i][j];
+            projects[i] = affiliations;
+        }
+        return projects; 
+    }
+
     function getProject(uint256 index) external view returns(Project memory) {
         return _projects[index]; 
     }

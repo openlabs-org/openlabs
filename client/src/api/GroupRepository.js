@@ -1,4 +1,4 @@
-export const fetchAll = async ({desiloContract, ceramic}) => {
+export const fetchAll = async ({ desiloContract, ceramic }) => {
   let groups = await desiloContract.methods.getAllGroups().call();
   let groupURIs = groups.map((elem) => ({ streamId: elem.uri }));
   let groupCeramic = await ceramic.multiQuery(groupURIs);
@@ -6,16 +6,23 @@ export const fetchAll = async ({desiloContract, ceramic}) => {
     let content = groupCeramic[key].content;
     content.id = index;
     content.description = "Token: " + content.token;
-  
+
     return content;
   });
   console.log(groupDict);
   return groupDict;
 };
 
-export const fetch = async ({desiloContract, ceramic}, id) => {
-  let stream = await fetchAll(desiloContract, ceramic);
+export const fetch = async ({ desiloContract, ceramic }, id) => {
+  let stream = await fetchAll({ desiloContract, ceramic });
   return Promise.resolve(groups.find((project) => project.id === id));
+};
+
+export const fetchDetailed = async ({ desiloContract, ceramic }, id) => {
+  let group = await fetch({ desiloContract, ceramic }, id);
+  let allVouches = await desiloContract.methods.getAllVouched().call();
+  console.log(allVouches);
+  return group;
 };
 
 export const add = (data) => {
@@ -58,3 +65,11 @@ let groups = [
     description: "Lorem ipsum",
   },
 ];
+
+let groupDetailed = {
+  id: 0,
+  name: "Group A",
+  token: "GA",
+  affiliatedPapers: [],
+  pendingPapers: [],
+};

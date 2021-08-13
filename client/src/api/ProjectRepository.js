@@ -1,53 +1,54 @@
 import { formatDistance } from "date-fns";
 import globals from "../global.json";
+import { fetchAll as fetchAllGroups } from "./GroupRepository";
 
-export const fetchAll = async ({
-  desiloContract,
-  ceramic,
-  idx
-}) => {
+export const fetchAll = async ({ desiloContract, ceramic, idx }) => {
   let projects = await desiloContract.methods.getAllProjects().call();
   let affiliations = await desiloContract.methods.getAllAffiliations().call();
-  let groups = await desiloContract.methods.getAllGroups().call();
+  let groups = await fetchAllGroups({
+    desiloContract,
+    ceramic,
+    idx,
+  });
 
-  console.log(projects);
   let projectURIs = projects.map((elem) => ({ streamId: elem.uri }));
-  console.log(projectURIs);
   let projectCeramic = await ceramic.multiQuery(projectURIs);
-  let projectDict = await Promise.all(Object.keys(projectCeramic).map(
-    async (key, index) => {
+  let projectDict = await Promise.all(
+    Object.keys(projectCeramic).map(async (key, index) => {
       let content = projectCeramic[key].content;
-      content.author = await Promise.all(projectCeramic[key].controllers.map(
-        async (did) => (await idx.get("basicProfile", did)).name
-      ));
+      content.author = await Promise.all(
+        projectCeramic[key].controllers.map(async (did) =>
+          Object.assign(
+            {},
+            {
+              did,
+            },
+            await idx.get("basicProfile", did)
+          )
+        )
+      );
       content.createdAt = formatDistance(
         new Date(projects[index].createdAt * 1000),
         new Date(),
         { addSuffix: true }
       );
-      content.id = key;
+      content.id = index;
       content.groups = [];
       affiliations[index].forEach((isAffiliated, index) => {
         if (isAffiliated) {
-          content.groups.push(groups[index]);
+          content.groups.push(Object.assign({}, { id: index }, groups[index]));
         }
       });
       return content;
-    }
-  ));
+    })
+  );
 
   console.log(projectDict);
   return projectDict;
 };
 
-export const fetch = async ({
-  desiloContract,
-  ceramic,
-  idx
-},
-  id
-) => {
-  let stream = await fetchAll({desiloContract, ceramic, idx});
+export const fetch = async ({ desiloContract, ceramic, idx }, id) => {
+  let stream = await fetchAll({ desiloContract, ceramic, idx });
   return Promise.resolve(stream.find((project) => project.id === id));
 };
 
