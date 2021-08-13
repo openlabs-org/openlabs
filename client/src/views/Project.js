@@ -4,13 +4,13 @@ import {
   Grid,
   Typography,
   TextField,
-  IconButton,
-  Tooltip,
   Button,
   Dialog,
   Select,
+  Chip,
+  Divider
 } from "@material-ui/core";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import FaceIcon from "@material-ui/icons/Face";
 import GroupIcon from "@material-ui/icons/Group";
 
 import { Link, useParams } from "react-router-dom";
@@ -18,7 +18,7 @@ import { fetch as fetchProject } from "../api/ProjectRepository";
 import { fetchAll as fetchProjectReviews } from "../api/EntityRepository";
 import { fetchAll as fetchGroups } from "../api/GroupRepository";
 import UserContext from "../context/UserContext";
-import ProjectReviews from "../components/Project/ProjectReviews";
+import ProjectEntity from "../components/Project/ProjectEntity";
 
 export default function Project() {
   const { id } = useParams();
@@ -99,58 +99,70 @@ export default function Project() {
       <Grid container spacing={3}>
         {project && (
           <>
-            <Grid item xs={12}>
-              <Typography variant="h5">Project</Typography>
-              <Typography variant="h4">{project.title}</Typography>
-            </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={9}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
-                  <Typography variant="body">{project.summary}</Typography>
+                  <Typography variant="h5">Project</Typography>
+                  <Typography variant="h4">{project.title}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="h6">Reviews</Typography>
-                  <ProjectReviews entities={entities}>
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Content"
-                      multiline
-                      rows={4}
-                      variant="outlined"
-                    />
-                  </ProjectReviews>
+                  <Typography variant="body1">{project.summary}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle1">Papers</Typography>
+                  {entities.map((entity, index) => 
+                    <ProjectEntity entity={entity} key={"entity_" + index}>
+                      {/* <TextField
+                        id="outlined-multiline-static"
+                        label="Content"
+                        multiline
+                        rows={4}
+                        variant="outlined"
+                      /> */}
+                    </ProjectEntity>
+                  )}
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <Button variant="outlined" onClick={onVouch}>
-                Vouch
-              </Button>
-              <Typography variant="h6">Authors</Typography>
-              {project.author.map((author) => {
-                return (
-                  <Tooltip title={author.name}>
-                    <Link to={"/profile/" + author.did}>
-                      <IconButton>
-                        <AccountCircleIcon></AccountCircleIcon>
-                      </IconButton>
-                    </Link>
-                  </Tooltip>
-                );
-              })}
-              <Typography variant="h6">Groups</Typography>
-              {project.groups.map((group) => {
-                return (
-                  <Tooltip title={group.name}>
-                    <Link to={"/group/" + group.id}>
-                      <IconButton>
-                        <GroupIcon></GroupIcon>
-                      </IconButton>
-                    </Link>
-                  </Tooltip>
-                );
-              })}
-              {/* <Typography variant="h6">Participants</Typography> */}
+            <Divider orientation="vertical" flexItem />
+            <Grid item xs={2}>
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Button variant="outlined" onClick={onVouch}>
+                    Vouch
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle1">Authors</Typography>
+                  {project.author.map((author) => 
+                    <Chip
+                      size="small"
+                      icon={<FaceIcon />}
+                      label={author.name}
+                      clickable
+                      color="primary"
+                      component={Link}
+                      to={"/profile/" + author.did}
+                      variant="outlined"
+                    />
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle1">Groups</Typography>
+                  {project.groups.map((group) => 
+                    <Chip
+                      size="small"
+                      icon={<GroupIcon />}
+                      label={group.name}
+                      clickable
+                      color="primary"
+                      component={Link}
+                      to={"/group/" + group.id}
+                      variant="outlined"
+                    />
+                  )}
+                </Grid>
+              </Grid>
             </Grid>
           </>
         )}
