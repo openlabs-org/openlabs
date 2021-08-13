@@ -124,13 +124,16 @@ export default function Project() {
                 </Grid>
               </Grid>
             </Grid>
-            <Divider orientation="vertical" flexItem />
-            <Grid item xs={2}>
+            
+            <Grid item xs={3}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <Button variant="outlined" onClick={onVouch}>
                     Vouch
                   </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Divider />
                 </Grid>
                 <Grid item xs={12}>
                   <Typography variant="subtitle1">Authors</Typography>
@@ -148,6 +151,9 @@ export default function Project() {
                   )}
                 </Grid>
                 <Grid item xs={12}>
+                  <Divider />
+                </Grid>
+                <Grid item xs={12}>
                   <Typography variant="subtitle1">Groups</Typography>
                   {project.groups.map((group) => 
                     <Chip
@@ -161,6 +167,9 @@ export default function Project() {
                       variant="outlined"
                     />
                   )}
+                </Grid>
+                <Grid item xs={12}>
+                  <Divider />
                 </Grid>
               </Grid>
             </Grid>
