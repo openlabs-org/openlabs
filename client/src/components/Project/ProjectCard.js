@@ -59,7 +59,13 @@ export default ({ project, skeleton = false }) => {
       </CardActionArea>
       <CardActions>
         {project.groups.map((group) => (
-          <Button size="small" key={"group_" + group.id}>
+          <Button
+            size="small"
+            key={"group_" + group.id}
+            onClick={() => {
+              history.push("/group/" + group.id);
+            }}
+          >
             {group.name}
           </Button>
         ))}
