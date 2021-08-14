@@ -25,13 +25,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProjectEntityReviews({
   reviews,
-  onReview,
-  onSubmitReview,
   onUnstake
 }) {
   const classes = useStyles();
   const { account } = useContext(UserContext);
-  const [reviewContent, setReviewContent] = useState({});
 
   return (
     <Timeline align="left">
@@ -53,38 +50,6 @@ export default function ProjectEntityReviews({
           </TimelineContent>
         </TimelineItem>
       ))}
-
-      {onReview ? (
-        <TimelineItem className={classes.item}>
-          <TimelineSeparator>
-            <TimelineDot />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent>
-            <Grid>
-              <TextField
-                multiline
-                rows={4}
-                variant="outlined"
-                style={{ width: "100%" }}
-                onChange={(e) => {
-                  setReviewContent({ ...reviewContent, texts: e.target.value });
-                }}
-              ></TextField>
-            </Grid>
-            <Grid>
-              <Button
-                variant="outlined"
-                onClick={() => onSubmitReview(reviewContent)}
-              >
-                Submit
-              </Button>
-            </Grid>
-          </TimelineContent>
-        </TimelineItem>
-      ) : (
-        ""
-      )}
     </Timeline>
   );
 }
