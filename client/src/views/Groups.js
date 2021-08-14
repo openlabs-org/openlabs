@@ -27,7 +27,7 @@ export default () => {
       setGroups(results);
     };
     if (ceramic && desiloContract) load();
-  }, [search, ceramic, desiloContract]);
+  }, [search, idx, desiloContract]);
 
   const styles = useStyles();
 

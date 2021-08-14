@@ -86,7 +86,7 @@ export default function Project() {
   };
 
   useEffect(() => {
-    if (desiloContract && ceramic && idx) loadPage();
+    if (desiloContract && idx) loadPage();
   }, [id, ceramic, desiloContract, idx]);
 
   return (
@@ -165,19 +165,25 @@ export default function Project() {
 
             <Grid item xs={3}>
               <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleVouchClick}
-                    fullWidth
-                  >
-                    Vouch
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Divider />
-                </Grid>
+                {idx.authenticated ? (
+                  <React.Fragment>
+                    <Grid item xs={12}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleVouchClick}
+                        fullWidth
+                      >
+                        Vouch
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Divider />
+                    </Grid>
+                  </React.Fragment>
+                ) : (
+                  ""
+                )}
                 <Grid item xs={12}>
                   <Typography variant="subtitle1">Authors</Typography>
                   {project.author.map((author) => (

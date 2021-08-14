@@ -29,7 +29,7 @@ export const fetchAll = async (
           entityCeramic[key].commitId.toString()
       )
         allCommits = allCommits.concat([entityCeramic[key].commitId]);
-      entity.uri = key; 
+      entity.uri = key;
       entity.content = await Promise.all(
         allCommits.map(async (e) => {
           let content = (await ceramic.loadStream(e)).content;
@@ -58,10 +58,11 @@ export const fetchAll = async (
           combined.author = Object.assign(
             {},
             {
-              did: content.controllers[0].did,
+              did: content.controllers[0],
             },
-            await idx.get("basicProfile", content.controllers[0].did)
+            await idx.get("basicProfile", content.controllers[0])
           );
+
 
           combined.publishedAt = formatDistance(
             new Date(combined.publishedAt * 1000),
@@ -69,7 +70,9 @@ export const fetchAll = async (
             { addSuffix: true }
           );
 
-          combined.unstake = (await desiloContract.methods.canUnstake(ids[index], i).call());
+          combined.unstake = await desiloContract.methods
+            .canUnstake(ids[index], i)
+            .call();
           return combined;
         })
       );

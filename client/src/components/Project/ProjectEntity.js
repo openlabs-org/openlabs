@@ -26,7 +26,8 @@ import {
 import ProjectEntityReviews from "./ProjectEntityReviews";
 import EntityForm from "./EntityForm";
 import ReviewForm from "./ReviewForm";
-import { createReview } from "../../api/CeramicService";
+import { createReview, updateEntity } from "../../api/CeramicService";
+import { retrieve, storeFiles } from "../../api/Web3storage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,7 +72,7 @@ export default function ProjectEntity({ entity, editable, onUpdate }) {
     setExpanded(!expanded);
   };
 
-  const handleNewReview = async ({reviewContent}) => {
+  const handleNewReview = async ({ reviewContent }) => {
     let commitId = await createReview("standard", reviewContent);
     await desiloContract.methods.stake(entity.id, commitId).send();
     setReviewDialog(false);
@@ -82,129 +83,138 @@ export default function ProjectEntity({ entity, editable, onUpdate }) {
     setCurrentVersion(e.target.value);
   };
 
-  const handleMaterialUpdate = async ({dropZoneDescription, dropZoneFile}) => {
-    /** code to update the material */
+  const handleMaterialUpdate = async ({
+    dropZoneDescription,
+    dropZoneFile,
+  }) => {
+    let cid = await storeFiles(dropZoneFile);
+    await updateEntity(
+      entity.uri,
+      dropZoneFile[0].name,
+      dropZoneDescription,
+      cid
+    );
     onUpdate();
-  }
+  };
 
   return (
     <>
-    <Dialog
-      open={updateDialog}
-      onClose={async () => {
-        setUpdateDialog(false);
-      }}
-      fullWidth
-    >
-      <EntityForm
-        title="Update material"
-        onSubmit={handleMaterialUpdate}
-        onClose={() => setUpdateDialog(false)}
-        defaultDescription={currentVersion.description}
-      />
-    </Dialog>
-    <Dialog
-      open={reviewDialog}
-      onClose={async () => {
-        setReviewDialog(false);
-      }}
-      fullWidth
-    >
-      <ReviewForm
-        title="New review"
-        onSubmit={handleNewReview}
-        onClose={() => setReviewDialog(false)}
-      />
-    </Dialog>
-    <Card className={classes.root}>
-      <CardHeader
-        action={
-          <FormControl className={classes.versionSelect}>
-            <InputLabel id="select-version-label-id">Version</InputLabel>
-            <Select
-              value={currentVersion}
-              onChange={handleVersionChange}
-              id="select-version-id"
-              labelId="select-version-label-id"
-            >
-              {entity.content.map((version, index) => (
-                <MenuItem value={version} key={"version_" + index}>
-                  {index + 1}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        }
-        title={currentVersion.name}
-        subheader={currentVersion.description}
-      />
-      <CardActions disableSpacing>
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          startIcon={<DownloadIcon />}
-          variant="outlined"
-          className={classes.actionBtn}
-          href={
-            "https://ipfs.io/ipfs/" +
-            currentVersion.uri +
-            "/" +
-            currentVersion.name
+      <Dialog
+        open={updateDialog}
+        onClose={async () => {
+          setUpdateDialog(false);
+        }}
+        fullWidth
+      >
+        <EntityForm
+          title="Update material"
+          onSubmit={handleMaterialUpdate}
+          onClose={() => setUpdateDialog(false)}
+          defaultDescription={currentVersion.description}
+        />
+      </Dialog>
+      <Dialog
+        open={reviewDialog}
+        onClose={async () => {
+          setReviewDialog(false);
+        }}
+        fullWidth
+      >
+        <ReviewForm
+          title="New review"
+          onSubmit={handleNewReview}
+          onClose={() => setReviewDialog(false)}
+        />
+      </Dialog>
+      <Card className={classes.root}>
+        <CardHeader
+          action={
+            <FormControl className={classes.versionSelect}>
+              <InputLabel id="select-version-label-id">Version</InputLabel>
+              <Select
+                value={currentVersion}
+                onChange={handleVersionChange}
+                id="select-version-id"
+                labelId="select-version-label-id"
+              >
+                {entity.content.map((version, index) => (
+                  <MenuItem value={version} key={"version_" + index}>
+                    {index + 1}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           }
-          download=""
-        >
-          Download
-        </Button>
+          title={currentVersion.name}
+          subheader={currentVersion.description}
+        />
+        <CardActions disableSpacing>
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<DownloadIcon />}
+            variant="outlined"
+            className={classes.actionBtn}
+            href={
+              "https://ipfs.io/ipfs/" +
+              currentVersion.uri +
+              "/" +
+              currentVersion.name
+            }
+            download=""
+          >
+            Download
+          </Button>
 
-        {editable ? (
+          {editable ? (
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              startIcon={<CloudUpload />}
+              variant="outlined"
+              className={classes.actionBtn}
+              onClick={() => setUpdateDialog(true)}
+            >
+              Upload New Version
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              startIcon={<EditIcon />}
+              variant="outlined"
+              onClick={() => setReviewDialog(true)}
+              className={classes.actionBtn}
+            >
+              Write a review
+            </Button>
+          )}
           <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            startIcon={<CloudUpload />}
-            variant="outlined"
-            className={classes.actionBtn}
-            onClick={() => setUpdateDialog(true)}
+            variant="text"
+            endIcon={
+              <ExpandMoreIcon
+                className={clsx(classes.expandIcon, {
+                  [classes.expandOpen]: expanded,
+                })}
+              />
+            }
+            onClick={handleExpand}
+            aria-expanded={expanded}
+            aria-label="show reviews"
+            className={classes.expand}
           >
-            Upload New Version
+            See reviews
           </Button>
-        ) : (
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            startIcon={<EditIcon />}
-            variant="outlined"
-            onClick={() => setReviewDialog(true)}
-            className={classes.actionBtn}
-          >
-            Write a review
-          </Button>
-        )}
-        <Button
-          variant="text"
-          endIcon={
-            <ExpandMoreIcon
-              className={clsx(classes.expandIcon, {
-                [classes.expandOpen]: expanded,
-              })}
-            />
-          }
-          onClick={handleExpand}
-          aria-expanded={expanded}
-          aria-label="show reviews"
-          className={classes.expand}
-        >
-          See reviews
-        </Button>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <ProjectEntityReviews reviews={entityReviews} />
-        </CardContent>
-      </Collapse>
-    </Card>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <ProjectEntityReviews reviews={entityReviews} />
+          </CardContent>
+        </Collapse>
+      </Card>
     </>
   );
 }
