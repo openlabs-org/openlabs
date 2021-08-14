@@ -15,6 +15,7 @@ import {
   FormControl,
   InputLabel,
   Button,
+  Dialog,
 } from "@material-ui/core";
 import {
   ExpandMore as ExpandMoreIcon,
@@ -23,7 +24,9 @@ import {
   CloudUpload,
 } from "@material-ui/icons";
 import ProjectEntityReviews from "./ProjectEntityReviews";
-import { createReview, updateEntity } from "../../api/CeramicService";
+import EntityForm from "./EntityForm";
+import ReviewForm from "./ReviewForm";
+import { createReview } from "../../api/CeramicService";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,18 +53,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProjectEntity({
-  entity,
-  isAuthor,
-  setDropZoneAction,
-  setDropZoneOpen,
-}) {
+export default function ProjectEntity({ entity, editable, onUpdate }) {
   const classes = useStyles();
   const entityReviews = entity.reviews;
   const { ceramic, desiloContract, idx } = useContext(UserContext);
 
   const [expanded, setExpanded] = useState(false);
-  const [onReview, setOnReview] = useState(false);
+  const [reviewDialog, setReviewDialog] = useState(false);
+  const [updateDialog, setUpdateDialog] = useState(false);
   const [currentVersion, setCurrentVersion] = useState(
     entity.content[entity.content.length - 1]
   );
@@ -72,36 +71,51 @@ export default function ProjectEntity({
     setExpanded(!expanded);
   };
 
-  const handleDownload = () => {
-    /** download file from ipfs ? */
-  };
-
-  const handleNewReview = () => {
-    /** new review dialog */
-    setOnReview(!onReview);
-  };
-
-  const handleUnstake = async (reviewId) => {
-    await desiloContract.methods.unstake(entity.id, reviewId).send();
-    console.log("unstake completed");
-  };
-
-  const handleSubmitReview = async (reviewContent) => {
-    let commitId = await createReview("standard", reviewContent.texts);
+  const handleNewReview = async ({reviewContent}) => {
+    let commitId = await createReview("standard", reviewContent);
     await desiloContract.methods.stake(entity.id, commitId).send();
-    setOnReview(!onReview);
+    setReviewDialog(false);
+    onUpdate();
   };
 
   const handleVersionChange = (e) => {
     setCurrentVersion(e.target.value);
   };
 
-  const handleUploadNewVersion = async () => {
-    setDropZoneAction("update " + entity.uri);
-    setDropZoneOpen(true);
-  };
+  const handleMaterialUpdate = async ({dropZoneDescription, dropZoneFile}) => {
+    /** code to update the material */
+    onUpdate();
+  }
 
   return (
+    <>
+    <Dialog
+      open={updateDialog}
+      onClose={async () => {
+        setUpdateDialog(false);
+      }}
+      fullWidth
+    >
+      <EntityForm
+        title="Update material"
+        onSubmit={handleMaterialUpdate}
+        onClose={() => setUpdateDialog(false)}
+        defaultDescription={currentVersion.description}
+      />
+    </Dialog>
+    <Dialog
+      open={reviewDialog}
+      onClose={async () => {
+        setReviewDialog(false);
+      }}
+      fullWidth
+    >
+      <ReviewForm
+        title="New review"
+        onSubmit={handleNewReview}
+        onClose={() => setReviewDialog(false)}
+      />
+    </Dialog>
     <Card className={classes.root}>
       <CardHeader
         action={
@@ -131,7 +145,6 @@ export default function ProjectEntity({
           size="small"
           startIcon={<DownloadIcon />}
           variant="outlined"
-          onClick={handleDownload}
           className={classes.actionBtn}
           href={
             "https://ipfs.io/ipfs/" +
@@ -144,7 +157,7 @@ export default function ProjectEntity({
           Download
         </Button>
 
-        {isAuthor ? (
+        {editable ? (
           <Button
             variant="contained"
             color="primary"
@@ -152,9 +165,7 @@ export default function ProjectEntity({
             startIcon={<CloudUpload />}
             variant="outlined"
             className={classes.actionBtn}
-            onClick={() => {
-              handleUploadNewVersion();
-            }}
+            onClick={() => setUpdateDialog(true)}
           >
             Upload New Version
           </Button>
@@ -165,7 +176,7 @@ export default function ProjectEntity({
             size="small"
             startIcon={<EditIcon />}
             variant="outlined"
-            onClick={handleNewReview}
+            onClick={() => setReviewDialog(true)}
             className={classes.actionBtn}
           >
             Write a review
@@ -190,14 +201,10 @@ export default function ProjectEntity({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <ProjectEntityReviews
-            reviews={entityReviews}
-            onReview
-            onSubmitReview={handleSubmitReview}
-            onUnstake={handleUnstake}
-          />
+          <ProjectEntityReviews reviews={entityReviews} />
         </CardContent>
       </Collapse>
     </Card>
+    </>
   );
 }

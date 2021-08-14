@@ -12,24 +12,24 @@ import {
 } from "@material-ui/core";
 import FaceIcon from "@material-ui/icons/Face";
 import GroupIcon from "@material-ui/icons/Group";
-import { DropzoneArea } from "material-ui-dropzone";
+import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import { Link, useParams } from "react-router-dom";
 import { fetch as fetchProject } from "../api/ProjectRepository";
-import { fetchAll as fetchProjectReviews } from "../api/EntityRepository";
-import { createEntity, updateEntity } from "../api/CeramicService";
+import { fetchAll as fetchProjectEntities } from "../api/EntityRepository";
+import { createEntity } from "../api/CeramicService";
 import UserContext from "../context/UserContext";
 import ProjectEntity from "../components/Project/ProjectEntity";
 import VouchForm from "../components/Project/VouchForm";
+import EntityForm from "../components/Project/EntityForm";
 import { storeFiles, retrieve } from "../api/Web3storage";
+import ProjectSkeleton from "../components/Project/ProjectSkeleton";
 
 export default function Project() {
   const { id } = useParams();
   const [project, setProject] = useState(null);
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [dropZoneOpen, setDropZoneOpen] = useState(false);
-  const [dropZoneFile, setDropZoneFile] = useState(null);
-  const [dropZoneAction, setDropZoneAction] = useState("add");
-  const [dropZoneDescription, setDropZoneDescription] = useState("");
 
   const [isAuthor, setIsAuthor] = useState(false);
   const [entities, setEntities] = useState([]);
@@ -46,47 +46,33 @@ export default function Project() {
     setOpen(false);
   };
 
-  const fileDrop = (files) => {
-    console.log(files);
-    setDropZoneFile(files);
-  };
-
-  const materialUpload = async () => {
-    let cid = await storeFiles(dropZoneFile);
+  const handleMaterialUpload = async ({
+    dropZoneDescription,
+    dropZoneFile,
+  }) => {
     if (dropZoneFile.length > 0) {
-      if (dropZoneAction == "add") {
-        let entityStreamId = await createEntity(
-          dropZoneFile[0].name,
-          dropZoneDescription,
-          cid
-        );
-        return await desiloContract.methods
-          .addProjectEntity(id, entityStreamId)
-          .send();
-      } else if (dropZoneAction.includes("update")) {
-        console.log(dropZoneAction.substr(7));
-        let entityStreamId = await updateEntity(
-          dropZoneAction.substr(7),
-          dropZoneFile[0].name,
-          dropZoneDescription,
-          cid
-        );
-      }
-
+      let cid = await storeFiles(dropZoneFile);
+      let entityStreamId = await createEntity(
+        dropZoneFile[0].name,
+        dropZoneDescription,
+        cid
+      );
+      let response = await desiloContract.methods
+        .addProjectEntity(id, entityStreamId)
+        .send();
       // console.log(response.events.EntityAdded.returnValues.entityId);
     }
     setDropZoneOpen(false);
-    setDropZoneFile(null);
-    setDropZoneDescription("");
-    // loadPage();
+    loadPage();
   };
 
   const loadPage = async () => {
+    setIsLoading(true);
     const project = await fetchProject(
       { ceramic, desiloContract, idx },
       parseInt(id)
     );
-    const entities = await fetchProjectReviews(
+    const entities = await fetchProjectEntities(
       { ceramic, desiloContract, idx, account },
       id
     );
@@ -94,8 +80,9 @@ export default function Project() {
     setEntities(entities);
     const isAuthor =
       idx.authenticated &&
-      project.author.filter((author) => author.did == idx.id).length > 0;
+      project.author.some((author) => author.did == idx.id);
     setIsAuthor(isAuthor);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -124,93 +111,73 @@ export default function Project() {
         aria-describedby="alert-dialog-description"
         fullWidth
       >
-        <DropzoneArea
-          onChange={(files) => fileDrop(files)}
-          filesLimit={1}
-          showFileNames={true}
-          maxFileSize={100000000}
-          dropzoneText={"Drag and drop a file here or click (Max 100Mb)"}
-        ></DropzoneArea>
-        <TextField
-          placeholder="Describe this file..."
-          variant="outlined"
-          multiline
-          rows={4}
-          onChange={(e) => setDropZoneDescription(e.target.value)}
-        ></TextField>
-        <Button
-          onClick={() => {
-            materialUpload();
-          }}
-        >
-          Upload
-        </Button>
+        <EntityForm
+          title="Add material"
+          onSubmit={handleMaterialUpload}
+          onClose={() => setDropZoneOpen(false)}
+        />
       </Dialog>
-
-      <Grid container spacing={3}>
-        {project && (
+      {isLoading || !project ? (
+        <ProjectSkeleton />
+      ) : (
+        <Grid container spacing={3}>
           <>
             <Grid item xs={9}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
-                  <Typography variant="h5">Project</Typography>
+                  <Typography variant="subtitle1">Project</Typography>
                   <Typography variant="h4">{project.title}</Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <Typography variant="body1">{project.summary}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="subtitle1">Materials</Typography>
-                  {entities.map((entity, index) => (
-                    <ProjectEntity
-                      entity={entity}
-                      isAuthor={isAuthor}
-                      setDropZoneAction={setDropZoneAction}
-                      setDropZoneOpen={setDropZoneOpen}
-                      key={"entity_" + index}
-                    >
-                      {/* <TextField
-                        id="outlined-multiline-static"
-                        label="Content"
-                        multiline
-                        rows={4}
-                        variant="outlined"
-                      /> */}
-                    </ProjectEntity>
-                  ))}
-                  {isAuthor ? (
-                    <Button
-                      onClick={() => {
-                        setDropZoneAction("add");
-                        setDropZoneOpen(true);
-                      }}
-                    >
-                      Add Material
-                    </Button>
-                  ) : (
-                    ""
-                  )}
+                  <Grid container spacing={3} justifyContent="space-between">
+                    <Grid item>
+                      <Typography variant="subtitle1">Materials</Typography>
+                    </Grid>
+                    <Grid item>
+                      {isAuthor && (
+                        <Button
+                          onClick={() => {
+                            setDropZoneOpen(true);
+                          }}
+                          startIcon={<NoteAddIcon />}
+                          variant="outlined"
+                        >
+                          Add material
+                        </Button>
+                      )}
+                    </Grid>
+                    {entities.map((entity, index) => (
+                      <Grid item xs={12} key={"entity_" + index}>
+                        <ProjectEntity
+                          entity={entity}
+                          editable={isAuthor}
+                          onUpdate={loadPage}
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
 
             <Grid item xs={3}>
               <Grid container spacing={3}>
-                {idx.authenticated ? (
-                  <React.Fragment>
-                    <Grid item xs={12}>
-                      <Button variant="outlined" onClick={handleVouchClick}>
-                        Vouch
-                      </Button>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                      <Divider />
-                    </Grid>
-                  </React.Fragment>
-                ) : (
-                  ""
-                )}
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleVouchClick}
+                    fullWidth
+                  >
+                    Vouch
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Divider />
+                </Grid>
                 <Grid item xs={12}>
                   <Typography variant="subtitle1">Authors</Typography>
                   {project.author.map((author) => (
@@ -252,8 +219,8 @@ export default function Project() {
               </Grid>
             </Grid>
           </>
-        )}
-      </Grid>
+        </Grid>
+      )}
     </Container>
   );
 }
