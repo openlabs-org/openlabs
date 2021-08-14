@@ -16,7 +16,6 @@ export async function storeFiles(files) {
   console.log("stored files with cid:", cid);
   return cid;
 }
-
 export async function retrieve(cid) {
   const res = await client.get(cid);
   console.log(`Got a response! [${res.status}] ${res.statusText}`);
@@ -25,6 +24,16 @@ export async function retrieve(cid) {
   }
   const files = await res.files();
   return files;
+}
+//read File() as image
+// Parameter: File() obj
+export async function displayImage(file) {
+  const reader = new FileReader();
+  reader.onload = async function () {
+    var dataURL = await reader.result;
+    //await setImage(dataURL)       SET STATE
+  };
+  reader.readAsDataURL(file);
 }
 
 export async function status(cid) {
@@ -44,5 +53,7 @@ const [logoFile, setLogoFile] = useState(null);
         <input type="file" id="text-file" name="text-file" onChange={(e) => setTextFile(e.target.files[0])} />
         <button type="submit">Submit</button>
       </form>
+      <button onClick={retrieve}>Retrieve</button>
+      <img src={image} id="testimg" alt="This is an image"></img>
   </div>
 */
