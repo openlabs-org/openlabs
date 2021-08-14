@@ -27,7 +27,7 @@ export default ({ project, skeleton = false }) => {
   const goToProject = () => project && history.push("/project/" + project.id);
 
   return skeleton ? (
-    <Card className={classes.root} variant="outlined">
+    <Card className={classes.root} variant="outlined"  >
       <CardContent>
         <Skeleton animation="wave" />
         <Skeleton animation="wave" />

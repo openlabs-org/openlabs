@@ -10,6 +10,7 @@ import {
 import { Publish as PublishIcon } from "@material-ui/icons";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
 import UserContext from "../context/UserContext";
+import { updateEntitySchema, updateReviewSchema } from "../api/CeramicService";
 
 const globals = require("../global.json");
 
@@ -19,25 +20,6 @@ export default function NewProject() {
   const [groupName, setGroupName] = useState("");
   const [groupToken, setGroupToken] = useState("");
   const { desiloContract, account, ceramic, web3 } = useContext(UserContext);
-
-  const updateEntitySchema = async () => {
-    const schema = {
-      $schema: "http://json-schema.org/draft-07/schema#",
-      title: "ProjectEntity",
-      type: "object",
-      properties: {
-        title: { type: "string" },
-        type: { type: "string" },
-        metadata: { type: "string" },
-      },
-      required: ["title", "type", "metadata"],
-    };
-    const metadata = {
-      controllers: [ceramic.did.id],
-    };
-    const schemaInstance = await TileDocument.create(ceramic, schema, metadata);
-    console.log("EntitySchema", schemaInstance.commitId.toString());
-  };
 
   const updateProjectSchema = async () => {
     const schema = {
@@ -86,6 +68,8 @@ export default function NewProject() {
       alert("Please provide title for your project!");
       return;
     }
+    // await updateReviewSchema();
+    // await updateEntitySchema();
     // await updateEntitySchema();
     // await updateProjectSchema();
     // await updateGroupSchema();

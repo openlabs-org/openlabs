@@ -1,5 +1,5 @@
-import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
-
+import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
+const globals = require("../global.json");
 // logoFile and textFile will need to be reachable. Example below
 // export function uploadFiles(e) {
 //   e.preventDefault();
@@ -9,23 +9,27 @@ import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 //   ]
 //   var cid = storeFiles(files);
 // }
+const client = new Web3Storage({ token: globals.web3storage });
 
 export async function storeFiles(files) {
-  const client = new Web3Storage({ token: 'WEB3.STORAGE API KEY HERE' })
-  const cid = await client.put(files)
-  console.log('stored files with cid:', cid)
+  const cid = await client.put(files);
+  console.log("stored files with cid:", cid);
   return cid;
 }
 
 export async function retrieve(cid) {
-  const client = new Web3Storage({ token: 'WEB3.STORAGE API KEY HERE' })
-  const res = await client.get(cid)
-  console.log(`Got a response! [${res.status}] ${res.statusText}`)
+  const res = await client.get(cid);
+  console.log(`Got a response! [${res.status}] ${res.statusText}`);
   if (!res.ok) {
-    throw new Error(`failed to get ${cid}`)
+    throw new Error(`failed to get ${cid}`);
   }
-  const files = await res.files()
+  const files = await res.files();
   return files;
+}
+
+export async function status(cid) {
+  const res = await client.status(cid);
+  return res;
 }
 
 // HTML/JS EXAMPLE FOR FILE UPLOAD

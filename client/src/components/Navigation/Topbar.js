@@ -66,7 +66,7 @@ export default function Topbar({ onConnect, isConnected }) {
           <TopbarLink to="/" exact>
             Feed
           </TopbarLink>
-          <TopbarLink to="/groups">Groups</TopbarLink>
+          <TopbarLink to="/labs">Labs</TopbarLink>
           <div className={classes.spacer}></div>
           {isConnected ? (
             <div>

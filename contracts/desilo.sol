@@ -19,6 +19,13 @@ contract desilo is ERC1155Receiver {
         address owner; 
     }
 
+    struct Review {
+        string uri;
+        uint256 publishedAt;
+        address reviewer;
+        uint256 stakeAmount;
+    }
+
     uint256 public groupCreationSCAmount;
     uint256 public scStakeAmount;
     uint256 public scSeedAmount;
@@ -31,8 +38,7 @@ contract desilo is ERC1155Receiver {
     mapping(address => bool) public registered;
 
     // mapping(entityID). keccak256(projectURI, entityURI)
-    mapping(bytes32 => mapping(address => uint256)) _stakedAmount;
-    mapping(bytes32 => mapping(address => uint256)) _stakeExpiry;
+    mapping(bytes32 => Review[]) _entityReviews;
     mapping(bytes32 => uint256) _entityToThread;
     mapping(bytes32 => string) _entityURI;
 
@@ -54,8 +60,9 @@ contract desilo is ERC1155Receiver {
     event GroupCreated(uint256 id, address creator); 
     event ProjectCreated(uint256 id, address creator); 
     event ProjectAccepted(uint256 projectId, uint256 groupId); 
-    event Staked(address staker, bytes32 commitId, string uri); 
-    event Unstaked(address staker, bytes32 commitId, string uri); 
+    event EntityAdded(uint256 projectId, bytes32 entityId);
+    event Staked(address staker, bytes32 commitId, uint256 index); 
+    event Unstaked(address staker, bytes32 commitId, uint256 index); 
 
 
     constructor(
@@ -120,6 +127,12 @@ contract desilo is ERC1155Receiver {
         return projects; 
     }
 
+    function getAllReviews(bytes32 entityID) external view returns(Review[] memory) {
+        Review[] memory reviews = new Review[](_entityReviews[entityID].length);
+        for (uint i = 0; i < _entityReviews[entityID].length; i++) reviews[i] = _entityReviews[entityID][i];
+        return reviews; 
+    }
+
     function getProject(uint256 index) external view returns(Project memory) {
         return _projects[index]; 
     }
@@ -130,10 +143,12 @@ contract desilo is ERC1155Receiver {
         return projects; 
     }
 
-    function getProjectEntities(uint256 projectID) external view returns(string[] memory entityURIs) {
-        string[] memory entityURIs = new string[](_projectEntitiesCount[projectID]);
+    function getProjectEntities(uint256 projectID) external view returns(bytes32[] memory entityIDs, string[] memory entityURIs) {
+        entityURIs = new string[](_projectEntitiesCount[projectID]);
+        entityIDs = new bytes32[](_projectEntitiesCount[projectID]);
         for (uint i = 0; i < _projectEntitiesCount[projectID]; i++) {
-            entityURIs[i] = _entityURI[keccak256(abi.encodePacked(_projects[projectID].uri, _projectEntitiesCount[projectID]))];
+            entityIDs[i] = keccak256(abi.encodePacked(_projects[projectID].uri, i));
+            entityURIs[i] = _entityURI[entityIDs[i]];
         }
     }
 
@@ -143,6 +158,7 @@ contract desilo is ERC1155Receiver {
         _entityToThread[entityID] = projectID;
         _entityURI[entityID] = entityURI;
         _projectEntitiesCount[projectID] += 1;
+        emit EntityAdded(projectID, entityID);
     }
 
     function vouchProject(uint256 projectID, uint256 groupID, uint256 amount) external {
@@ -168,15 +184,7 @@ contract desilo is ERC1155Receiver {
         _scContract.mint(msg.sender, scID, scSeedAmount, "");
     }
 
-    function getStaked(bytes32 _commitId, address _addr)
-        public
-        view
-        returns (uint256)
-    {
-        return _stakedAmount[_commitId][_addr];
-    }
-
-    function stake(bytes32 _commitId) external {
+    function stake(bytes32 _commitId, string memory uri) external {
         _scContract.safeTransferFrom(
             msg.sender,
             address(this),
@@ -184,30 +192,29 @@ contract desilo is ERC1155Receiver {
             scStakeAmount,
             ""
         );
-        _stakedAmount[_commitId][msg.sender] += scStakeAmount;
-        _stakeExpiry[_commitId][msg.sender] = block.timestamp + scStakePeriod;
-        emit Staked(msg.sender, _commitId, ""); 
+        Review memory newReview = Review(uri, block.timestamp, msg.sender, scStakeAmount);
+        _entityReviews[_commitId].push(newReview);
+        emit Staked(msg.sender, _commitId, _entityReviews[_commitId].length - 1); 
     }
 
-    function unstake(bytes32 _commitId) external {
+    function canUnstake(bytes32 _commitId, uint256 index) public view returns(bool) {
+        return block.timestamp >= _entityReviews[_commitId][index].publishedAt + scStakePeriod;
+    }
+
+    function unstake(bytes32 _commitId, uint256 index) external {
         require(
-            block.timestamp >= _stakeExpiry[_commitId][msg.sender],
+            canUnstake(_commitId, index),
             "desilo: You may not yet unstake."
         );
-        require(
-            getStaked(_commitId, msg.sender) >= 0,
-            "desilo: You have not yet staked."
-        );
 
-        uint256 stakedAmount = getStaked(_commitId, msg.sender);
+        uint256 stakedAmount = _entityReviews[_commitId][index].stakeAmount;
         uint256 threadID = _entityToThread[_commitId];
         uint256 gscCount = _projects[threadID].groupCount;
         uint256[] memory ids = new uint256[](gscCount);
         uint256[] memory amounts = new uint256[](gscCount);
 
-        _stakedAmount[_commitId][msg.sender] -= stakedAmount;
-        _stakeExpiry[_commitId][msg.sender] = 0;
-
+        _entityReviews[_commitId][index].stakeAmount = 0;
+        
         _scContract.safeTransferFrom(
             address(this),
             msg.sender,
@@ -231,7 +238,7 @@ contract desilo is ERC1155Receiver {
             }
         }
         _scContract.mintBatch(msg.sender, ids, amounts, "");
-        emit Unstaked(msg.sender, _commitId, ""); 
+        emit Unstaked(msg.sender, _commitId, index); 
     }
 
     function registerProject(string memory uri) external {

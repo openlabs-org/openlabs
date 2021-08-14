@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Typography, Button } from "@material-ui/core";
+import { Paper, Typography, Button, TextField, Grid } from "@material-ui/core";
+import UserContext from "../../context/UserContext";
+
 import {
   Timeline,
   TimelineItem,
@@ -21,8 +23,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProjectEntityReviews({ reviews, onNewReview }) {
+export default function ProjectEntityReviews({
+  reviews,
+  onReview,
+  onSubmitReview,
+  onUnstake
+}) {
   const classes = useStyles();
+  const { account } = useContext(UserContext);
+  const [reviewContent, setReviewContent] = useState({});
 
   return (
     <Timeline align="left">
@@ -33,17 +42,49 @@ export default function ProjectEntityReviews({ reviews, onNewReview }) {
             <TimelineConnector />
           </TimelineSeparator>
           <TimelineContent>
-          <Typography color="textSecondary">
-            <strong>{review.author}</strong> added a review {review.publishedAt}
-          </Typography>
-          <Paper elevation={0} className={classes.paper}>
-            <Typography>{review.content}</Typography>
-          </Paper>
+            <Typography color="textSecondary">
+              <strong>{review.author.name}</strong> added a review{" "}
+              {review.publishedAt}
+            </Typography>
+            <Paper elevation={0} className={classes.paper}>
+              <Typography>{review.texts}</Typography>
+            </Paper>
+            {review.reviewer == account ? <Button onClick={()=>onUnstake(index)} disabled={!review.unstake}>Unstake</Button> : ""}
           </TimelineContent>
-          
-          
         </TimelineItem>
       ))}
+
+      {onReview ? (
+        <TimelineItem className={classes.item}>
+          <TimelineSeparator>
+            <TimelineDot />
+            <TimelineConnector />
+          </TimelineSeparator>
+          <TimelineContent>
+            <Grid>
+              <TextField
+                multiline
+                rows={4}
+                variant="outlined"
+                style={{ width: "100%" }}
+                onChange={(e) => {
+                  setReviewContent({ ...reviewContent, texts: e.target.value });
+                }}
+              ></TextField>
+            </Grid>
+            <Grid>
+              <Button
+                variant="outlined"
+                onClick={() => onSubmitReview(reviewContent)}
+              >
+                Submit
+              </Button>
+            </Grid>
+          </TimelineContent>
+        </TimelineItem>
+      ) : (
+        ""
+      )}
     </Timeline>
   );
 }

@@ -6,7 +6,12 @@ import getWeb3 from "./getWeb3";
 import "./App.css";
 import Topbar from "./components/Navigation/Topbar";
 import UserContext from "./context/UserContext";
-import { ceramic, threeIdAuthenticate } from "./api/CeramicService";
+import {
+  ceramic,
+  threeIdAuthenticate,
+  defaultAuthenticate,
+} from "./api/CeramicService";
+import { IDX } from "@ceramicstudio/idx";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Typography } from "@material-ui/core";
@@ -57,6 +62,7 @@ const App = () => {
         setSocialCreditsContract(socialCreditsContract);
 
         // Authenticate
+        // await defaultAuthenticate();
       } catch (error) {
         // Catch any errors for any of the above operations.
         alert(
@@ -96,10 +102,10 @@ const App = () => {
                 <Route exact path="/">
                   <Feed />
                 </Route>
-                <Route path="/groups">
+                <Route path="/labs">
                   <Groups />
                 </Route>
-                <Route path="/group/:id">
+                <Route path="/lab/:id">
                   <Group />
                 </Route>
                 <Route path="/me">

@@ -1,25 +1,45 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
-import { Card, CardHeader, CardContent, CardActions, IconButton, Collapse, Select, MenuItem, FormControl, InputLabel, Button } from "@material-ui/core";
-import { ExpandMore as ExpandMoreIcon, CloudDownload as DownloadIcon, Edit as EditIcon } from "@material-ui/icons";
+import UserContext from "../../context/UserContext";
+
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  IconButton,
+  Collapse,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Button,
+} from "@material-ui/core";
+import {
+  ExpandMore as ExpandMoreIcon,
+  CloudDownload as DownloadIcon,
+  Edit as EditIcon,
+  CloudUpload,
+} from "@material-ui/icons";
 import ProjectEntityReviews from "./ProjectEntityReviews";
+import { createReview } from "../../api/CeramicService";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: "100%",
   },
   expand: {
-    marginLeft: 'auto'
+    marginLeft: "auto",
   },
   expandIcon: {
-    transform: 'rotate(0deg)', 
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: "rotate(180deg)",
   },
   versionSelect: {
     minWidth: 80,
@@ -27,17 +47,21 @@ const useStyles = makeStyles((theme) => ({
   },
   actionBtn: {
     margin: theme.spacing(1),
-  }
+  },
 }));
 
-export default function ProjectEntity({entity}) {
+export default function ProjectEntity({ entity, isAuthor }) {
   const classes = useStyles();
   const entityReviews = entity.reviews;
+  const { ceramic, desiloContract, idx } = useContext(UserContext);
 
   const [expanded, setExpanded] = useState(false);
-  const [currentVersion, setCurrentVersion] = useState(entity.content[entity.content.length - 1]);
+  const [onReview, setOnReview] = useState(false);
+  const [currentVersion, setCurrentVersion] = useState(
+    entity.content[entity.content.length - 1]
+  );
 
-  console.log(entity)
+  console.log(entity);
 
   const handleExpand = () => {
     setExpanded(!expanded);
@@ -49,6 +73,13 @@ export default function ProjectEntity({entity}) {
 
   const handleNewReview = () => {
     /** new review dialog */
+    setOnReview(!onReview);
+  };
+
+  const handleSubmitReview = async (reviewContent) => {
+    let commitId = await createReview("standard", reviewContent.texts);
+    await desiloContract.methods.stake(entity.id, commitId).send();
+    setOnReview(!onReview);
   };
 
   const handleVersionChange = (e) => {
@@ -60,21 +91,23 @@ export default function ProjectEntity({entity}) {
       <CardHeader
         action={
           <FormControl className={classes.versionSelect}>
-          <InputLabel id="select-version-label-id">Version</InputLabel>
+            <InputLabel id="select-version-label-id">Version</InputLabel>
             <Select
               value={currentVersion}
               onChange={handleVersionChange}
               id="select-version-id"
               labelId="select-version-label-id"
             >
-              {entity.content.map((version, index) => 
-                <MenuItem value={version} key={"version_" + index}>{index + 1}</MenuItem>
-              )}
+              {entity.content.map((version, index) => (
+                <MenuItem value={version} key={"version_" + index}>
+                  {index + 1}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         }
         title={currentVersion.name}
-        subheader={currentVersion.publishedAt}
+        subheader={currentVersion.description}
       />
       <CardActions disableSpacing>
         <Button
@@ -85,27 +118,49 @@ export default function ProjectEntity({entity}) {
           variant="outlined"
           onClick={handleDownload}
           className={classes.actionBtn}
-          href={currentVersion.file}
+          href={
+            "https://ipfs.io/ipfs/" +
+            currentVersion.uri +
+            "/" +
+            currentVersion.name
+          }
+          download=""
         >
           Download
         </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          size="small"
-          startIcon={<EditIcon />}
-          variant="outlined"
-          onClick={handleNewReview}
-          className={classes.actionBtn}
-        >
-          Write a review
-        </Button>
+
+        {isAuthor ? (
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<CloudUpload />}
+            variant="outlined"
+            className={classes.actionBtn}
+          >
+            Upload New Version
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            startIcon={<EditIcon />}
+            variant="outlined"
+            onClick={handleNewReview}
+            className={classes.actionBtn}
+          >
+            Write a review
+          </Button>
+        )}
         <Button
           variant="text"
           endIcon={
-            <ExpandMoreIcon className={clsx(classes.expandIcon, {
-              [classes.expandOpen]: expanded,
-            })} />
+            <ExpandMoreIcon
+              className={clsx(classes.expandIcon, {
+                [classes.expandOpen]: expanded,
+              })}
+            />
           }
           onClick={handleExpand}
           aria-expanded={expanded}
@@ -117,7 +172,11 @@ export default function ProjectEntity({entity}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <ProjectEntityReviews reviews={entityReviews} />
+          <ProjectEntityReviews
+            reviews={entityReviews}
+            onReview
+            onSubmitReview={handleSubmitReview}
+          />
         </CardContent>
       </Collapse>
     </Card>

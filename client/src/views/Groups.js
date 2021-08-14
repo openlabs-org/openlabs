@@ -22,7 +22,7 @@ export default () => {
 
   useEffect(() => {
     const load = async () => {
-      let results = await fetchAll({desiloContract, ceramic});
+      let results = await fetchAll({ desiloContract, ceramic });
       if (search) results = results.filter((item) => item.name.match(search));
       setGroups(results);
     };
@@ -35,7 +35,7 @@ export default () => {
     <Container maxWidth="lg" className={styles.root}>
       <Grid container spacing={3} alignItems="center">
         <Grid item xs={10}>
-          <Typography variant="h3">Groups List</Typography>
+          <Typography variant="h3">All Labs</Typography>
         </Grid>
         <Grid item xs={2}>
           <TextField label="Search" variant="filled" onChange={handleSearch} />
