@@ -11,6 +11,8 @@ import {
   Box,
   Paper,
   LinearProgress,
+  Card,
+  CardActionArea,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -93,8 +95,8 @@ export default () => {
       setResults(results);
       setIsLoading(false);
     };
-    load();
-  }, [search, ceramic, desiloContract]);
+    if (desiloContract && idx) load();
+  }, [search, idx, desiloContract]);
 
   const styles = useStyles();
 
@@ -124,6 +126,7 @@ export default () => {
               >
                 <Tab label="Affiliated" {...a11yProps(0)} />
                 <Tab label="Pending" {...a11yProps(1)} />
+                <Tab label="Members" {...a11yProps(2)} />
               </Tabs>
             </Paper>
             <TextField
@@ -153,10 +156,25 @@ export default () => {
                     <ProjectCard project={project} />
                   </Grid>
                   <Grid item xs={12}>
-                    <LinearProgress variant="determinate" value={(project.vouches / results.acceptance) * 100} />
+                    <LinearProgress
+                      variant="determinate"
+                      value={(project.vouches / results.acceptance) * 100}
+                    />
                   </Grid>
                 </Grid>
               ))}
+            </TabPanel>
+            <TabPanel value={value} index={2} style={{ width: "100%" }}>
+              {/* {results.members.map((user) => (
+                <Grid item xs={12} key={"user_" + user.did}>
+                  <Card>
+                    <CardActionArea>
+                      <Grid>{user.name}</Grid>
+                      <Grid>{user.description}</Grid>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
+              ))} */}
             </TabPanel>
           </Grid>
         </Grid>

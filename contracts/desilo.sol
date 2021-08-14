@@ -26,6 +26,12 @@ contract desilo is ERC1155Receiver {
         uint256 stakeAmount;
     }
 
+    enum StakingState {
+        pending,
+        ready,
+        unstaked
+    }
+
     uint256 public groupCreationSCAmount;
     uint256 public scStakeAmount;
     uint256 public scSeedAmount;
@@ -41,6 +47,8 @@ contract desilo is ERC1155Receiver {
     mapping(bytes32 => Review[]) _entityReviews;
     mapping(bytes32 => uint256) _entityToThread;
     mapping(bytes32 => string) _entityURI;
+    mapping(bytes32 => mapping(uint256 => bool)) _fraudulent;
+
 
     // mapping(groupID)
     mapping (uint256 => mapping(uint256 => bool)) _affiliatedGroups;
@@ -160,12 +168,14 @@ contract desilo is ERC1155Receiver {
         _projectEntitiesCount[projectID] += 1;
         emit EntityAdded(projectID, entityID);
     }
+    
 
     function vouchProject(uint256 projectID, uint256 groupID, uint256 amount) external {
         _scContract.burn(msg.sender, groupID, amount);
         _affiliatedGroupsVouched[projectID][groupID] += amount; 
         if (_affiliatedGroupsVouched[projectID][groupID] >= _groups[groupID].acceptance) {
             _affiliatedGroups[projectID][groupID] = true; 
+            _projects[projectID].groupCount += 1;
             emit ProjectAccepted(projectID, groupID);
         }
     }
@@ -197,13 +207,24 @@ contract desilo is ERC1155Receiver {
         emit Staked(msg.sender, _commitId, _entityReviews[_commitId].length - 1); 
     }
 
-    function canUnstake(bytes32 _commitId, uint256 index) public view returns(bool) {
-        return block.timestamp >= _entityReviews[_commitId][index].publishedAt + scStakePeriod;
+    function toggleFraudulent(bytes32 _commitId, uint256 index, bool _isFraudulent) external {
+        require(_projects[_entityToThread[_commitId]].owner == msg.sender);
+        _fraudulent[_commitId][index] = _isFraudulent;
+    }
+
+    function isFraudulent(bytes32 _commitId, uint256 index) public view returns(bool) {
+        return _fraudulent[_commitId][index];
+    }
+
+    function canUnstake(bytes32 _commitId, uint256 index) public view returns(StakingState) {
+        if (isFraudulent(_commitId, index) || block.timestamp < _entityReviews[_commitId][index].publishedAt + scStakePeriod) return StakingState.pending;
+        if (_entityReviews[_commitId][index].stakeAmount > 0) return StakingState.ready;
+        return StakingState.unstaked;
     }
 
     function unstake(bytes32 _commitId, uint256 index) external {
         require(
-            canUnstake(_commitId, index),
+            canUnstake(_commitId, index) == StakingState.ready,
             "desilo: You may not yet unstake."
         );
 
@@ -214,7 +235,6 @@ contract desilo is ERC1155Receiver {
         uint256[] memory amounts = new uint256[](gscCount);
 
         _entityReviews[_commitId][index].stakeAmount = 0;
-        
         _scContract.safeTransferFrom(
             address(this),
             msg.sender,

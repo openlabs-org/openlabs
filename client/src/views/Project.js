@@ -16,7 +16,7 @@ import { DropzoneArea } from "material-ui-dropzone";
 import { Link, useParams } from "react-router-dom";
 import { fetch as fetchProject } from "../api/ProjectRepository";
 import { fetchAll as fetchProjectReviews } from "../api/EntityRepository";
-import { createEntity } from "../api/CeramicService";
+import { createEntity, updateEntity } from "../api/CeramicService";
 import UserContext from "../context/UserContext";
 import ProjectEntity from "../components/Project/ProjectEntity";
 import VouchForm from "../components/Project/VouchForm";
@@ -28,6 +28,7 @@ export default function Project() {
   const [open, setOpen] = useState(false);
   const [dropZoneOpen, setDropZoneOpen] = useState(false);
   const [dropZoneFile, setDropZoneFile] = useState(null);
+  const [dropZoneAction, setDropZoneAction] = useState("add");
   const [dropZoneDescription, setDropZoneDescription] = useState("");
 
   const [isAuthor, setIsAuthor] = useState(false);
@@ -51,16 +52,27 @@ export default function Project() {
   };
 
   const materialUpload = async () => {
+    let cid = await storeFiles(dropZoneFile);
     if (dropZoneFile.length > 0) {
-      let cid = await storeFiles(dropZoneFile);
-      let entityStreamId = await createEntity(
-        dropZoneFile[0].name,
-        dropZoneDescription,
-        cid
-      );
-      let response = await desiloContract.methods
-        .addProjectEntity(id, entityStreamId)
-        .send();
+      if (dropZoneAction == "add") {
+        let entityStreamId = await createEntity(
+          dropZoneFile[0].name,
+          dropZoneDescription,
+          cid
+        );
+        return await desiloContract.methods
+          .addProjectEntity(id, entityStreamId)
+          .send();
+      } else if (dropZoneAction.includes("update")) {
+        console.log(dropZoneAction.substr(7));
+        let entityStreamId = await updateEntity(
+          dropZoneAction.substr(7),
+          dropZoneFile[0].name,
+          dropZoneDescription,
+          cid
+        );
+      }
+
       // console.log(response.events.EntityAdded.returnValues.entityId);
     }
     setDropZoneOpen(false);
@@ -81,6 +93,7 @@ export default function Project() {
     setProject(project);
     setEntities(entities);
     const isAuthor =
+      idx.authenticated &&
       project.author.filter((author) => author.did == idx.id).length > 0;
     setIsAuthor(isAuthor);
   };
@@ -152,6 +165,8 @@ export default function Project() {
                     <ProjectEntity
                       entity={entity}
                       isAuthor={isAuthor}
+                      setDropZoneAction={setDropZoneAction}
+                      setDropZoneOpen={setDropZoneOpen}
                       key={"entity_" + index}
                     >
                       {/* <TextField
@@ -166,6 +181,7 @@ export default function Project() {
                   {isAuthor ? (
                     <Button
                       onClick={() => {
+                        setDropZoneAction("add");
                         setDropZoneOpen(true);
                       }}
                     >
@@ -180,14 +196,21 @@ export default function Project() {
 
             <Grid item xs={3}>
               <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <Button variant="outlined" onClick={handleVouchClick}>
-                    Vouch
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Divider />
-                </Grid>
+                {idx.authenticated ? (
+                  <React.Fragment>
+                    <Grid item xs={12}>
+                      <Button variant="outlined" onClick={handleVouchClick}>
+                        Vouch
+                      </Button>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <Divider />
+                    </Grid>
+                  </React.Fragment>
+                ) : (
+                  ""
+                )}
                 <Grid item xs={12}>
                   <Typography variant="subtitle1">Authors</Typography>
                   {project.author.map((author) => (

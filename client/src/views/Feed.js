@@ -39,7 +39,7 @@ export default () => {
       setProjects(results);
       setIsLoading(false);
     };
-    if (ceramic && desiloContract && idx) load();
+    if (idx) load();
   }, [search, ceramic, desiloContract, idx]);
 
   return (

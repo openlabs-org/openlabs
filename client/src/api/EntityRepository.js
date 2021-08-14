@@ -29,7 +29,7 @@ export const fetchAll = async (
           entityCeramic[key].commitId.toString()
       )
         allCommits = allCommits.concat([entityCeramic[key].commitId]);
-
+      entity.uri = key; 
       entity.content = await Promise.all(
         allCommits.map(async (e) => {
           let content = (await ceramic.loadStream(e)).content;
@@ -69,9 +69,7 @@ export const fetchAll = async (
             { addSuffix: true }
           );
 
-          combined.unstake =
-            (combined.reviewer == account) &&
-            (await desiloContract.methods.canUnstake(ids[index], i).call());
+          combined.unstake = (await desiloContract.methods.canUnstake(ids[index], i).call());
           return combined;
         })
       );

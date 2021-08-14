@@ -23,7 +23,7 @@ import {
   CloudUpload,
 } from "@material-ui/icons";
 import ProjectEntityReviews from "./ProjectEntityReviews";
-import { createReview } from "../../api/CeramicService";
+import { createReview, updateEntity } from "../../api/CeramicService";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +50,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProjectEntity({ entity, isAuthor }) {
+export default function ProjectEntity({
+  entity,
+  isAuthor,
+  setDropZoneAction,
+  setDropZoneOpen,
+}) {
   const classes = useStyles();
   const entityReviews = entity.reviews;
   const { ceramic, desiloContract, idx } = useContext(UserContext);
@@ -76,6 +81,11 @@ export default function ProjectEntity({ entity, isAuthor }) {
     setOnReview(!onReview);
   };
 
+  const handleUnstake = async (reviewId) => {
+    await desiloContract.methods.unstake(entity.id, reviewId).send();
+    console.log("unstake completed");
+  };
+
   const handleSubmitReview = async (reviewContent) => {
     let commitId = await createReview("standard", reviewContent.texts);
     await desiloContract.methods.stake(entity.id, commitId).send();
@@ -84,6 +94,11 @@ export default function ProjectEntity({ entity, isAuthor }) {
 
   const handleVersionChange = (e) => {
     setCurrentVersion(e.target.value);
+  };
+
+  const handleUploadNewVersion = async () => {
+    setDropZoneAction("update " + entity.uri);
+    setDropZoneOpen(true);
   };
 
   return (
@@ -137,6 +152,9 @@ export default function ProjectEntity({ entity, isAuthor }) {
             startIcon={<CloudUpload />}
             variant="outlined"
             className={classes.actionBtn}
+            onClick={() => {
+              handleUploadNewVersion();
+            }}
           >
             Upload New Version
           </Button>
@@ -176,6 +194,7 @@ export default function ProjectEntity({ entity, isAuthor }) {
             reviews={entityReviews}
             onReview
             onSubmitReview={handleSubmitReview}
+            onUnstake={handleUnstake}
           />
         </CardContent>
       </Collapse>

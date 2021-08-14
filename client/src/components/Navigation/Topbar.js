@@ -60,6 +60,10 @@ export default function Topbar({ onConnect, isConnected }) {
     <>
       <AppBar position="static" color="transparent" className={classes.root}>
         <Toolbar>
+          <img
+            src={require("../../resources/openlabs-02.svg")}
+            style={{ width: 40, height: 40, marginRight: 10 }}
+          ></img>
           <Typography variant="h6" className={classes.title}>
             OpenLabs
           </Typography>

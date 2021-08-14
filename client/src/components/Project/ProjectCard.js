@@ -27,7 +27,7 @@ export default ({ project, skeleton = false }) => {
   const goToProject = () => project && history.push("/project/" + project.id);
 
   return skeleton ? (
-    <Card className={classes.root} variant="outlined"  >
+    <Card className={classes.root} variant="outlined">
       <CardContent>
         <Skeleton animation="wave" />
         <Skeleton animation="wave" />
@@ -63,7 +63,7 @@ export default ({ project, skeleton = false }) => {
             size="small"
             key={"group_" + group.id}
             onClick={() => {
-              history.push("/group/" + group.id);
+              history.push("/lab/" + group.id);
             }}
           >
             {group.name}

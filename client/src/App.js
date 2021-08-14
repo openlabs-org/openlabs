@@ -62,7 +62,9 @@ const App = () => {
         setSocialCreditsContract(socialCreditsContract);
 
         // Authenticate
-        // await defaultAuthenticate();
+        const idx = await defaultAuthenticate();
+        setIDX(idx);
+        console.log(idx);
       } catch (error) {
         // Catch any errors for any of the above operations.
         alert(
@@ -97,7 +99,7 @@ const App = () => {
         <Router>
           <Topbar onConnect={onConnect} isConnected={isConnected} />
           <Container maxWidth="lg">
-            {isConnected ? (
+            {true ? (
               <Switch>
                 <Route exact path="/">
                   <Feed />

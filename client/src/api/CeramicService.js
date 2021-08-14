@@ -19,8 +19,10 @@ const did = new DID({ resolver });
 export const ceramic = ceramicClient;
 
 export const defaultAuthenticate = async () => {
-  await did.authenticate();
-  await ceramic.setDID(did);
+  // await did.authenticate();
+  // await ceramic.setDID(did);
+  const idx = new IDX({ ceramic });
+  return idx;
 };
 
 export const threeIdAuthenticate = async (ethereum, account) => {
@@ -49,6 +51,13 @@ export const createEntity = async (name, description, uri) => {
     }
   );
   return newEntity.id.toString();
+};
+
+export const updateEntity = async (entityStreamId, name, description, uri) => {
+  let authorID = ceramic.did.id;
+  console.log(name, description, uri);
+  let entity = await ceramic.loadStream(entityStreamId);
+  await entity.update({ name, description, uri });
 };
 
 export const createReview = async (type, texts) => {

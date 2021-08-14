@@ -49,7 +49,7 @@ export default function ProjectEntityReviews({
             <Paper elevation={0} className={classes.paper}>
               <Typography>{review.texts}</Typography>
             </Paper>
-            {review.reviewer == account ? <Button onClick={()=>onUnstake(index)} disabled={!review.unstake}>Unstake</Button> : ""}
+            {review.reviewer == account ? <Button onClick={()=>onUnstake(index)} disabled={review.unstake!=1}>{review.unstake==2? "Already Unstaked" : "Unstake"}</Button> : ""}
           </TimelineContent>
         </TimelineItem>
       ))}

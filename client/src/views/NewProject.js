@@ -105,7 +105,7 @@ export default function NewProject() {
     );
 
     let createGroupCall = await desiloContract.methods
-      .createGroup(100, groupSetup.id.toString(), 8, 30)
+      .createGroup(100, groupSetup.id.toString(), "0x8" + "0".repeat(15), 30)
       .send({
         from: account,
       });

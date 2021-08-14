@@ -6,8 +6,8 @@ module.exports = async function (deployer) {
     desilo,
     5,
     10,
-    1,  // new web3.utils.BN("1001" + "0".repeat(61), 2),
-    20,
+    1, // new web3.utils.BN("1001" + "0".repeat(61), 2),
+    50,
     3
   ); // 12.5% yield
   let desiloContract = await desilo.deployed();
