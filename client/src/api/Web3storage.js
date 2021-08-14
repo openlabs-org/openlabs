@@ -1,5 +1,4 @@
 import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
-
 // logoFile and textFile will need to be reachable. Example below
 // export function uploadFiles(e) {
 //   e.preventDefault();
@@ -9,14 +8,12 @@ import { Web3Storage } from 'web3.storage/dist/bundle.esm.min.js'
 //   ]
 //   var cid = storeFiles(files);
 // }
-
 export async function storeFiles(files) {
   const client = new Web3Storage({ token: 'WEB3.STORAGE API KEY HERE' })
   const cid = await client.put(files)
   console.log('stored files with cid:', cid)
   return cid;
 }
-
 export async function retrieve(cid) {
   const client = new Web3Storage({ token: 'WEB3.STORAGE API KEY HERE' })
   const res = await client.get(cid)
@@ -27,8 +24,18 @@ export async function retrieve(cid) {
   const files = await res.files()
   return files;
 }
+//read File() as image
+// Parameter: File() obj
+export async function displayImage(file) {
+  const reader = new FileReader();
+  reader.onload = async function () {
+    var dataURL = await reader.result;
+    //await setImage(dataURL)       SET STATE
+  }
+  reader.readAsDataURL(file)
+}
 
-// HTML/JS EXAMPLE FOR FILE UPLOAD
+// HTML/JS EXAMPLE FOR FILE UPLOAD, RETRIEVAL, AND DISPLAY
 /*
 const [textFile, setTextFile] = useState(null);
 const [logoFile, setLogoFile] = useState(null);
@@ -40,5 +47,7 @@ const [logoFile, setLogoFile] = useState(null);
         <input type="file" id="text-file" name="text-file" onChange={(e) => setTextFile(e.target.files[0])} />
         <button type="submit">Submit</button>
       </form>
+      <button onClick={retrieve}>Retrieve</button>
+      <img src={image} id="testimg" alt="This is an image"></img>
   </div>
 */
