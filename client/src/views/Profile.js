@@ -76,13 +76,13 @@ export default function Profile() {
   const handleProjectCreated = ({createdProjectId}) => {
     setProjectDialog(false)
     /** redirect */
-    // history.push("/project/" + createdProjectId);
+    history.push("/project/" + createdProjectId);
   }
 
   const handleGroupCreated = ({createdGroupId}) => {
     setGroupDialog(false)
     /** redirect */
-    // history.push("/lab/" + createdGroupId);
+    history.push("/lab/" + createdGroupId);
   }
 
   const loadPage = async () => {

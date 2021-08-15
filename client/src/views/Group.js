@@ -10,7 +10,7 @@ import {
   Box,
   Paper,
   LinearProgress,
-  Divider
+  Divider,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -73,7 +73,7 @@ export default () => {
     const load = async () => {
       let newResults;
       if (cache) {
-        newResults = {...cache};
+        newResults = { ...cache };
       } else {
         setIsLoading(true);
         newResults = await fetchDetailed(
@@ -92,6 +92,7 @@ export default () => {
         );
       }
       setResults(newResults);
+      console.log(newResults);
       setIsLoading(false);
     };
     if (desiloContract && idx) load();
@@ -101,83 +102,103 @@ export default () => {
 
   return (
     <Container maxWidth="lg" className={styles.root}>
-      <Grid container spacing={3} alignItems="center" justifyContent="space-between">
-        {isLoading ?
+      <Grid
+        container
+        spacing={3}
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        {isLoading ? (
           <>
             <Grid item xs={12}>
-              <Skeleton animation="wave" height={30} width="15%"/>
-              <Skeleton animation="wave" height={50} width="50%"/>
-              <Skeleton animation="wave" height={100} width="70%"/>
+              <Skeleton animation="wave" height={30} width="15%" />
+              <Skeleton animation="wave" height={50} width="50%" />
+              <Skeleton animation="wave" height={100} width="70%" />
             </Grid>
             <Grid item xs={12}>
-              <Skeleton animation="wave" height={50} width="50%"/>
+              <Skeleton animation="wave" height={50} width="50%" />
             </Grid>
             <Grid item xs={12}>
-              <Skeleton animation="wave" height={200} width="100%"/>
-            </Grid>
-          </> : results &&
-          <>
-            <Grid item xs={12}>
-              <Typography variant="subtitle1">Lab</Typography>
-              <Typography variant="h3">{results.name}</Typography>
-              <Typography variant="h5">{results.description}</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Divider />
-            </Grid>
-            <Grid item xs={9}>
-              <Paper square elevation={0}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="simple tabs example"
-                  indicatorColor="primary"
-                  textColor="primary"
-                >
-                  <Tab label="Affiliated" {...a11yProps(0)} />
-                  <Tab label="Pending" {...a11yProps(1)} />
-                </Tabs>
-              </Paper>
-            </Grid>
-            <Grid item xs={3}>
-              <TextField
-                label="Search"
-                placeholder="Search..."
-                variant="filled"
-                onChange={handleSearch}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TabPanel value={value} index={0} style={{ width: "100%" }}>
-                {results.affiliated.map((project) => (
-                  <Grid item xs={12} key={"project_" + project.id}>
-                    <ProjectCard project={project} />
-                  </Grid>
-                ))}
-              </TabPanel>
-              <TabPanel value={value} index={1} style={{ width: "100%" }}>
-                {results.pending.map((project) => (
-                  <Grid container>
-                    <Grid
-                      item
-                      xs={12}
-                      key={"project_" + project.id}
-                      style={{ width: "40%" }}
-                    >
-                      <ProjectCard project={project} />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <LinearProgress
-                        variant="determinate"
-                        value={(project.vouches / results.acceptance) * 100}
-                      />
-                    </Grid>
-                  </Grid>
-                ))}
-              </TabPanel>
+              <Skeleton animation="wave" height={200} width="100%" />
             </Grid>
           </>
-        }
+        ) : (
+          results && (
+            <>
+              <Grid item xs={12}>
+                <Typography variant="subtitle1">Lab</Typography>
+                <Typography variant="h3">{results.name}</Typography>
+                <Typography variant="h5">{results.description}</Typography>
+                <Grid style={{ width: "100%", height: 25 }}></Grid>
+                <Typography variant="h7" style={{ color: "gray" }}>
+                  {"Acceptance: " +
+                    results.acceptance +
+                    " " +
+                    results.token +
+                    ", " +
+                    "Yield: " +
+                    (results.yield / 2 ** 64) * 100 +
+                    "%"}
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider />
+              </Grid>
+              <Grid item xs={9}>
+                <Paper square elevation={0}>
+                  <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="simple tabs example"
+                    indicatorColor="primary"
+                    textColor="primary"
+                  >
+                    <Tab label="Affiliated" {...a11yProps(0)} />
+                    <Tab label="Pending" {...a11yProps(1)} />
+                    <Tab label="Governance" {...a11yProps(2)} disabled />
+                  </Tabs>
+                </Paper>
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  label="Search"
+                  placeholder="Search..."
+                  variant="filled"
+                  onChange={handleSearch}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TabPanel value={value} index={0} style={{ width: "100%" }}>
+                  {results.affiliated.map((project) => (
+                    <Grid item xs={12} key={"project_" + project.id}>
+                      <ProjectCard project={project} />
+                    </Grid>
+                  ))}
+                </TabPanel>
+                <TabPanel value={value} index={1} style={{ width: "100%" }}>
+                  {results.pending.map((project) => (
+                    <Grid container>
+                      <Grid
+                        item
+                        xs={12}
+                        key={"project_" + project.id}
+                        style={{ width: "40%" }}
+                      >
+                        <ProjectCard project={project} />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <LinearProgress
+                          variant="determinate"
+                          value={(project.vouches / results.acceptance) * 100}
+                        />
+                      </Grid>
+                    </Grid>
+                  ))}
+                </TabPanel>
+              </Grid>
+            </>
+          )
+        )}
       </Grid>
     </Container>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Button,
   TextField,
@@ -8,21 +8,37 @@ import {
   CardActions,
   CardHeader,
   IconButton,
-  CircularProgress
+  CircularProgress,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { SketchPicker } from "react-color";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
 import UserContext from "../../context/UserContext";
-
+import { fetch as fetchProfile } from "../../api/ProfileRepository";
 const globals = require("../../global.json");
 
-export default function NewProject({onCreated, onClose}) {
+export default function NewProject({ onCreated, onClose }) {
   const [group, setGroup] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [groupCreationCost, setGroupCreationCost] = useState(0);
+  const [profile, setProfile] = useState(null);
 
-  const { desiloContract, account, ceramic } = useContext(UserContext);
+  const { desiloContract, account, ceramic, idx } = useContext(UserContext);
 
+  useEffect(() => {
+    const load = async () => {
+      const groupCreation = await desiloContract.methods
+        .groupCreationSCAmount()
+        .call();
+      setGroupCreationCost(parseInt(groupCreation));
+      const profile = await fetchProfile(
+        { idx, ceramic, desiloContract },
+        idx.id
+      );
+      setProfile(profile);
+    };
+    if (idx && desiloContract) load();
+  }, [idx, ceramic, desiloContract]);
 
   const createGroup = async () => {
     setIsSubmitting(true);
@@ -45,9 +61,11 @@ export default function NewProject({onCreated, onClose}) {
       .send({
         from: account,
       });
-      console.log(createGroupCall)
+
     setIsSubmitting(false);
-    onCreated({createdGroupId: 0})
+    onCreated({
+      createdGroupId: createGroupCall.events.GroupCreated.returnValues.id,
+    });
   };
 
   return (
@@ -67,19 +85,17 @@ export default function NewProject({onCreated, onClose}) {
           onChange={(e) => setGroup({ ...group, name: e.target.value })}
           value={group.name}
           variant="outlined"
-          style={{width: "100%"}}
+          style={{ width: "100%" }}
         ></TextField>
       </CardContent>
       <CardContent>
         <TextField
           label="Description"
           placeholder="What's your lab about ?"
-          onChange={(e) =>
-            setGroup({ ...group, description: e.target.value })
-          }
+          onChange={(e) => setGroup({ ...group, description: e.target.value })}
           value={group.description}
           variant="outlined"
-          style={{width: "100%"}}
+          style={{ width: "100%" }}
         ></TextField>
       </CardContent>
       <CardContent>
@@ -90,16 +106,14 @@ export default function NewProject({onCreated, onClose}) {
           value={group.token}
           variant="outlined"
           inputProps={{ maxLength: 8 }}
-          style={{width: "100%"}}
+          style={{ width: "100%" }}
         ></TextField>
       </CardContent>
       <CardContent>
         <SketchPicker
           color={group.color}
-          onChangeComplete={(color) =>
-            setGroup({ ...group, color: color.hex })
-          }
-          style={{width: "100%"}}
+          onChangeComplete={(color) => setGroup({ ...group, color: color.hex })}
+          style={{ width: "100%" }}
         />
       </CardContent>
       <CardActions>
@@ -108,6 +122,11 @@ export default function NewProject({onCreated, onClose}) {
           fullWidth
           color="primary"
           variant="contained"
+          disabled={
+            !profile ||
+            groupCreationCost >
+              profile.socialCredits[profile.socialCredits.length - 1].amount
+          }
         >
           {isSubmitting && (
             <CircularProgress
@@ -115,7 +134,7 @@ export default function NewProject({onCreated, onClose}) {
               style={{ marginRight: "8px", color: "white" }}
             />
           )}
-          Create
+          Create ({groupCreationCost + " SC"})
         </Button>
       </CardActions>
     </Card>
