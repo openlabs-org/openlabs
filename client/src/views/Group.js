@@ -126,7 +126,6 @@ export default () => {
               >
                 <Tab label="Affiliated" {...a11yProps(0)} />
                 <Tab label="Pending" {...a11yProps(1)} />
-                <Tab label="Members" {...a11yProps(2)} />
               </Tabs>
             </Paper>
             <TextField
@@ -164,18 +163,7 @@ export default () => {
                 </Grid>
               ))}
             </TabPanel>
-            <TabPanel value={value} index={2} style={{ width: "100%" }}>
-              {/* {results.members.map((user) => (
-                <Grid item xs={12} key={"user_" + user.did}>
-                  <Card>
-                    <CardActionArea>
-                      <Grid>{user.name}</Grid>
-                      <Grid>{user.description}</Grid>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-              ))} */}
-            </TabPanel>
+ 
           </Grid>
         </Grid>
       )}

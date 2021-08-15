@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProjectEntity({ entity, editable, onUpdate }) {
   const classes = useStyles();
-  const entityReviews = entity.reviews;
+  let entityReviews = entity.reviews;
   const { ceramic, desiloContract, idx } = useContext(UserContext);
 
   const [expanded, setExpanded] = useState(false);
@@ -211,7 +211,11 @@ export default function ProjectEntity({ entity, editable, onUpdate }) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <ProjectEntityReviews reviews={entityReviews} />
+            <ProjectEntityReviews
+              entityReviews={entityReviews}
+              editable={editable}
+              entityId={entity.id}
+            />
           </CardContent>
         </Collapse>
       </Card>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { AccountCircle } from "@material-ui/icons";
+import UserContext from "../../context/UserContext";
 
 import TopbarLink from "./TopbarLink";
 
@@ -34,6 +35,7 @@ export default function Topbar({ onConnect, isConnected }) {
   const classes = useStyles();
 
   const [isConnecting, setIsConnecting] = useState(false);
+  const { idx } = useContext(UserContext);
 
   const handleConnect = () => {
     setIsConnecting(true);
@@ -61,12 +63,16 @@ export default function Topbar({ onConnect, isConnected }) {
       <AppBar position="static" color="transparent" className={classes.root}>
         <Toolbar>
           <img
-            src={require("../../resources/openlabs-02.svg")}
-            style={{ width: 40, height: 40, marginRight: 10 }}
+            src={require("../../resources/openlabs6-03.png")}
+            style={{
+              width: 198,
+              height: 55,
+              marginRight: 10,
+              marginTop: 5,
+              marginBottom: 5,
+            }}
           ></img>
-          <Typography variant="h6" className={classes.title}>
-            OpenLabs
-          </Typography>
+
           <TopbarLink to="/" exact>
             Feed
           </TopbarLink>
@@ -82,7 +88,7 @@ export default function Topbar({ onConnect, isConnected }) {
               >
                 New Project
               </Button>
-              <TopbarLink to="/me" icon>
+              <TopbarLink to={"/profile/" + idx.id} icon>
                 <AccountCircle />
               </TopbarLink>
             </div>

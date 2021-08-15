@@ -109,7 +109,7 @@ const App = () => {
                 <Route path="/lab/:id">
                   <Group />
                 </Route>
-                <Route path="/me">
+                <Route path="/profile/:id">
                   <Profile />
                 </Route>
                 <Route path="/new">

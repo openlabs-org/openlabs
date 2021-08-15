@@ -24,6 +24,7 @@ contract desilo is ERC1155Receiver {
         uint256 publishedAt;
         address reviewer;
         uint256 stakeAmount;
+        bool fraudulent;
     }
 
     enum StakingState {
@@ -47,7 +48,6 @@ contract desilo is ERC1155Receiver {
     mapping(bytes32 => Review[]) _entityReviews;
     mapping(bytes32 => uint256) _entityToThread;
     mapping(bytes32 => string) _entityURI;
-    mapping(bytes32 => mapping(uint256 => bool)) _fraudulent;
 
 
     // mapping(groupID)
@@ -160,6 +160,20 @@ contract desilo is ERC1155Receiver {
         }
     }
 
+    function getAllSocialCredits(address account) external view returns(uint256[] memory socialCredits, uint256[] memory lifetimeSocialCredits) {
+        socialCredits = new uint256[](_groupCount+1);
+        lifetimeSocialCredits = new uint256[](_groupCount+1);
+
+        for (uint i = 0; i < _groupCount; i++) {
+            socialCredits[i] = _scContract.balanceOf(account, i);
+            lifetimeSocialCredits[i] = _scContract.lifetimeBalanceOf(account, i);
+        }
+        socialCredits[_groupCount] = _scContract.balanceOf(account, scID);
+        lifetimeSocialCredits[_groupCount] = _scContract.lifetimeBalanceOf(account, scID);
+
+        return (socialCredits, lifetimeSocialCredits) ;
+    }
+
     function addProjectEntity(uint256 projectID, string memory entityURI) external {
         // Run Chainlink verification of ownership
         bytes32 entityID = keccak256(abi.encodePacked(_projects[projectID].uri, _projectEntitiesCount[projectID]));
@@ -202,22 +216,18 @@ contract desilo is ERC1155Receiver {
             scStakeAmount,
             ""
         );
-        Review memory newReview = Review(uri, block.timestamp, msg.sender, scStakeAmount);
+        Review memory newReview = Review(uri, block.timestamp, msg.sender, scStakeAmount, false);
         _entityReviews[_commitId].push(newReview);
         emit Staked(msg.sender, _commitId, _entityReviews[_commitId].length - 1); 
     }
 
     function toggleFraudulent(bytes32 _commitId, uint256 index, bool _isFraudulent) external {
         require(_projects[_entityToThread[_commitId]].owner == msg.sender);
-        _fraudulent[_commitId][index] = _isFraudulent;
-    }
-
-    function isFraudulent(bytes32 _commitId, uint256 index) public view returns(bool) {
-        return _fraudulent[_commitId][index];
+        _entityReviews[_commitId][index].fraudulent = _isFraudulent;
     }
 
     function canUnstake(bytes32 _commitId, uint256 index) public view returns(StakingState) {
-        if (isFraudulent(_commitId, index) || block.timestamp < _entityReviews[_commitId][index].publishedAt + scStakePeriod) return StakingState.pending;
+        if (_entityReviews[_commitId][index].fraudulent || block.timestamp < _entityReviews[_commitId][index].publishedAt + scStakePeriod) return StakingState.pending;
         if (_entityReviews[_commitId][index].stakeAmount > 0) return StakingState.ready;
         return StakingState.unstaked;
     }

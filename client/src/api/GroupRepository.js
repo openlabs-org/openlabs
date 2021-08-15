@@ -6,7 +6,6 @@ export const fetchAll = async ({ desiloContract, ceramic }) => {
   let groupDict = Object.keys(groupCeramic).map((key, index) => {
     let content = Object.assign({}, groupCeramic[key].content, groups[index]);
     content.id = index;
-    content.description = "Token: " + content.token;
 
     return content;
   });

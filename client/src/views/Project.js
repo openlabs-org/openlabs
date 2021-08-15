@@ -79,6 +79,7 @@ export default function Project() {
     setProject(project);
     setEntities(entities);
     const isAuthor =
+      idx &&
       idx.authenticated &&
       project.author.some((author) => author.did == idx.id);
     setIsAuthor(isAuthor);

@@ -6,6 +6,7 @@ contract dSocialCredits is ERC1155 {
     address _admin;
     address[] _authorizedTransfer;
     uint256 _authTransferCount;
+    mapping (uint256 => mapping (address => uint256)) _lifetimeBalances; 
 
     modifier validTransfer(address from, address to) {
         bool hasValidParty = false;
@@ -51,6 +52,10 @@ contract dSocialCredits is ERC1155 {
         _safeBatchTransferFrom(from, to, ids, amounts, data);
     }
 
+    function lifetimeBalanceOf(address account, uint256 id) external view returns(uint256) {
+        return _lifetimeBalances[id][account];
+    }
+
     function burn(
         address account,
         uint256 id,
@@ -67,6 +72,7 @@ contract dSocialCredits is ERC1155 {
         bytes memory data
     ) public {
         require(msg.sender == _admin, "Only designated admin can mint.");
+        _lifetimeBalances[id][account] += amount;
         _mint(account, id, amount, data);
     }
 
@@ -77,6 +83,11 @@ contract dSocialCredits is ERC1155 {
         bytes memory data
     ) public {
         require(msg.sender == _admin, "Only designated admin can mint.");
+        for (uint i = 0; i < ids.length; i++) {
+            _lifetimeBalances[ids[i]][to] += amounts[i];
+        }
         _mintBatch(to, ids, amounts, data);
     }
+
+    
 }

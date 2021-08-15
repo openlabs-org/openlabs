@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core";
 import { Publish as PublishIcon } from "@material-ui/icons";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
+import { SketchPicker } from "react-color";
 import UserContext from "../context/UserContext";
 import { updateEntitySchema, updateReviewSchema } from "../api/CeramicService";
 
@@ -17,8 +18,8 @@ const globals = require("../global.json");
 export default function NewProject() {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
-  const [groupName, setGroupName] = useState("");
-  const [groupToken, setGroupToken] = useState("");
+  const [group, setGroup] = useState({});
+
   const { desiloContract, account, ceramic, web3 } = useContext(UserContext);
 
   const updateProjectSchema = async () => {
@@ -52,9 +53,11 @@ export default function NewProject() {
       type: "object",
       properties: {
         token: { type: "string" },
+        description: { type: "string" },
         name: { type: "string" },
+        color: { type: "string" },
       },
-      required: ["token", "name"],
+      required: ["token", "name", "color", "description"],
     };
     const metadata = {
       controllers: [ceramic.did.id],
@@ -95,8 +98,10 @@ export default function NewProject() {
     let groupSetup = await TileDocument.create(
       ceramic,
       {
-        name: groupName,
-        token: groupToken,
+        name: group.name,
+        token: group.token,
+        color: group.color,
+        description: group.description,
       },
       {
         schema: globals.ceramicSchemas.GroupSchema,
@@ -152,18 +157,37 @@ export default function NewProject() {
         <Grid item xs={12}>
           <TextField
             placeholder="Group name"
-            onChange={(e) => setGroupName(e.target.value)}
-            value={groupName}
+            onChange={(e) => setGroup({ ...group, name: e.target.value })}
+            value={group.name}
+            variant="outlined"
+          ></TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            placeholder="Group description"
+            onChange={(e) =>
+              setGroup({ ...group, description: e.target.value })
+            }
+            value={group.description}
             variant="outlined"
           ></TextField>
         </Grid>
         <Grid item xs={12}>
           <TextField
             placeholder="Group token"
-            onChange={(e) => setGroupToken(e.target.value)}
-            value={groupToken}
+            onChange={(e) => setGroup({ ...group, token: e.target.value })}
+            value={group.token}
             variant="outlined"
+            inputProps={{ maxLength: 8 }}
           ></TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <SketchPicker
+            color={group.color}
+            onChangeComplete={(color) =>
+              setGroup({ ...group, color: color.hex })
+            }
+          />
         </Grid>
         <Grid item xs={12}>
           <Button onClick={createGroup} variant="outlined">
