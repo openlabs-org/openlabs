@@ -8,9 +8,9 @@ export default function ProjectSkeleton () {
       <Grid item xs={9}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Skeleton animation="wave" height={50} />
-            <Skeleton animation="wave" height={100} />
-            <Skeleton animation="wave" height={200}/>
+            <Skeleton animation="wave" height={50} width="25%"/>
+            <Skeleton animation="wave" height={100} width="50%"/>
+            <Skeleton animation="wave" height={200} width="100%"/>
           </Grid>
           <Grid item xs={12}>
             <Card>

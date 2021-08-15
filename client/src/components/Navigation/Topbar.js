@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -6,17 +6,19 @@ import {
   Typography,
   Button,
   CircularProgress,
+  Divider
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { AccountCircle } from "@material-ui/icons";
+import { AccountCircle, Loyalty } from "@material-ui/icons";
 import UserContext from "../../context/UserContext";
+
 
 import TopbarLink from "./TopbarLink";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginBottom: "20px",
+    marginBottom: "32px",
   },
   title: {
     flexGrow: 0,
@@ -35,8 +37,9 @@ export default function Topbar({ onConnect, isConnected }) {
   const classes = useStyles();
 
   const [isConnecting, setIsConnecting] = useState(false);
-  const { idx } = useContext(UserContext);
 
+  const { idx, username, credits } = useContext(UserContext);
+  
   const handleConnect = () => {
     setIsConnecting(true);
     onConnect();
@@ -53,7 +56,7 @@ export default function Topbar({ onConnect, isConnected }) {
       Connecting
     </Button>
   ) : (
-    <Button color="inherit" onClick={handleConnect} variant="contained">
+    <Button color="primary" onClick={handleConnect} variant="contained">
       Connect
     </Button>
   );
@@ -79,19 +82,9 @@ export default function Topbar({ onConnect, isConnected }) {
           <TopbarLink to="/labs">Labs</TopbarLink>
           <div className={classes.spacer}></div>
           {isConnected ? (
-            <div>
-              <Button
-                component={Link}
-                to="/new"
-                color="primary"
-                variant="contained"
-              >
-                New Project
-              </Button>
-              <TopbarLink to={"/profile/" + idx.id} icon>
-                <AccountCircle />
-              </TopbarLink>
-            </div>
+            <TopbarLink to={"/profile/" + idx.id} icon label={username + ", " + credits + " SC"} variant="outlined">
+              <AccountCircle />
+            </TopbarLink>
           ) : (
             ConnectBtn
           )}

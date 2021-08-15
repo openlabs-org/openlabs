@@ -12,6 +12,7 @@ import {
   defaultAuthenticate,
 } from "./api/CeramicService";
 import { IDX } from "@ceramicstudio/idx";
+import { fetch as fetchProfile } from "./api/ProfileRepository";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Container, Typography } from "@material-ui/core";
@@ -30,6 +31,8 @@ const App = () => {
   const [desiloContract, setDesiloContract] = useState(null);
   const [socialCreditsContract, setSocialCreditsContract] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [username, setUsername] = useState("");
+  const [credits, setCredits] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -76,6 +79,9 @@ const App = () => {
 
   const onConnect = async () => {
     const idx = await threeIdAuthenticate(window.ethereum, account);
+    const profile = await fetchProfile({ idx, ceramic, desiloContract }, idx.id);
+    setUsername(profile.name);
+    setCredits(profile.socialCredits.find(credit => credit.token === "SC").amount);
     setIDX(idx);
     setIsConnected(true);
   };
@@ -92,6 +98,8 @@ const App = () => {
         ceramic,
         idx,
         web3,
+        username,
+        credits
       }}
     >
       <div className="App">
