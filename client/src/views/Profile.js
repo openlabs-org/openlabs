@@ -93,7 +93,8 @@ export default function Profile() {
         if (records) setRecords(records);
         setProfile(await fetchProfile({ idx, ceramic, desiloContract }, id));
         const projects = await fetchProjects({ idx, ceramic, desiloContract })
-        setProjects(projects.filter((project) => true))
+        console.log(projects)
+        setProjects(projects.filter(project => project.author.some(author => author.did == id)));
         setIsLoading(false);
       } catch (error) {
         console.warn(error);
