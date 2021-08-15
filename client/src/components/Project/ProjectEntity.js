@@ -162,7 +162,7 @@ export default function ProjectEntity({ entity, editable, onUpdate }) {
               "/" +
               currentVersion.name
             }
-            download=""
+            target="_blank"
           >
             Download
           </Button>
