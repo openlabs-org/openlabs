@@ -29,12 +29,12 @@ export default ({ project, skeleton = false }) => {
   return skeleton ? (
     <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Skeleton animation="wave" />
-        <Skeleton animation="wave" />
-        <Skeleton animation="wave" />
+        <Skeleton animation="wave" width="15%"/>
+        <Skeleton animation="wave" width="50%"/>
+        <Skeleton animation="wave" width="100%"/>
       </CardContent>
       <CardActions>
-        <Skeleton animation="wave" />
+        <Skeleton animation="wave" width="30%"/>
       </CardActions>
     </Card>
   ) : (

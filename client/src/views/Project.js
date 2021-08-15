@@ -23,6 +23,7 @@ import VouchForm from "../components/Project/VouchForm";
 import EntityForm from "../components/Project/EntityForm";
 import { storeFiles, retrieve } from "../api/Web3storage";
 import ProjectSkeleton from "../components/Project/ProjectSkeleton";
+import { HowToVote } from "@material-ui/icons";
 
 export default function Project() {
   const { id } = useParams();
@@ -174,6 +175,7 @@ export default function Project() {
                         color="primary"
                         onClick={handleVouchClick}
                         fullWidth
+                        startIcon={<HowToVote></HowToVote>}
                       >
                         Vouch
                       </Button>

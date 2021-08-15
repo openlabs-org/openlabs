@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import UserContext from "../../context/UserContext";
 
+import {Link} from "react-router-dom";
 import {
   Timeline,
   TimelineItem,
@@ -113,11 +114,10 @@ export default function ProjectEntityReviews({
                     ) : (
                       <React.Fragment>
                         <Typography color="textSecondary">
-                          <strong>
-                            <a href={"/profile/" + review.author.did}>
-                              {review.author.name}
-                            </a>
-                          </strong>{" "}
+                          <Link to={"/profile/" + review.author.did}>
+                            <strong>{review.author.name}</strong>
+                          </Link>
+                          {" "}
                           added a review {review.publishedAt}
                         </Typography>
                         <Paper elevation={0} className={classes.paper}>
